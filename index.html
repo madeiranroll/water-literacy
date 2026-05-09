@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Water Literacy — Find the best water for your health</title>
+  <meta name="description" content="A free, open-source AI-powered guide to understanding water quality and finding the best water for your health." />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f8f7f4;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    #root { max-width: 720px; margin: 0 auto; }
+
+    .tab-btn {
+      background: none; border: none; border-bottom: 2px solid transparent;
+      padding: 0.5rem 1rem; cursor: pointer; font-size: 14px; font-weight: 400;
+      color: #666; margin-bottom: -1px; transition: color 0.15s;
+      font-family: inherit;
+    }
+    .tab-btn.active { font-weight: 500; color: #1a1a1a; border-bottom: 2px solid #1a1a1a; }
+
+    .card {
+      background: #fff; border: 0.5px solid #e0e0e0;
+      border-radius: 10px; padding: 1.25rem; margin-bottom: 12px;
+    }
+    .label {
+      font-size: 11px; font-weight: 500; color: #888;
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+    }
+    .opt-btn {
+      width: 100%; text-align: left; padding: 0.85rem 1.25rem;
+      background: #fff; border: 0.5px solid #ddd; border-radius: 10px;
+      cursor: pointer; font-size: 15px; color: #1a1a1a; margin-bottom: 10px;
+      transition: border-color 0.15s; font-family: inherit;
+    }
+    .opt-btn:hover { border-color: #999; }
+
+    .primary-btn {
+      font-size: 14px; font-weight: 500; padding: 0.6rem 1.5rem;
+      background: #1a1a1a; color: #fff; border: none;
+      border-radius: 8px; cursor: pointer; font-family: inherit;
+    }
+    .secondary-btn {
+      font-size: 14px; padding: 0.6rem 1.25rem; background: none;
+      border: 0.5px solid #ddd; border-radius: 8px;
+      cursor: pointer; color: #1a1a1a; font-family: inherit;
+    }
+    .water-card { background: #fff; border: 0.5px solid #e0e0e0; border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+    .water-card-header {
+      width: 100%; display: flex; align-items: center; gap: 12px;
+      padding: 1rem 1.25rem; background: none; border: none;
+      cursor: pointer; text-align: left; font-family: inherit;
+    }
+    .mineral-track { height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+    .mineral-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+
+    .risk-low    { background: #f0faf4; border: 0.5px solid #2d9e6a; }
+    .risk-medium { background: #fffbf0; border: 0.5px solid #d4a017; }
+    .risk-high   { background: #fff5f5; border: 0.5px solid #e05252; }
+    .risk-low .risk-label    { color: #2d9e6a; }
+    .risk-medium .risk-label { color: #d4a017; }
+    .risk-high .risk-label   { color: #e05252; }
+
+    .tip-box {
+      background: #f8f7f4; border: 0.5px solid #e0e0e0;
+      border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;
+    }
+    .loading-box { text-align: center; padding: 3rem 0; }
+    .pro-tip { font-size: 14px; line-height: 1.7; font-style: italic; color: #1a1a1a; }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #111; color: #f0f0f0; }
+      .card, .water-card, .opt-btn { background: #1e1e1e; border-color: #333; }
+      .tab-btn { color: #999; }
+      .tab-btn.active { color: #f0f0f0; border-bottom-color: #f0f0f0; }
+      .primary-btn { background: #f0f0f0; color: #111; }
+      .secondary-btn { border-color: #444; color: #f0f0f0; }
+      .mineral-track { background: #2a2a2a; }
+      .tip-box { background: #1a1a1a; border-color: #333; }
+      .water-card-header { color: #f0f0f0; }
+      .label { color: #777; }
+      .opt-btn { color: #f0f0f0; }
+      .opt-btn:hover { border-color: #888; }
+      .risk-low    { background: #0d2a1e; }
+      .risk-medium { background: #2a200a; }
+      .risk-high   { background: #2a0f0f; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const waterTypes = [
+      { id:"tap", name:"Tap water", emoji:"🚿", tagline:"Convenient & regulated", desc:"Municipally treated water, regulated by authorities. Quality varies by location — urban areas typically add chlorine and fluoride.", pros:["Free or very cheap","Zero packaging waste","Regularly tested & reported"], cons:["May contain chlorine byproducts","Old pipes can leach lead","Hard water common in many areas"], best:"Budget-conscious households in low-risk areas" },
+      { id:"filtered", name:"Filtered water", emoji:"🔬", tagline:"Targeted purification", desc:"Tap water passed through a carbon, ceramic, or RO filter. Quality depends heavily on filter type and maintenance.", pros:["Removes chlorine & off-tastes","Cost-effective long term","Reduces key contaminants"], cons:["Filter maintenance required","Quality varies by grade","Some remove beneficial minerals"], best:"Most households — best overall value" },
+      { id:"spring", name:"Spring water", emoji:"🌿", tagline:"Naturally occurring minerals", desc:"Collected from underground springs with naturally occurring minerals. Minimally processed compared to purified water.", pros:["Natural mineral balance","Clean fresh taste","No added chemicals"], cons:["Expensive & plastic-heavy","Purity not always guaranteed","Mineral content varies by brand"], best:"Those prioritising mineral intake and taste" },
+      { id:"mineral", name:"Mineral water", emoji:"💎", tagline:"Rich in electrolytes", desc:"Bottled at source with a defined, consistent mineral composition — typically higher in calcium, magnesium, and sulfates.", pros:["Consistent mineral profile","Excellent electrolyte replenishment","Good for bone & nerve health"], cons:["Expensive","High plastic waste","Not suitable for low-mineral diets"], best:"Athletes, those with mineral deficiencies" },
+      { id:"purified", name:"Purified / RO water", emoji:"⚗️", tagline:"Ultra-clean, mineral-free", desc:"Reverse osmosis or distillation removes virtually everything — contaminants and minerals alike. The purest option available.", pros:["Removes heavy metals & PFAS","Consistent reliable purity","Ideal for sensitive populations"], cons:["Removes beneficial minerals too","Can be slightly acidic","System costs can be high"], best:"Contaminated areas, pregnancy, immune conditions" }
+    ];
+
+    const keyFactors = [
+      { name:"pH level", ideal:"6.5 – 8.5", icon:"⚖️", desc:"Measures acidity vs alkalinity. Most healthy water falls in a neutral range. Extremely acidic or alkaline water affects taste and over time can impact health." },
+      { name:"TDS (dissolved solids)", ideal:"50 – 500 mg/L", icon:"🧪", desc:"Total dissolved solids indicate mineral and salt content. Too low = flat taste and few minerals. Too high = possible contamination or excess salts." },
+      { name:"Key minerals", ideal:"Ca, Mg, K balanced", icon:"⚡", desc:"Calcium supports bones, magnesium supports nerves and sleep, potassium supports heart function. Good water contributes meaningfully to your daily intake." },
+      { name:"Contaminants to watch", ideal:"Below WHO limits", icon:"⚠️", desc:"Key risks: chlorine byproducts (THMs), lead from old pipes, nitrates from agriculture, PFAS (forever chemicals), and microplastics." }
+    ];
+
+    const questions = [
+      { id:"goal", text:"What is your primary health goal?", options:[{v:"hydration",l:"General daily hydration"},{v:"athletic",l:"Athletic performance & recovery"},{v:"detox",l:"Reduce toxin exposure"},{v:"condition",l:"Managing a health condition"}] },
+      { id:"location", text:"Where do you live?", options:[{v:"urban",l:"Urban city (apartment / older building)"},{v:"suburban",l:"Suburban (newer infrastructure)"},{v:"rural",l:"Rural (well water or older pipes)"},{v:"coastal",l:"Coastal or industrial area"}] },
+      { id:"source", text:"What do you currently drink most?", options:[{v:"tap",l:"Straight from the tap"},{v:"bottled",l:"Bottled water"},{v:"filtered",l:"Filtered (pitcher or under-sink)"},{v:"unsure",l:"Not sure / it varies"}] },
+      { id:"concern", text:"What concerns you most about water?", options:[{v:"chemicals",l:"Chemicals & contaminants"},{v:"minerals",l:"Getting the right minerals"},{v:"taste",l:"Taste & smell"},{v:"environment",l:"Environmental impact"}] },
+      { id:"health", text:"Any special health considerations?", options:[{v:"none",l:"None — generally healthy"},{v:"kidney",l:"Kidney or urinary concerns"},{v:"pregnancy",l:"Pregnant or nursing"},{v:"immune",l:"Compromised immune system"}] }
+    ];
+
+    const typeMap = Object.fromEntries(waterTypes.map(t => [t.id, t]));
+
+    async function getAIRecommendation(answers) {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: `You are a water quality and environmental health expert with deep knowledge of WHO guidelines, EPA standards, and nutritional science. Given a user's health profile, provide a personalised water recommendation.
+
+Respond ONLY with valid JSON — no markdown, no backticks, no preamble:
+{
+  "recommended": "filtered|tap|spring|mineral|purified",
+  "headline": "short punchy 6-10 word headline",
+  "why": "2-3 sentences tailored to their specific answers — mention their goal and location",
+  "lookFor": ["specific item 1", "specific item 2", "specific item 3"],
+  "avoid": ["specific item 1", "specific item 2"],
+  "tip": "one very specific actionable pro tip",
+  "minerals": { "calcium": 0-100, "magnesium": 0-100, "potassium": 0-100, "sodium": 0-100 },
+  "riskLevel": "low|medium|high",
+  "riskReason": "one sentence explaining their specific water risk"
+}`,
+          messages: [{ role:"user", content:`Goal: ${answers.goal}, Location: ${answers.location}, Source: ${answers.source}, Concern: ${answers.concern}, Health: ${answers.health}` }]
+        })
+      });
+      const data = await response.json();
+      const text = data.content[0].text;
+      return JSON.parse(text.replace(/```json|```/g,"").trim());
+    }
+
+    function MineralBar({ label, value }) {
+      const color = value > 66 ? "#2d9e6a" : value > 33 ? "#2196b8" : "#aaa";
+      return (
+        <div style={{marginBottom:12}}>
+          <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
+            <span style={{fontSize:12,color:"#888"}}>{label}</span>
+            <span style={{fontSize:12,fontWeight:500}}>{Math.round(value)}%</span>
+          </div>
+          <div className="mineral-track">
+            <div className="mineral-fill" style={{width:`${value}%`,background:color}}/>
+          </div>
+        </div>
+      );
+    }
+
+    function WaterCard({ water }) {
+      const [open, setOpen] = useState(false);
+      return (
+        <div className="water-card">
+          <button className="water-card-header" onClick={()=>setOpen(!open)}>
+            <span style={{fontSize:18}}>{water.emoji}</span>
+            <div style={{flex:1}}>
+              <div style={{fontSize:14,fontWeight:500}}>{water.name}</div>
+              <div style={{fontSize:12,color:"#888"}}>{water.tagline}</div>
+            </div>
+            <span style={{fontSize:10,color:"#aaa",display:"inline-block",transform:open?"rotate(180deg)":"none",transition:"transform 0.2s"}}>▼</span>
+          </button>
+          {open && (
+            <div style={{padding:"0 1.25rem 1.25rem",borderTop:"0.5px solid #e0e0e0"}}>
+              <p style={{fontSize:13,lineHeight:1.6,color:"#666",margin:"1rem 0"}}>{water.desc}</p>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:10}}>
+                <div>
+                  <div style={{fontSize:11,fontWeight:500,color:"#2d9e6a",marginBottom:6}}>Pros</div>
+                  {water.pros.map((p,i)=><div key={i} style={{fontSize:12,padding:"2px 0"}}>+ {p}</div>)}
+                </div>
+                <div>
+                  <div style={{fontSize:11,fontWeight:500,color:"#e05252",marginBottom:6}}>Cons</div>
+                  {water.cons.map((c,i)=><div key={i} style={{fontSize:12,padding:"2px 0"}}>− {c}</div>)}
+                </div>
+              </div>
+              <div style={{fontSize:12,color:"#888"}}>Best for: <strong style={{fontWeight:500}}>{water.best}</strong></div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function App() {
+      const [tab, setTab] = useState("learn");
+      const [step, setStep] = useState(0);
+      const [answers, setAnswers] = useState({});
+      const [result, setResult] = useState(null);
+      const [loading, setLoading] = useState(false);
+      const [error, setError] = useState(null);
+
+      async function handleAnswer(qId, val) {
+        const newAnswers = {...answers,[qId]:val};
+        setAnswers(newAnswers);
+        if (step < questions.length - 1) { setStep(step+1); }
+        else {
+          setLoading(true); setError(null); setTab("result");
+          try { setResult(await getAIRecommendation(newAnswers)); }
+          catch(e) { setError("Something went wrong generating your recommendation. Please try again."); }
+          finally { setLoading(false); }
+        }
+      }
+
+      function resetQuiz() { setStep(0); setAnswers({}); setResult(null); setError(null); setLoading(false); setTab("quiz"); }
+
+      const recType = result ? typeMap[result.recommended] : null;
+      const tabs = ["learn","quiz",...(result||loading?["result"]:[])];
+      const riskClass = result ? `risk-${result.riskLevel}` : "risk-low";
+      const riskLabels = { low:"Low risk", medium:"Moderate risk", high:"Higher risk" };
+
+      return (
+        <div>
+          {/* Header */}
+          <div style={{borderBottom:"0.5px solid #e0e0e0",paddingBottom:"1.25rem",marginBottom:"1.5rem"}}>
+            <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:4}}>
+              <span style={{fontSize:21,fontWeight:500}}>💧 Water Literacy</span>
+              <span style={{fontSize:11,color:"#999",background:"#f0f0f0",padding:"2px 8px",borderRadius:20,border:"0.5px solid #e0e0e0"}}>AI-powered · open source</span>
+            </div>
+            <p style={{fontSize:13,color:"#666"}}>Understand what's in your water — and discover what's best for you.</p>
+          </div>
+
+          {/* Nav */}
+          <div style={{display:"flex",borderBottom:"0.5px solid #e0e0e0",marginBottom:"2rem"}}>
+            {tabs.map(t=>(
+              <button key={t} className={`tab-btn ${tab===t?"active":""}`} onClick={()=>setTab(t)}>
+                {t==="result"?"My result":t.charAt(0).toUpperCase()+t.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          {/* LEARN */}
+          {tab==="learn" && (
+            <div>
+              <h2 style={{fontSize:19,fontWeight:500,marginBottom:"0.4rem"}}>Water types</h2>
+              <p style={{fontSize:13,color:"#666",marginBottom:"1.25rem"}}>Each source has a different mineral profile, purity level, and cost.</p>
+              {waterTypes.map(w=><WaterCard key={w.id} water={w}/>)}
+
+              <h2 style={{fontSize:19,fontWeight:500,margin:"1.5rem 0 0.4rem"}}>What actually matters</h2>
+              <p style={{fontSize:13,color:"#666",marginBottom:"1.25rem"}}>Four parameters that define water quality.</p>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:10,marginBottom:"1.5rem"}}>
+                {keyFactors.map(f=>(
+                  <div key={f.name} className="card" style={{marginBottom:0}}>
+                    <div style={{fontSize:16,marginBottom:8}}>{f.icon}</div>
+                    <div style={{fontSize:13,fontWeight:500,marginBottom:3}}>{f.name}</div>
+                    <div style={{fontSize:11,color:"#2196b8",fontWeight:500,marginBottom:8}}>{f.ideal}</div>
+                    <div style={{fontSize:12,color:"#666",lineHeight:1.5}}>{f.desc}</div>
+                  </div>
+                ))}
+              </div>
+              <button className="primary-btn" onClick={()=>setTab("quiz")}>Find my water →</button>
+            </div>
+          )}
+
+          {/* QUIZ */}
+          {tab==="quiz" && !loading && (
+            <div>
+              <div style={{display:"flex",gap:4,marginBottom:"1.75rem"}}>
+                {questions.map((_,i)=>(
+                  <div key={i} style={{flex:1,height:3,borderRadius:2,background:i<=step?"#1a1a1a":"#e0e0e0",transition:"background 0.3s"}}/>
+                ))}
+              </div>
+              <div style={{fontSize:12,color:"#aaa",marginBottom:8}}>Question {step+1} of {questions.length}</div>
+              <h2 style={{fontSize:20,fontWeight:500,marginBottom:"1.5rem",lineHeight:1.35}}>{questions[step].text}</h2>
+              <div>
+                {questions[step].options.map(o=>(
+                  <button key={o.v} className="opt-btn" onClick={()=>handleAnswer(questions[step].id,o.v)}>{o.l}</button>
+                ))}
+              </div>
+              {step>0&&<button onClick={()=>setStep(step-1)} style={{fontSize:13,color:"#aaa",background:"none",border:"none",cursor:"pointer",marginTop:"1rem",padding:0,fontFamily:"inherit"}}>← Back</button>}
+            </div>
+          )}
+
+          {/* RESULT */}
+          {tab==="result" && (
+            <div>
+              {loading && (
+                <div className="loading-box">
+                  <div style={{fontSize:32,marginBottom:16}}>💧</div>
+                  <div style={{fontSize:14,color:"#666"}}>Analysing your water profile…</div>
+                  <div style={{fontSize:12,color:"#aaa",marginTop:6}}>Consulting WHO guidelines, EPA standards & nutritional science</div>
+                </div>
+              )}
+              {error && (
+                <div className="card" style={{border:"0.5px solid #e05252"}}>
+                  <div style={{fontSize:14,color:"#e05252",marginBottom:12}}>{error}</div>
+                  <button className="secondary-btn" onClick={resetQuiz}>Try again</button>
+                </div>
+              )}
+              {result && recType && (
+                <div>
+                  <div style={{marginBottom:"1.5rem"}}>
+                    <div style={{fontSize:11,color:"#aaa",marginBottom:6,textTransform:"uppercase",letterSpacing:"0.06em"}}>Your AI-powered recommendation</div>
+                    <h2 style={{fontSize:24,fontWeight:500,marginBottom:4}}>{recType.name} {recType.emoji}</h2>
+                    <div style={{fontSize:14,color:"#666",fontStyle:"italic"}}>{result.headline}</div>
+                  </div>
+
+                  <div className={`card ${riskClass}`} style={{marginBottom:12}}>
+                    <div className="risk-label label">{riskLabels[result.riskLevel] || "Risk level"}</div>
+                    <div style={{fontSize:13,lineHeight:1.5}}>{result.riskReason}</div>
+                  </div>
+
+                  <div className="card">
+                    <div className="label">Why this works for you</div>
+                    <p style={{fontSize:14,lineHeight:1.7}}>{result.why}</p>
+                  </div>
+
+                  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:12,marginBottom:12}}>
+                    <div className="card" style={{marginBottom:0}}>
+                      <div className="label" style={{color:"#2d9e6a"}}>Look for</div>
+                      {result.lookFor.map((l,i)=>(
+                        <div key={i} style={{fontSize:13,padding:"4px 0",display:"flex",gap:8,alignItems:"flex-start"}}>
+                          <span style={{color:"#2d9e6a",marginTop:1}}>✓</span><span>{l}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="card" style={{marginBottom:0}}>
+                      <div className="label" style={{color:"#e05252"}}>Avoid</div>
+                      {result.avoid.map((a,i)=>(
+                        <div key={i} style={{fontSize:13,padding:"4px 0",display:"flex",gap:8,alignItems:"flex-start"}}>
+                          <span style={{color:"#e05252",marginTop:1}}>✕</span><span>{a}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {result.minerals && (
+                    <div className="card">
+                      <div className="label">Ideal mineral priorities for you</div>
+                      <p style={{fontSize:12,color:"#888",marginBottom:"1rem"}}>How much to prioritise each mineral, based on your health profile.</p>
+                      {Object.entries(result.minerals).map(([k,v])=>(
+                        <MineralBar key={k} label={k.charAt(0).toUpperCase()+k.slice(1)} value={v}/>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="tip-box">
+                    <div className="label">Pro tip</div>
+                    <p className="pro-tip">{result.tip}</p>
+                  </div>
+
+                  <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+                    <button className="secondary-btn" onClick={resetQuiz}>Retake quiz</button>
+                    <button className="primary-btn" onClick={()=>setTab("learn")}>Explore water types</button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+  </script>
+</body>
+</html>
