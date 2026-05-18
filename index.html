@@ -1,377 +1,1047 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Water Literacy — Find the best water for your health</title>
-  <meta name="description" content="A free, open-source AI-powered guide to understanding water quality and finding the best water for your health." />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background: #f8f7f4;
-      color: #1a1a1a;
-      min-height: 100vh;
-      padding: 2rem 1rem;
-    }
-    #root { max-width: 720px; margin: 0 auto; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Discern Like A Rebel — Smashing The Toxins Out Of The Way</title>
+<meta name="description" content="Ruthlessly curated swaps, education, and consultancy across water, supplements, home and more. By Natalie."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+:root {
+  --rebel:#962D49; --rebel-lt:#B83858; --rebel-dk:#5C1828; --rebel-glow:rgba(150,45,73,.28);
+  --near-black:#0E090C; --surface:#180D12; --card:#221318; --elevated:#2E1A22;
+  --rose:#D46882; --rose-lt:#E8B4C4; --rose-gold:#C4929C; --mauve:#8C5068;
+  --text:#EDE0E6; --text-dim:#A07888; --text-soft:#6B4A58;
+  --border:rgba(150,45,73,.2); --border-lt:rgba(237,224,230,.1);
+  --water-link:#5A7FA8;
+  --teal-dk:#071418; --teal:#1A506A; --wave:#2D7A96; --foam:#7BBDD1; --mist:#B4D6E3;
+  --ink:#071418; --ocean:#112d40;
+  --ff-disp:'Playfair Display',Georgia,serif;
+  --ff-body:'Cormorant Garamond',Georgia,serif;
+  --ff-ui:'Raleway',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-body);background:var(--near-black);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:18px;line-height:1.75}
+img{max-width:100%;display:block} a{color:inherit;text-decoration:none} button{cursor:pointer;font-family:inherit}
+h1,h2,h3,h4{font-family:var(--ff-disp);font-weight:400;line-height:1.1}
+.label{font-family:var(--ff-ui);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--rose-gold)}
+.label--rebel{color:var(--rebel)}
+.container{max-width:1080px;margin:0 auto;padding:0 2rem}
+.narrow{max-width:740px;margin:0 auto;padding:0 2rem}
+section{padding:6rem 0}
 
-    .tab-btn {
-      background: none; border: none; border-bottom: 2px solid transparent;
-      padding: 0.5rem 1rem; cursor: pointer; font-size: 14px; font-weight: 400;
-      color: #666; margin-bottom: -1px; transition: color 0.15s;
-      font-family: inherit;
-    }
-    .tab-btn.active { font-weight: 500; color: #1a1a1a; border-bottom: 2px solid #1a1a1a; }
+/* BRAND BAR */
+.brand-bar{background:var(--rebel);height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;position:fixed;top:0;left:0;right:0;z-index:300}
+.brand-bar__name{font-family:var(--ff-ui);font-size:.6rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.95)}
+.brand-bar__tag{font-family:var(--ff-body);font-size:.82rem;font-style:italic;color:rgba(255,255,255,.65)}
 
-    .card {
-      background: #fff; border: 0.5px solid #e0e0e0;
-      border-radius: 10px; padding: 1.25rem; margin-bottom: 12px;
-    }
-    .label {
-      font-size: 11px; font-weight: 500; color: #888;
-      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
-    }
-    .opt-btn {
-      width: 100%; text-align: left; padding: 0.85rem 1.25rem;
-      background: #fff; border: 0.5px solid #ddd; border-radius: 10px;
-      cursor: pointer; font-size: 15px; color: #1a1a1a; margin-bottom: 10px;
-      transition: border-color 0.15s; font-family: inherit;
-    }
-    .opt-btn:hover { border-color: #999; }
+/* NAV */
+.nav{position:fixed;top:36px;left:0;right:0;z-index:200;background:rgba(24,13,18,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;height:62px;padding:0 2.5rem}
+.nav__logo{display:flex;flex-direction:column;gap:1px;cursor:pointer}
+.nav__logo-sub{font-family:var(--ff-ui);font-size:.56rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--rebel)}
+.nav__logo-title{font-family:var(--ff-disp);font-size:1rem;color:var(--text);font-style:italic}
+.nav__links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav__link{font-family:var(--ff-ui);font-size:.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;transition:color .2s;cursor:pointer;position:relative}
+.nav__link:hover,.nav__link.on{color:var(--text)}
+.nav__link.on::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--rose-gold)}
+.nav__cta{font-family:var(--ff-ui);font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--rebel);border:none;padding:.5rem 1.4rem;border-radius:2px;transition:background .2s,transform .2s;cursor:pointer}
+.nav__cta:hover{background:var(--rebel-lt);transform:translateY(-1px)}
+.dropdown{position:relative}
+.dropdown__btn{font-family:var(--ff-ui);font-size:.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:color .2s;position:relative}
+.dropdown__btn:hover,.dropdown__btn.on{color:var(--text)}
+.dropdown__btn.on::after{content:'';position:absolute;bottom:-22px;left:0;right:0;height:1px;background:var(--rose-gold)}
+.dropdown__chev{font-size:.55rem;transition:transform .2s;display:inline-block}
+.dropdown__chev.open{transform:rotate(180deg)}
+.dropdown__menu{position:absolute;top:calc(100% + 18px);left:0;background:rgba(24,13,18,.98);border:1px solid var(--border);border-radius:4px;min-width:160px;overflow:hidden;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s,transform .2s}
+.dropdown__menu.open{opacity:1;pointer-events:all;transform:translateY(0)}
+.dropdown__item{display:block;width:100%;font-family:var(--ff-ui);font-size:.66rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;padding:.9rem 1.2rem;text-align:left;cursor:pointer;transition:all .15s;border-bottom:1px solid var(--border)}
+.dropdown__item:last-child{border-bottom:none}
+.dropdown__item:hover{background:rgba(150,45,73,.1);color:var(--text)}
+.dropdown__item--water{color:var(--water-link) !important}
+.dropdown__item--water:hover{background:rgba(90,127,168,.08) !important}
+.dropdown__item--rebel{color:var(--rebel) !important}
+.dropdown__item--rebel:hover{background:rgba(150,45,73,.1) !important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:all .3s}
+.mob-nav{display:none;flex-direction:column;background:rgba(24,13,18,.98);border-top:1px solid var(--border)}
+.mob-nav.open{display:flex}
+.mob-link{font-family:var(--ff-ui);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;border-bottom:1px solid var(--border);padding:.9rem 2.5rem;text-align:left;transition:color .2s;cursor:pointer}
+.mob-link:hover,.mob-link.on{color:var(--cream)}
+.mob-link--rebel{color:var(--rebel) !important}
 
-    .primary-btn {
-      font-size: 14px; font-weight: 500; padding: 0.6rem 1.5rem;
-      background: #1a1a1a; color: #fff; border: none;
-      border-radius: 8px; cursor: pointer; font-family: inherit;
-    }
-    .secondary-btn {
-      font-size: 14px; padding: 0.6rem 1.25rem; background: none;
-      border: 0.5px solid #ddd; border-radius: 8px;
-      cursor: pointer; color: #1a1a1a; font-family: inherit;
-    }
-    .water-card { background: #fff; border: 0.5px solid #e0e0e0; border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
-    .water-card-header {
-      width: 100%; display: flex; align-items: center; gap: 12px;
-      padding: 1rem 1.25rem; background: none; border: none;
-      cursor: pointer; text-align: left; font-family: inherit;
-    }
-    .mineral-track { height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
-    .mineral-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+/* FLOAT BTN */
+.float-swaps{position:fixed;bottom:2rem;right:2rem;z-index:250;background:var(--rebel);color:#fff;font-family:var(--ff-ui);font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:.8rem 1.4rem;border-radius:2px;border:none;cursor:pointer;box-shadow:0 6px 24px var(--rebel-glow);animation:pulseFloat 3s ease-in-out infinite;transition:transform .2s,background .2s,box-shadow .2s}
+.float-swaps:hover{transform:translateY(-3px) scale(1.03);background:var(--rebel-lt);box-shadow:0 10px 32px rgba(150,45,73,.55);animation:none}
 
-    .risk-low    { background: #f0faf4; border: 0.5px solid #2d9e6a; }
-    .risk-medium { background: #fffbf0; border: 0.5px solid #d4a017; }
-    .risk-high   { background: #fff5f5; border: 0.5px solid #e05252; }
-    .risk-low .risk-label    { color: #2d9e6a; }
-    .risk-medium .risk-label { color: #d4a017; }
-    .risk-high .risk-label   { color: #e05252; }
+/* BUTTONS */
+.btn{display:inline-block;font-family:var(--ff-ui);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;border-radius:2px;border:none;cursor:pointer;transition:all .25s var(--ease)}
+.btn-rebel{background:var(--rebel);color:#fff}
+.btn-rebel:hover{background:var(--rebel-lt);transform:translateY(-2px);box-shadow:0 10px 32px rgba(150,45,73,.35)}
+.btn-gold{background:var(--gold);color:var(--near-black)}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 10px 32px rgba(200,169,107,.28)}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(244,237,227,.35)}
+.btn-ghost:hover{border-color:var(--cream);background:rgba(244,237,227,.05);transform:translateY(-2px)}
+.btn-teal{background:transparent;color:var(--foam);border:1px solid rgba(123,189,209,.35)}
+.btn-teal:hover{border-color:var(--foam);background:rgba(123,189,209,.06);transform:translateX(4px)}
+.btn-sm{padding:.5rem 1.1rem;font-size:.62rem}
 
-    .tip-box {
-      background: #f8f7f4; border: 0.5px solid #e0e0e0;
-      border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;
-    }
-    .loading-box { text-align: center; padding: 3rem 0; }
-    .pro-tip { font-size: 14px; line-height: 1.7; font-style: italic; color: #1a1a1a; }
+/* CARDS */
+.card{background:rgba(34,19,24,.8);border:1px solid var(--border);border-radius:4px;padding:2rem;transition:all .3s var(--ease)}
+.card:hover{background:var(--card);border-color:rgba(150,45,73,.38);transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,.35)}
+.divider{display:flex;align-items:center;gap:1.5rem;margin:2.5rem 0}
+.div-line{flex:1;height:1px;background:var(--border)}
+.div-mark{color:var(--rose-gold);font-size:.75rem}
+.quote{border-left:2px solid var(--rose-gold);padding:1.5rem 2rem;margin:2rem 0;background:rgba(150,45,73,.04)}
+.quote p{font-family:var(--ff-body);font-size:1.3rem;font-style:italic;font-weight:300;color:var(--text-dim);line-height:1.6}
 
-    @media (prefers-color-scheme: dark) {
-      body { background: #111; color: #f0f0f0; }
-      .card, .water-card, .opt-btn { background: #1e1e1e; border-color: #333; }
-      .tab-btn { color: #999; }
-      .tab-btn.active { color: #f0f0f0; border-bottom-color: #f0f0f0; }
-      .primary-btn { background: #f0f0f0; color: #111; }
-      .secondary-btn { border-color: #444; color: #f0f0f0; }
-      .mineral-track { background: #2a2a2a; }
-      .tip-box { background: #1a1a1a; border-color: #333; }
-      .water-card-header { color: #f0f0f0; }
-      .label { color: #777; }
-      .opt-btn { color: #f0f0f0; }
-      .opt-btn:hover { border-color: #888; }
-      .risk-low    { background: #0d2a1e; }
-      .risk-medium { background: #2a200a; }
-      .risk-high   { background: #2a0f0f; }
-    }
-  </style>
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(25%)}}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes smashIn{0%{opacity:0;transform:scale(1.12) translateY(-8px);filter:blur(3px)}65%{transform:scale(.985) translateY(2px);opacity:1;filter:blur(0)}82%{transform:scale(1.008)}100%{transform:scale(1);opacity:1}}
+@keyframes strikeAnim{0%{width:0}100%{width:100%}}
+@keyframes pulseGlow{0%,100%{text-shadow:0 0 40px rgba(150,45,73,.4)}50%{text-shadow:0 0 80px rgba(150,45,73,.7)}}
+@keyframes pulseFloat{0%,100%{box-shadow:0 6px 24px rgba(150,45,73,.38)}50%{box-shadow:0 6px 36px rgba(150,45,73,.65)}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(9px)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+.page-in{animation:fadeIn .4s var(--ease) both}
+.a1{animation:smashIn .8s var(--ease) .3s both}
+.a2{animation:smashIn .8s var(--ease) .55s both}
+.a3{animation:smashIn .8s var(--ease) .8s both}
+.a4{animation:fadeUp .8s var(--ease) 1.2s both}
+
+/* BRAND HERO */
+.brand-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:12rem 0 6rem;position:relative;overflow:hidden;background:var(--near-black)}
+.brand-hero__bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(150,45,73,.14) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(92,24,40,.12) 0%,transparent 60%)}
+.brand-hero__title{font-family:var(--ff-disp);font-size:clamp(4.5rem,12vw,10rem);font-weight:700;line-height:.9;color:var(--cream);display:block}
+.brand-hero__title--red{color:var(--rebel);animation:pulseGlow 4s ease-in-out infinite}
+.brand-hero__title--italic{font-style:italic;font-weight:400;font-size:clamp(3rem,8vw,7rem);color:rgba(243,236,226,.7);display:block}
+.brand-hero__tag{font-family:var(--ff-ui);font-size:clamp(.75rem,1.5vw,1rem);font-weight:500;letter-spacing:.08em;color:rgba(243,236,226,.55);margin-top:2rem;max-width:560px;line-height:1.7;display:block}
+.smash-word{position:relative;display:inline}
+.smash-strike{position:absolute;left:0;top:48%;height:3px;background:var(--rebel);border-radius:2px;width:0;animation:strikeAnim .55s ease 2.2s forwards;display:block}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;z-index:2;animation:bounce 2s ease-in-out infinite,fadeIn 1s var(--ease) 2s both}
+.scroll-line{width:1px;height:44px;background:linear-gradient(180deg,transparent,var(--rebel));margin:0 auto}
+
+/* TICKER */
+.ticker-wrap{background:var(--rebel);padding:.72rem 0;overflow:hidden}
+.ticker-inner{display:flex;width:fit-content;animation:ticker 22s linear infinite}
+.ticker-item{font-family:var(--ff-ui);font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.9);padding:0 2.5rem;white-space:nowrap;display:flex;align-items:center;gap:2.5rem}
+.ticker-sep{opacity:.45;font-size:.55rem}
+
+/* METHOD */
+.method-section{background:linear-gradient(180deg,var(--near-black) 0%,var(--surface) 100%);padding:7rem 0;border-top:1px solid rgba(150,45,73,.2)}
+.method-inner{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:2rem}
+.method-num{font-family:var(--ff-body);font-size:.82rem;font-style:italic;color:rgba(200,169,107,.45);margin-bottom:.6rem}
+.method-verb{font-family:var(--ff-ui);font-size:clamp(2.2rem,5vw,4rem);font-weight:900;letter-spacing:-.02em;color:var(--cream);line-height:1;margin-bottom:1rem}
+.method-verb--rebel{color:var(--rebel);text-shadow:0 0 40px rgba(150,45,73,.35)}
+.method-desc{font-family:var(--ff-body);font-size:.98rem;color:var(--text-dim);line-height:1.75}
+.method-arrow{font-family:var(--ff-ui);font-size:1.8rem;color:rgba(150,45,73,.4);align-self:center;padding-top:3.5rem;font-weight:300}
+
+/* TOPICS */
+.topics-section{background:var(--surface);padding:7rem 0}
+.topic-grid{display:grid;grid-template-columns:1.6fr 1fr;grid-template-rows:1fr 1fr;gap:1.25rem;margin-top:3rem;min-height:420px}
+.topic-card{border-radius:4px;padding:2.5rem;position:relative;overflow:hidden;transition:all .3s var(--ease)}
+.topic-card--water{background:linear-gradient(135deg,var(--rebel-dk) 0%,#3D1828 100%);border:1px solid rgba(150,45,73,.4);grid-row:1/3;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
+.topic-card--water:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.4);border-color:var(--rebel)}
+.topic-card--water::before{content:'';position:absolute;top:-30%;right:-10%;width:280px;height:280px;background:radial-gradient(circle,rgba(150,45,73,.15) 0%,transparent 70%);pointer-events:none}
+.topic-card--soon{background:rgba(255,255,255,.02);border:1px solid rgba(237,224,230,.07);display:flex;flex-direction:column;justify-content:flex-end}
+.topic-card--soon:hover{background:rgba(150,45,73,.04);border-color:rgba(150,45,73,.18)}
+.topic-badge{font-family:var(--ff-ui);font-size:.56rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;display:inline-block;padding:.22rem .7rem;border-radius:2px;margin-bottom:1.25rem}
+.badge-live{background:rgba(150,45,73,.25);color:var(--rose-lt);border:1px solid rgba(150,45,73,.4)}
+.badge-soon{background:rgba(255,255,255,.04);color:rgba(237,224,230,.3);border:1px solid rgba(237,224,230,.08)}
+.topic-title{font-family:var(--ff-disp);font-size:clamp(2rem,4vw,3rem);color:var(--cream);margin-bottom:.75rem}
+.topic-desc{font-family:var(--ff-body);font-size:1rem;color:var(--text-dim);line-height:1.75;margin-bottom:2rem;max-width:380px}
+.topic-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.topic-soon-title{font-family:var(--ff-disp);font-size:1.6rem;color:rgba(243,236,226,.3);margin-bottom:.35rem}
+.topic-soon-sub{font-family:var(--ff-body);font-size:.9rem;color:rgba(243,236,226,.18);font-style:italic}
+
+/* PAGE HEROES */
+.page-hero{min-height:44vh;display:flex;align-items:flex-end;padding:10rem 0 4rem;position:relative;overflow:hidden}
+.page-hero--water{background:linear-gradient(180deg,var(--near-black) 0%,var(--ink) 50%,#0a2230 100%)}
+.page-hero--rebel{background:linear-gradient(160deg,var(--near-black) 0%,#1a0810 100%)}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 25% 55%,rgba(29,80,110,.25) 0%,transparent 70%)}
+.page-hero--rebel::before{background:radial-gradient(ellipse 50% 60% at 80% 40%,rgba(150,45,73,.18) 0%,transparent 70%)}
+.water-badge{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--ff-ui);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--foam);background:rgba(45,122,150,.15);border:1px solid rgba(45,122,150,.3);padding:.3rem .85rem;border-radius:2px;margin-bottom:1rem}
+.water-dot{width:6px;height:6px;border-radius:50%;background:var(--foam);display:inline-block}
+
+/* ABOUT */
+.about-teaser{background:var(--near-black);padding:7rem 0;border-top:1px solid rgba(150,45,73,.15)}
+.about-teaser-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:center}
+.about-photo-sm{aspect-ratio:3/4;background:linear-gradient(135deg,var(--rebel-dk),var(--elevated));border-radius:4px;overflow:hidden;border:1px solid var(--border);max-width:280px}
+.about-photo-sm img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.photo-placeholder-sm{display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--ff-disp);font-size:5rem;color:var(--mauve);font-style:italic}
+.about-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:5rem;align-items:start}
+.about-sticky{position:sticky;top:110px}
+.photo-frame{aspect-ratio:3/4;background:linear-gradient(135deg,var(--rebel-dk),var(--elevated));border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.photo-placeholder{display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--ff-disp);font-size:6rem;color:var(--mauve);font-style:italic}
+.photo-cap{margin-top:1rem;text-align:center;font-family:var(--ff-ui);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose-gold)}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.value-item{padding:1.25rem;border:1px solid var(--border);border-radius:4px;background:rgba(150,45,73,.06)}
+.value-item h4{font-family:var(--ff-disp);font-size:1.05rem;color:var(--text);margin-bottom:.4rem}
+.value-item p{font-family:var(--ff-body);font-size:.92rem;color:var(--text-dim);line-height:1.6}
+
+/* SWAPS */
+.swap-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden;flex-wrap:wrap;margin-bottom:2rem}
+.s-tab{flex:1;font-family:var(--ff-ui);font-size:.63rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1rem;background:none;border:none;color:var(--text-dim);transition:all .2s;cursor:pointer;border-right:1px solid var(--border);white-space:nowrap}
+.s-tab:last-child{border-right:none}
+.s-tab:hover{background:rgba(17,45,64,.3);color:var(--cream)}
+.s-tab.on{background:rgba(45,122,150,.2);color:var(--cream)}
+.src-list{display:flex;flex-direction:column;gap:.85rem}
+.src-item{display:flex;align-items:center;gap:1.5rem;padding:1.2rem 1.5rem;background:rgba(17,45,64,.3);border:1px solid var(--border);border-radius:4px;transition:all .22s}
+.src-item:hover{background:rgba(17,45,64,.5);border-color:rgba(45,122,150,.4)}
+.src-rank{font-family:var(--ff-disp);font-size:2.5rem;color:rgba(200,169,107,.22);min-width:3rem;font-style:italic;line-height:1}
+.src-info{flex:1}
+.src-name{font-family:var(--ff-disp);font-size:1.2rem;color:var(--cream);margin-bottom:.25rem}
+.src-desc{font-family:var(--ff-body);font-size:.92rem;color:var(--text-dim);line-height:1.6}
+.badge{font-family:var(--ff-ui);font-size:.58rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .65rem;border-radius:2px}
+.b-best{background:rgba(45,158,106,.18);color:#6bcea0;border:1px solid rgba(45,158,106,.28)}
+.b-good{background:rgba(45,122,150,.18);color:var(--foam);border:1px solid var(--border)}
+.b-caution{background:rgba(200,169,107,.1);color:var(--gold);border:1px solid rgba(200,169,107,.28)}
+.b-avoid{background:rgba(224,82,82,.1);color:#e08888;border:1px solid rgba(224,82,82,.2)}
+.tbl-wrap{overflow-x:auto;border-radius:4px;border:1px solid var(--border)}
+.dtbl{width:100%;border-collapse:collapse;font-size:.93rem}
+.dtbl th{font-family:var(--ff-ui);font-size:.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);padding:.95rem 1.2rem;text-align:left;background:rgba(12,33,48,.8);border-bottom:1px solid var(--border);white-space:nowrap}
+.dtbl td{padding:.88rem 1.2rem;border-bottom:1px solid rgba(45,122,150,.08);color:var(--text-dim);vertical-align:top;line-height:1.55}
+.dtbl tr:last-child td{border-bottom:none}
+.dtbl tr:hover td{background:rgba(17,45,64,.2)}
+.crosslink{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--ff-ui);font-size:.63rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--foam);background:none;border:1px solid rgba(123,189,209,.28);padding:.38rem .95rem;border-radius:2px;cursor:pointer;transition:all .2s;margin-top:1rem}
+.crosslink:hover{border-color:var(--foam);background:rgba(123,189,209,.05)}
+
+/* ACCORDION */
+.accordion{border:1px solid var(--border);border-radius:4px;margin-bottom:.85rem;overflow:hidden;transition:border-color .3s}
+.accordion:hover{border-color:rgba(45,122,150,.45)}
+.acc-head{display:flex;align-items:center;gap:1.25rem;padding:1.4rem 1.75rem;background:rgba(17,45,64,.35);cursor:pointer;border:none;width:100%;text-align:left;transition:background .2s}
+.acc-head:hover{background:rgba(17,45,64,.55)}
+.acc-head.open{background:rgba(17,45,64,.6);border-bottom:1px solid var(--border)}
+.acc-num{font-family:var(--ff-body);font-size:.88rem;font-style:italic;color:var(--gold);min-width:26px}
+.acc-title{font-family:var(--ff-disp);font-size:1.25rem;color:var(--cream);flex:1}
+.acc-chev{font-size:.75rem;color:var(--text-soft);transition:transform .3s}
+.acc-chev.open{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .55s var(--ease)}
+.acc-body.open{max-height:2400px}
+.acc-content{padding:2rem 1.75rem;font-size:1rem;line-height:1.85;color:var(--text-dim)}
+.acc-content p{margin-bottom:1rem}
+.acc-content strong{color:var(--cream);font-weight:600}
+.symp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.75rem;margin:1.25rem 0}
+.symp-item{display:flex;align-items:center;gap:.7rem;font-size:.95rem}
+.symp-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.toxin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.25rem 0}
+.toxin-item{padding:1rem;border:1px solid var(--border);border-radius:3px;background:rgba(26,80,106,.08)}
+.toxin-item h4{font-family:var(--ff-disp);font-size:1rem;color:var(--cream);margin-bottom:.3rem}
+.toxin-item p{font-size:.88rem;color:var(--text-dim);line-height:1.55}
+
+/* QUIZ */
+.quiz-wrap{background:linear-gradient(180deg,#0a2230 0%,var(--near-black) 100%);position:relative;overflow:hidden}
+.quiz-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 80% 50%,rgba(45,122,150,.1) 0%,transparent 70%)}
+.quiz-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:0 2rem}
+.q-progress{display:flex;gap:3px;margin-bottom:2.5rem}
+.q-prog-bar{flex:1;height:2px;background:rgba(45,122,150,.18);border-radius:1px;overflow:hidden}
+.q-prog-fill{height:100%;background:var(--gold);transition:width .45s var(--ease);border-radius:1px}
+.q-text{font-family:var(--ff-disp);font-size:clamp(1.5rem,4vw,2rem);font-style:italic;color:var(--cream);margin-bottom:2rem;line-height:1.3;animation:fadeUp .5s var(--ease) both}
+.q-opts{display:flex;flex-direction:column;gap:.7rem}
+.q-opt{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 1.5rem;background:rgba(17,45,64,.3);border:1px solid var(--border);border-radius:4px;cursor:pointer;text-align:left;transition:all .2s;width:100%}
+.q-opt:hover{background:rgba(17,45,64,.55);border-color:rgba(45,122,150,.45);transform:translateX(4px)}
+.q-letter{font-family:var(--ff-ui);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:var(--gold);min-width:20px;padding-top:2px}
+.q-opt-text{font-family:var(--ff-body);font-size:1.05rem;color:var(--text-dim);line-height:1.5}
+.q-result{text-align:center;padding:2rem 0}
+.q-score{font-family:var(--ff-disp);font-size:6.5rem;color:var(--gold);line-height:1;animation:fadeUp .6s var(--ease) both}
+.q-level{font-family:var(--ff-ui);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--foam);margin:.6rem 0 1.5rem;animation:fadeUp .6s var(--ease) .1s both}
+.q-rtitle{font-family:var(--ff-disp);font-size:2.3rem;color:var(--cream);margin-bottom:1rem;animation:fadeUp .6s var(--ease) .2s both}
+.q-rmsg{font-family:var(--ff-body);font-size:1.1rem;font-style:italic;color:var(--text-dim);max-width:540px;margin:0 auto 2rem;line-height:1.75;animation:fadeUp .6s var(--ease) .3s both}
+.q-ract{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s var(--ease) .4s both}
+
+/* WORK */
+.offer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.offer-card{border:1px solid var(--border);border-radius:4px;padding:2.5rem;position:relative;overflow:hidden;transition:all .3s var(--ease);background:rgba(150,45,73,.06)}
+.offer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--rebel),transparent)}
+.offer-card:hover{transform:translateY(-5px);box-shadow:0 22px 50px rgba(0,0,0,.32);border-color:rgba(150,45,73,.38)}
+.offer-type{font-family:var(--ff-ui);font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--rebel);margin-bottom:1rem}
+.offer-title{font-family:var(--ff-disp);font-size:2rem;color:var(--text);margin-bottom:.85rem}
+.offer-desc{font-family:var(--ff-body);font-size:1rem;color:var(--text-dim);line-height:1.8;margin-bottom:1.5rem}
+.offer-list{list-style:none;margin-bottom:2rem}
+.offer-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.95rem;color:var(--text-dim);padding:.45rem 0;border-bottom:1px solid rgba(150,45,73,.1)}
+.offer-list li::before{content:'—';color:var(--rebel);flex-shrink:0}
+.offer-list li:last-child{border-bottom:none}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.process-step{text-align:center;padding:2rem 1.5rem;border:1px solid var(--border);border-radius:4px;background:rgba(150,45,73,.05)}
+.process-step__num{font-family:var(--ff-disp);font-size:3rem;color:rgba(150,45,73,.3);line-height:1;margin-bottom:.75rem;font-style:italic}
+.process-step h4{font-family:var(--ff-disp);font-size:1.1rem;color:var(--text);margin-bottom:.5rem}
+.process-step p{font-family:var(--ff-body);font-size:.92rem;color:var(--text-dim);line-height:1.65}
+
+/* CONTACT */
+.contact-wrap{min-height:65vh;display:flex;align-items:center;padding:8rem 0;background:linear-gradient(180deg,var(--near-black) 0%,var(--surface) 100%);position:relative;overflow:hidden}
+.contact-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(150,45,73,.12) 0%,transparent 70%)}
+.email-link{display:inline-block;font-family:var(--ff-body);font-size:clamp(1.2rem,3vw,1.8rem);font-style:italic;color:var(--rebel-lt);margin:1.5rem 0;border-bottom:1px solid rgba(150,45,73,.35);padding-bottom:.3rem;transition:all .2s}
+.email-link:hover{color:var(--rebel);border-color:var(--rebel)}
+
+/* FOOTER */
+.footer{background:var(--surface);border-top:1px solid rgba(150,45,73,.2);padding:3rem 2rem}
+.footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
+.footer-brand{font-family:var(--ff-disp);font-size:1rem;font-style:italic;color:rgba(243,236,226,.4)}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+.footer-link{font-family:var(--ff-ui);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-soft);background:none;border:none;cursor:pointer;transition:color .2s}
+.footer-link:hover{color:var(--cream)}
+.footer-copy{font-family:var(--ff-ui);font-size:.58rem;letter-spacing:.08em;color:var(--text-soft);text-align:right}
+
+/* WAVE */
+.wave-wrap{position:absolute;bottom:0;left:0;right:0;z-index:1;overflow:hidden;line-height:0}
+.wv{position:absolute;bottom:0;left:-50%;width:200%}
+.wv1{opacity:.1;animation:waveMove 14s linear infinite}
+.wv2{opacity:.06;animation:waveMove 20s linear infinite reverse}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .nav__links,.nav__cta{display:none}
+  .hamburger{display:flex}
+  .method-inner{grid-template-columns:1fr;gap:1.5rem}
+  .method-arrow{display:none}
+  .topic-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .topic-card--water{grid-row:auto;min-height:280px}
+  .about-grid,.about-teaser-grid{grid-template-columns:1fr}
+  .about-sticky{position:static}
+  .offer-grid,.process-grid,.values-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr;text-align:center}
+  .footer-copy{text-align:center}
+}
+@media(max-width:600px){
+  section{padding:4rem 0}
+  .container{padding:0 1.25rem}
+  .brand-bar__tag{display:none}
+  .float-swaps{bottom:1.25rem;right:1.25rem}
+}
+</style>
 </head>
 <body>
-  <div id="root"></div>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
 
-  <script type="text/babel">
-    const { useState } = React;
+/* ── DATA ── */
+const QUIZ_QS = [
+  { text:"How is your energy through the day?", opts:[{t:"Consistently good — alert and grounded",p:0},{t:"Afternoon slumps and occasional brain fog",p:1},{t:"Persistent fatigue that's hard to shake",p:2}]},
+  { text:"How does your skin, hair, and joints feel?", opts:[{t:"Supple, hydrated, and healthy",p:0},{t:"Sometimes dry, dull, or stiff",p:1},{t:"Often dry, brittle, or achy",p:2}]},
+  { text:"After drinking a glass of water, you feel…", opts:[{t:"Satisfied and refreshed",p:0},{t:"Still thirsty soon after",p:1},{t:"Water doesn't seem to help my thirst",p:2}]},
+  { text:"How is your digestion and regularity?", opts:[{t:"Regular, comfortable, no issues",p:0},{t:"Occasional sluggishness or bloating",p:1},{t:"Constipation or discomfort is common",p:2}]},
+  { text:"Unexplained headaches or afternoon food cravings?", opts:[{t:"Rarely or never",p:0},{t:"Sometimes — especially mid-afternoon",p:1},{t:"Frequently, without obvious cause",p:2}]},
+  { text:"What water do you mainly drink?", opts:[{t:"Filtered mineral-rich water or natural spring water",p:0},{t:"Tap water or standard bottled brands",p:1},{t:"Reverse osmosis, distilled, or I'm not sure",p:2}]}
+];
+const QUIZ_RES = [
+  {min:0,max:4,level:"Well-Hydrated",title:"Refine & Elevate",msg:"Your body is responding well. Now it's about elevation — explore water structuring, mineral balance, and the deeper intelligence of living water.",cta:"principles",ctaLabel:"Explore Principles"},
+  {min:5,max:8,level:"Moderately Dehydrated",title:"Time to Upgrade",msg:"Your cells are asking for better water. These symptoms are real signals. Focus on mineral-rich, structured water and reduce the dehydrating agents in your environment.",cta:"swaps",ctaLabel:"See the Swaps"},
+  {min:9,max:12,level:"Cellular Support Needed",title:"Your Cells Are Calling",msg:"These signs indicate your cellular hydration is compromised. A personalised consultation will identify the root cause and give you a clear, tailored path forward.",cta:"work",ctaLabel:"Work With Me"}
+];
+const PRINCIPLES_DATA = [
+  {num:"01",title:"Why Hydration is the Foundation of Life",
+   body:`<p>Water is not passive. It delivers nutrients to every cell, removes metabolic waste, and orchestrates thousands of physiological processes simultaneously. Even mild dehydration — as little as 2% of body weight — can measurably impair cognitive performance, reaction time, and mood.</p><p>But here is what most people miss: the human body is not made of plain water. It runs on <strong>electrolyte-rich fluids</strong> — complex solutions filled with minerals and trace elements. Flooding your body with pure H₂O can actually dilute these vital electrolytes, disrupting the very balance you are trying to restore.</p><p><strong>Salt is not your enemy — it is your bioelectrical conductor.</strong> Without minerals like sodium and potassium, electrical signals cannot travel through your body.</p><p>Signs your cells may be dehydrated:</p><div class="symp-grid"><div class="symp-item"><div class="symp-dot"></div><span>Dry skin, joints, or hair</span></div><div class="symp-item"><div class="symp-dot"></div><span>Constipation</span></div><div class="symp-item"><div class="symp-dot"></div><span>Frequent thirst water doesn't resolve</span></div><div class="symp-item"><div class="symp-dot"></div><span>Fatigue or feeling "ungrounded"</span></div><div class="symp-item"><div class="symp-dot"></div><span>Unexplained headaches</span></div><div class="symp-item"><div class="symp-dot"></div><span>Afternoon food cravings</span></div></div><p><strong>Action:</strong> Begin each morning with a glass of mineral-rich water and a small pinch of quality sea salt.</p>`,
+   link:{label:"→ See trusted salt brands",page:"swaps",section:"salt"}},
+  {num:"02",title:"Water as a Living Medium",
+   body:`<p>Austrian naturalist <strong>Victor Schauberger</strong> described water as "the blood of the Earth" — a living substance that gains vitality as it flows naturally through the landscape. Modern science confirms that water's molecular structure changes with movement, temperature, pressure, and energetic input.</p><p>Water researcher <strong>Veda Austin</strong> has demonstrated what she calls <em>hydroglyphs</em> — repeatable crystalline ice patterns that emerge when the same energetic input is applied to water. Her conclusion: water is responsive, intelligent, and relational.</p><p><strong>Water remembers how it has been treated.</strong> Stagnant, over-processed water has a fundamentally different structural quality than water that has flowed freely through natural landscapes.</p><p><strong>Action:</strong> Stir or swirl your water before drinking. Bring gratitude to the exchange.</p>`,
+   link:{label:"→ See structuring products",page:"swaps",section:"structuring"}},
+  {num:"03",title:"The Key to Cellular Hydration",
+   body:`<p>Water must actually make it <strong>inside your cells</strong>. Drinking more water does not automatically mean your cells are absorbing it.</p><p><strong>Hydration is electrical before it is mechanical.</strong> Your cells structure water — organising molecules to transport them from the extracellular space into the interior. This process is powered by the electrical voltage across your cell membranes and mitochondria.</p><p>Cell membranes are phospholipid bilayers that are semi-conductive. The quality of dietary fats you consume directly determines how well your membranes hold charge and facilitate water transport.</p><p><strong>Drink your food.</strong> Broths, porridges, raw vegetables, and lightly cooked eggs all contribute meaningfully to hydration in ways plain water cannot match.</p>`,
+   link:{label:"→ See water sources",page:"swaps",section:"sources"}},
+  {num:"04",title:"Water Structuring & Vitality",
+   body:`<p>The <strong>fourth phase of water</strong> — also called structured, hexagonal, coherent, or biological water — is a plasma-like crystalline gel state. It is the form water takes inside living cells, and the form that hydrates most effectively.</p><p>Structured water forms naturally through movement (vortexing), sunlight exposure, contact with natural minerals, and low temperatures. It is degraded by stagnation, right-angle pipes, reverse osmosis, and electromagnetic pollution.</p><p><strong>At home:</strong> Swirl vigorously with a spoon before drinking. Store in glass or stainless steel. Add shungite or quartz crystals to your storage vessel. Hold your glass and bring a quiet intention before drinking.</p>`,
+   link:{label:"→ See structuring products",page:"swaps",section:"structuring"}},
+  {num:"05",title:"Dehydrating Agents & Your Environment",
+   body:`<p>You can drink excellent water and still be chronically dehydrated if your environment is working against you.</p><div class="toxin-grid"><div class="toxin-item"><h4>Ultra-processed food</h4><p>Low moisture, high in synthetic additives that increase cellular water demand.</p></div><div class="toxin-item"><h4>EMF exposure</h4><p>Disrupts cellular voltage and impairs membrane function.</p></div><div class="toxin-item"><h4>Sleep deprivation</h4><p>Interrupts the body's overnight repair and hydration cycles.</p></div><div class="toxin-item"><h4>Fluoride &amp; Chlorine</h4><p>Chlorine disrupts gut microbiome. Fluoride has documented thyroid impacts.</p></div><div class="toxin-item"><h4>Heavy metals &amp; PFAS</h4><p>Accumulate in tissue over time, requiring robust cellular hydration to process.</p></div><div class="toxin-item"><h4>Microplastics</h4><p>Found in water, food, and air. Chemical additives within them are often more harmful than the plastic itself.</p></div></div><p><strong>What you send down the drain matters.</strong> Bleach, ammonia, and synthetic cleaners are not fully broken down in treatment. Vinegar, baking soda, citric acid, and simple soap are effective alternatives.</p>`,
+   link:{label:"→ See filtration guide",page:"swaps",section:"filtration"}}
+];
+const PRICE_TOOLTIPS = {'€':'Under €100','€€':'Under €700','€€€':'Under €1,500','€€€€':'Above €1,500','€–€€':'€100–€700 range','€€€–€€€€':'€1,500+ range'};
+const WATER_SOURCES = [
+  {rank:"1",name:"Natural Spring Water",desc:"Sourced from deep underground aquifers, filtered naturally by soil and rock. Balanced mineral profile, natural structure, clean energetic imprint.",badge:"b-best",label:"Excellent"},
+  {rank:"2",name:"Deep Well or Underground Water",desc:"In rural areas, it is rich in natural minerals and untouched by surface pollutants. Regular testing is essential, especially in agricultural zones.",badge:"b-good",label:"Regional"},
+  {rank:"3",name:"Quality Tap Water",desc:"In Switzerland, Austria and Scandinavia, tap water is often safe with basic filtration. The opposite is true in most of the world.",badge:"b-caution",label:"Upgrade"},
+  {rank:"4",name:"Filtered Tap Water",desc:"Carbon, gravity, or multi-stage filtration greatly improves tap water. Removes chlorine and many contaminants. A good baseline for most households.",badge:"b-best",label:"Ideal"},
+  {rank:"5",name:"Reverse Osmosis & Distilled",desc:"Removes virtually everything — contaminants and minerals alike. Results in 'empty' water that can leach electrolytes if consumed long-term. Always remineralise.",badge:"b-caution",label:"Remineralise"},
+  {rank:"6",name:"Rainwater",desc:"Can be pure in remote clean-air environments. In urban areas, often contains acidic compounds and air pollutants. Must be filtered and tested if used for drinking.",badge:"b-avoid",label:"Situational"}
+];
+const SALT_DATA = {
+  europe:["Rapunzel Meersalz","Saltverk Icelandic Salt","Vera Salt","Mediterra Mediterranean Sea Salt","Mayi Spring Salt"],
+  australia:["Lake Deborah Salt","Tasman Sea Salt","Murray River Salt"],
+  usa:["Jacobsen Salt Co. Sea Salt","Diamond Crystal Kosher Salt","Vancouver Island Sea Salt","Mayi Delice Fine Natural Spring Salt","Only Plastic-Free Spring Salt"]
+};
+const TRUSTED_WATER = [
+  {region:"USA",brands:"Splendor Water, Mountain Valley, Castle Rock, Gerolsteiner, Icelandic Glacial, Blue Spring Living, Three Bays Still Water"},
+  {region:"Europe",brands:"Hallstein Water, Acqua Filette, Llanllyr Source, Borjomi, Gerolsteiner, Lofoten Arctic, Vincentka, Tatranská Minerálka"},
+  {region:"Australia",brands:"Cape Grim, Pristine Yarra Valley, Daylesford & Hepburn Mineral Springs"}
+];
+const QUESTION_WATER = [
+  {region:"USA",brands:"Fiji, Nestlé Pure Life, Dasani, Aquafina, Crystal Geyser, Arrowhead, Deer Park, San Pellegrino, 365 Sparkling Water",issues:"Toxins, tap reprocessing, heavy metals"},
+  {region:"Europe",brands:"Evian, Contrex, Volvic, Vittel, Highland Spring, Perrier, San Pellegrino, Jana, Solan de Cabras, Vichy Catalan",issues:"Plastic leaching, microplastics, heavy metals"},
+  {region:"Australia",brands:"Mount Franklin, Frantelle, Pump Spring Water",issues:"Plastic leaching"}
+];
+const FILTRATION_TYPES = [
+  {name:"Reverse Osmosis",desc:"Removes most contaminants including heavy metals and fluoride. Always remineralise after."},
+  {name:"Carbon Block",desc:"Removes chlorine, VOCs, and organic chemicals effectively. Good everyday workhorse."},
+  {name:"Ceramic",desc:"Physically blocks bacteria and sediment. Long-lasting and low-maintenance."},
+  {name:"Charcoal / Shungite",desc:"Reduces chemicals and adds beneficial minerals back. Great for basic enhancement."},
+  {name:"UV Light",desc:"Kills bacteria and viruses without chemicals, but does not remove heavy metals."},
+  {name:"Ozone",desc:"Ozone molecules eliminate contaminants on contact. Often used therapeutically or in pools."},
+  {name:"Multi-stage Systems",desc:"Combination of the above. Best practice for broad-spectrum protection."}
+];
+const HOME_FILTERS = [
+  {name:"Leogant Spring System",tech:"Activated carbon, EM ceramics, vortex module",best:"High-end undersink with vitalization",avail:"Germany, Austria, EU",url:"https://leogant.com",price:"€€€–€€€€"},
+  {name:"Atla Water System",note:"formerly AquaLiv",tech:"Multi-stage filtration, mineralisation, structured vortexing",best:"Bioavailable mineral-rich water",avail:"USA, Canada, international",url:"https://atlawater.com",price:"€€"},
+  {name:"Aquasana Rhino Max Flow",tech:"Carbon/KDF filtration, optional UV, salt-free softener",best:"Whole-house chemical & heavy metal filtration",avail:"USA, Canada",url:"https://www.aquasana.com/whole-house-water-filters/rhino-max-flow-100362408.html",price:"€€€€"},
+  {name:"Stabfor S-SAT Home Filter",tech:"Ceramic, carbon, structured vortex module (no RO)",best:"Point-of-entry with energising effect",avail:"Central Europe",url:"https://eshop.newhumansolution.com/sk/produkty-stabfor-stabfor-s-sat-domaci-filter-1-s-vlozkou-5-10mcr/",price:"€€€€"}
+];
+const PORTABLE_FILTERS = [
+  {name:"Survivor Filter PRO",tech:"Pre-filter, carbon, ultrafiltration",best:"Hiking, camping, emergencies",avail:"USA, Canada, Mexico, Europe",url:"https://www.survivorfilter.com/collections/all",price:"€"},
+  {name:"Epic Vostok Stainless Bottle",tech:"Activated carbon + UF",best:"Travel, everyday use, insulated",avail:"USA, Canada, Australia, Europe",url:"https://epicwaterfilters.com.au/products/epic-vostok-double-walled-vacuum-insulated-stainless-steel-34-oz-filtered-filter-water-bottle",price:"€"},
+  {name:"GRAYL UltraPress",tech:"Electroadsorption + activated carbon",best:"International travel, trekking",avail:"USA, Canada, Europe, Russia",url:"https://grayl.com/collections/featured-collection",price:"€–€€"},
+  {name:"Aurmina",tech:"Flocculation, agglutination, coagulation",best:"Everyday use, travel",avail:"USA, ships worldwide by request",url:"https://www.aurmina.com",price:"€€"}
+];
+const STRUCT_PRODUCTS = [
+  {name:"Alive Water Vortex Revitalizer",desc:"Double spiral vortex mimics natural streams to enhance structure and pH.",avail:"Canada, US",url:"https://www.alivewater.ca",price:"€€"},
+  {name:"Analemma Coherent Water",desc:"Uses light and frequency to structure water for enhanced bioavailability.",avail:"US, Canada, Europe, Russia, AU",url:"https://eu.analemma-water.com/?country=SK",price:"€€"},
+  {name:"Flaska TPS Water Bottle",desc:"Silica imprinting mimics spring water's vibrational memory.",avail:"Europe, US, Canada, Russia",url:"https://flaska.ie/catalog",price:"€"},
+  {name:"Vortex Magnet Energizer (VME)",desc:"Vortex motion combined with reversed magnetic fields.",avail:"US, Canada, Europe",url:"https://vibrantvitalwater.com/products/",price:"€€"},
+  {name:"3DModelShop Schauberger Devices",desc:"3D-printed vortex generators replicating Schauberger's spiral designs.",avail:"Worldwide",url:"https://pedros3dmodels.myshopify.com/collections/viktor-schauberger",price:"€"},
+  {name:"Aurmina Mineral Solution",desc:"Volcanic minerals promote more organised molecular structure in water.",avail:"US, ships worldwide",url:"https://www.aurmina.com",price:"€€"}
+];
 
-    const waterTypes = [
-      { id:"tap", name:"Tap water", emoji:"🚿", tagline:"Convenient & regulated", desc:"Municipally treated water, regulated by authorities. Quality varies by location — urban areas typically add chlorine and fluoride.", pros:["Free or very cheap","Zero packaging waste","Regularly tested & reported"], cons:["May contain chlorine byproducts","Old pipes can leach lead","Hard water common in many areas"], best:"Budget-conscious households in low-risk areas" },
-      { id:"filtered", name:"Filtered water", emoji:"🔬", tagline:"Targeted purification", desc:"Tap water passed through a carbon, ceramic, or RO filter. Quality depends heavily on filter type and maintenance.", pros:["Removes chlorine & off-tastes","Cost-effective long term","Reduces key contaminants"], cons:["Filter maintenance required","Quality varies by grade","Some remove beneficial minerals"], best:"Most households — best overall value" },
-      { id:"spring", name:"Spring water", emoji:"🌿", tagline:"Naturally occurring minerals", desc:"Collected from underground springs with naturally occurring minerals. Minimally processed compared to purified water.", pros:["Natural mineral balance","Clean fresh taste","No added chemicals"], cons:["Expensive & plastic-heavy","Purity not always guaranteed","Mineral content varies by brand"], best:"Those prioritising mineral intake and taste" },
-      { id:"mineral", name:"Mineral water", emoji:"💎", tagline:"Rich in electrolytes", desc:"Bottled at source with a defined, consistent mineral composition — typically higher in calcium, magnesium, and sulfates.", pros:["Consistent mineral profile","Excellent electrolyte replenishment","Good for bone & nerve health"], cons:["Expensive","High plastic waste","Not suitable for low-mineral diets"], best:"Athletes, those with mineral deficiencies" },
-      { id:"purified", name:"Purified / RO water", emoji:"⚗️", tagline:"Ultra-clean, mineral-free", desc:"Reverse osmosis or distillation removes virtually everything — contaminants and minerals alike. The purest option available.", pros:["Removes heavy metals & PFAS","Consistent reliable purity","Ideal for sensitive populations"], cons:["Removes beneficial minerals too","Can be slightly acidic","System costs can be high"], best:"Contaminated areas, pregnancy, immune conditions" }
-    ];
+/* ── UTILS ── */
+function useReveal() {
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const els = document.querySelectorAll('.reveal:not(.vis)');
+      if (!els.length) return;
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      els.forEach(el => obs.observe(el));
+      return () => obs.disconnect();
+    }, 100);
+    return () => clearTimeout(t);
+  });
+}
+function PriceTier({ price }) {
+  const tip = PRICE_TOOLTIPS[price] || price;
+  if (price.includes('–')) return <span title={tip} style={{fontFamily:'var(--ff-ui)',fontSize:'.78rem',fontWeight:700,color:'var(--rose-gold)',letterSpacing:'.04em',cursor:'help'}}>{price}</span>;
+  const n = price.length;
+  return <span title={tip} style={{fontFamily:'var(--ff-ui)',fontSize:'.78rem',fontWeight:700,letterSpacing:'.04em',cursor:'help'}}><span style={{color:'var(--rose-gold)'}}>{'€'.repeat(n)}</span><span style={{color:'rgba(196,146,156,.18)'}}>{'€'.repeat(4-n)}</span></span>;
+}
+function PriceLegend() {
+  return (
+    <div style={{display:'flex',alignItems:'center',gap:'1.5rem',flexWrap:'wrap',padding:'.65rem 1rem',background:'rgba(150,45,73,.06)',border:'1px solid rgba(150,45,73,.18)',borderRadius:3,margin:'1.5rem 0 0'}}>
+      <span style={{fontFamily:'var(--ff-ui)',fontSize:'.58rem',fontWeight:600,letterSpacing:'.15em',textTransform:'uppercase',color:'var(--text-soft)'}}>Price guide</span>
+      {Object.entries(PRICE_TOOLTIPS).filter(([k])=>!k.includes('–')).map(([t,l])=>(
+        <span key={t} style={{display:'flex',alignItems:'center',gap:'.4rem'}}><PriceTier price={t}/><span style={{fontFamily:'var(--ff-ui)',fontSize:'.6rem',color:'var(--text-soft)'}}>{l}</span></span>
+      ))}
+    </div>
+  );
+}
+function WaveSVG({ cls }) {
+  return <svg className={cls} viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{height:120}}><path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" fill="rgba(45,122,150,1)"/></svg>;
+}
 
-    const keyFactors = [
-      { name:"pH level", ideal:"6.5 – 8.5", icon:"⚖️", desc:"Measures acidity vs alkalinity. Most healthy water falls in a neutral range. Extremely acidic or alkaline water affects taste and over time can impact health." },
-      { name:"TDS (dissolved solids)", ideal:"50 – 500 mg/L", icon:"🧪", desc:"Total dissolved solids indicate mineral and salt content. Too low = flat taste and few minerals. Too high = possible contamination or excess salts." },
-      { name:"Key minerals", ideal:"Ca, Mg, K balanced", icon:"⚡", desc:"Calcium supports bones, magnesium supports nerves and sleep, potassium supports heart function. Good water contributes meaningfully to your daily intake." },
-      { name:"Contaminants to watch", ideal:"Below WHO limits", icon:"⚠️", desc:"Key risks: chlorine byproducts (THMs), lead from old pipes, nitrates from agriculture, PFAS (forever chemicals), and microplastics." }
-    ];
+/* ── SOCIAL LINKS ── */
+const SOCIALS = [
+  { name:'Instagram', handle:'@discern.like.a.rebel', url:'https://www.instagram.com/discern.like.a.rebel/',
+    icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> },
+  { name:'YouTube', handle:'@discernlikearebel', url:'https://www.youtube.com/@discernlikearebel',
+    icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg> }
+];
 
-    const questions = [
-      { id:"goal", text:"What is your primary health goal?", options:[{v:"hydration",l:"General daily hydration"},{v:"athletic",l:"Athletic performance & recovery"},{v:"detox",l:"Reduce toxin exposure"},{v:"condition",l:"Managing a health condition"}] },
-      { id:"location", text:"Where do you live?", options:[{v:"urban",l:"Urban city (apartment / older building)"},{v:"suburban",l:"Suburban (newer infrastructure)"},{v:"rural",l:"Rural (well water or older pipes)"},{v:"coastal",l:"Coastal or industrial area"}] },
-      { id:"source", text:"What do you currently drink most?", options:[{v:"tap",l:"Straight from the tap"},{v:"bottled",l:"Bottled water"},{v:"filtered",l:"Filtered (pitcher or under-sink)"},{v:"unsure",l:"Not sure / it varies"}] },
-      { id:"concern", text:"What concerns you most about water?", options:[{v:"chemicals",l:"Chemicals & contaminants"},{v:"minerals",l:"Getting the right minerals"},{v:"taste",l:"Taste & smell"},{v:"environment",l:"Environmental impact"}] },
-      { id:"health", text:"Any special health considerations?", options:[{v:"none",l:"None — generally healthy"},{v:"kidney",l:"Kidney or urinary concerns"},{v:"pregnancy",l:"Pregnant or nursing"},{v:"immune",l:"Compromised immune system"}] }
-    ];
-
-    const typeMap = Object.fromEntries(waterTypes.map(t => [t.id, t]));
-
-    async function getAIRecommendation(answers) {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: `You are a water quality and environmental health expert with deep knowledge of WHO guidelines, EPA standards, and nutritional science. Given a user's health profile, provide a personalised water recommendation.
-
-Respond ONLY with valid JSON — no markdown, no backticks, no preamble:
-{
-  "recommended": "filtered|tap|spring|mineral|purified",
-  "headline": "short punchy 6-10 word headline",
-  "why": "2-3 sentences tailored to their specific answers — mention their goal and location",
-  "lookFor": ["specific item 1", "specific item 2", "specific item 3"],
-  "avoid": ["specific item 1", "specific item 2"],
-  "tip": "one very specific actionable pro tip",
-  "minerals": { "calcium": 0-100, "magnesium": 0-100, "potassium": 0-100, "sodium": 0-100 },
-  "riskLevel": "low|medium|high",
-  "riskReason": "one sentence explaining their specific water risk"
-}`,
-          messages: [{ role:"user", content:`Goal: ${answers.goal}, Location: ${answers.location}, Source: ${answers.source}, Concern: ${answers.concern}, Health: ${answers.health}` }]
-        })
-      });
-      const data = await response.json();
-      const text = data.content[0].text;
-      return JSON.parse(text.replace(/```json|```/g,"").trim());
-    }
-
-    function MineralBar({ label, value }) {
-      const color = value > 66 ? "#2d9e6a" : value > 33 ? "#2196b8" : "#aaa";
-      return (
-        <div style={{marginBottom:12}}>
-          <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
-            <span style={{fontSize:12,color:"#888"}}>{label}</span>
-            <span style={{fontSize:12,fontWeight:500}}>{Math.round(value)}%</span>
+function SocialLinks({ style='bar' }) {
+  if (style === 'bar') return (
+    <div style={{display:'flex',alignItems:'center',gap:'.85rem'}}>
+      {SOCIALS.map(s => (
+        <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" title={`${s.name} ${s.handle}`}
+          style={{color:'rgba(255,255,255,.65)',display:'flex',alignItems:'center',transition:'color .2s'}}
+          onMouseEnter={e=>e.currentTarget.style.color='#fff'} onMouseLeave={e=>e.currentTarget.style.color='rgba(255,255,255,.65)'}>
+          {s.icon}
+        </a>
+      ))}
+    </div>
+  );
+  if (style === 'footer') return (
+    <div style={{display:'flex',gap:'1.25rem',flexWrap:'wrap',alignItems:'center'}}>
+      {SOCIALS.map(s => (
+        <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer"
+          style={{display:'flex',alignItems:'center',gap:'.45rem',fontFamily:'var(--ff-ui)',fontSize:'.6rem',fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--text-soft)',textDecoration:'none',transition:'color .2s'}}
+          onMouseEnter={e=>e.currentTarget.style.color='var(--rose-gold)'} onMouseLeave={e=>e.currentTarget.style.color='var(--text-soft)'}>
+          {s.icon}<span>{s.handle}</span>
+        </a>
+      ))}
+    </div>
+  );
+  if (style === 'block') return (
+    <div style={{display:'flex',flexDirection:'column',gap:'.75rem'}}>
+      {SOCIALS.map(s => (
+        <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer"
+          style={{display:'flex',alignItems:'center',gap:'.9rem',padding:'.9rem 1.25rem',background:'rgba(150,45,73,.06)',border:'1px solid var(--border)',borderRadius:4,textDecoration:'none',transition:'all .2s'}}
+          onMouseEnter={e=>{e.currentTarget.style.background='rgba(150,45,73,.12)';e.currentTarget.style.borderColor='rgba(150,45,73,.38)';}}
+          onMouseLeave={e=>{e.currentTarget.style.background='rgba(150,45,73,.06)';e.currentTarget.style.borderColor='rgba(150,45,73,.2)';}}>
+          <span style={{color:'var(--rose-gold)'}}>{s.icon}</span>
+          <div>
+            <div style={{fontFamily:'var(--ff-ui)',fontSize:'.56rem',fontWeight:700,letterSpacing:'.16em',textTransform:'uppercase',color:'var(--text-soft)',marginBottom:'.15rem'}}>{s.name}</div>
+            <div style={{fontFamily:'var(--ff-body)',fontSize:'1rem',color:'var(--text-dim)'}}>{s.handle}</div>
           </div>
-          <div className="mineral-track">
-            <div className="mineral-fill" style={{width:`${value}%`,background:color}}/>
+        </a>
+      ))}
+    </div>
+  );
+  return null;
+}
+
+/* ── NAV ── */
+function BrandBar() {
+  return (
+    <div className="brand-bar">
+      <span className="brand-bar__name">Discern Like A Rebel</span>
+      <span className="brand-bar__tag">Smashing The Toxins Out Of The Way</span>
+      <SocialLinks style="bar"/>
+    </div>
+  );
+}
+function Nav({ page, navigate }) {
+  const [mob, setMob] = useState(false);
+  const [wOpen, setWOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const h = e => { if (ref.current && !ref.current.contains(e.target)) setWOpen(false); };
+    document.addEventListener('mousedown', h);
+    return () => document.removeEventListener('mousedown', h);
+  }, []);
+  const isW = ['principles','swaps'].includes(page);
+  return (
+    <nav className="nav">
+      <div className="nav__inner">
+        <div className="nav__logo" onClick={() => { navigate('home'); setMob(false); }}>
+          <span className="nav__logo-sub">Discern Like A Rebel</span>
+          <span className="nav__logo-title">Living Water</span>
+        </div>
+        <ul className="nav__links">
+          <li ref={ref} className="dropdown">
+            <button className={`dropdown__btn ${isW?'on':''}`} onClick={() => setWOpen(!wOpen)}>
+              Water <span className={`dropdown__chev ${wOpen?'open':''}`}>▾</span>
+            </button>
+            <div className={`dropdown__menu ${wOpen?'open':''}`}>
+              <button className="dropdown__item" onClick={() => { navigate('principles'); setWOpen(false); }}>Principles</button>
+              <button className="dropdown__item dropdown__item--rebel" onClick={() => { navigate('swaps'); setWOpen(false); }}>Swaps →</button>
+            </div>
+          </li>
+          <li><button className={`nav__link ${page==='about'?'on':''}`} onClick={() => navigate('about')}>About</button></li>
+          <li><button className={`nav__link ${page==='contact'?'on':''}`} onClick={() => navigate('contact')}>Contact</button></li>
+          <li><button className={`nav__link ${page==='work'?'on':''}`} onClick={() => navigate('work')}>Work With Me</button></li>
+          <li><button className="nav__cta" onClick={() => navigate('swaps')}>Swaps →</button></li>
+        </ul>
+        <button className="hamburger" onClick={() => setMob(!mob)}><span/><span/><span/></button>
+      </div>
+      <div className={`mob-nav ${mob?'open':''}`}>
+        {[{id:'home',l:'Home'},{id:'principles',l:'Water — Principles'},{id:'swaps',l:'Water — Swaps',r:true},{id:'about',l:'About'},{id:'work',l:'Work With Me'},{id:'contact',l:'Contact'}].map(item=>(
+          <button key={item.id} className={`mob-link ${page===item.id?'on':''} ${item.r?'mob-link--rebel':''}`} onClick={()=>{navigate(item.id);setMob(false);}}>{item.l}</button>
+        ))}
+      </div>
+    </nav>
+  );
+}
+function FloatingSwapsBtn({ navigate }) {
+  return <button className="float-swaps" onClick={() => navigate('swaps')}>Swaps →</button>;
+}
+function Ticker() {
+  const items = ['Water','Supplements','Home & Environment','Clothing','Food & Nutrition','Personal Care','Sleep','Movement'];
+  const all = [...items,...items];
+  return (
+    <div className="ticker-wrap">
+      <div className="ticker-inner">
+        {all.map((item,i) => <span key={i} className="ticker-item">{item} <span className="ticker-sep">×</span></span>)}
+      </div>
+    </div>
+  );
+}
+
+/* ── HOME ── */
+function HomePage({ navigate }) {
+  useReveal();
+  return (
+    <div className="page-in">
+      <section className="brand-hero">
+        <div className="brand-hero__bg"/>
+        <div className="container" style={{position:'relative',zIndex:1}}>
+          <span className="label label--rebel a1" style={{display:'block',marginBottom:'1.5rem'}}>Discern Like A Rebel</span>
+          <span className="brand-hero__title a1">DISCERN</span>
+          <span className="brand-hero__title brand-hero__title--italic a2">like a</span>
+          <span className="brand-hero__title brand-hero__title--red a3">REBEL</span>
+          <span className="brand-hero__tag a4">
+            Smashing The <span className="smash-word">Toxins<span className="smash-strike"/></span> Out Of The Way.
+            <br/>Ruthlessly curated education and swaps — across water, supplements, home, and beyond.
+          </span>
+          <div className="a4" style={{display:'flex',gap:'1rem',flexWrap:'wrap',marginTop:'2.5rem'}}>
+            <button className="btn btn-rebel" onClick={() => navigate('swaps')}>Explore Swaps →</button>
+            <button className="btn btn-ghost" onClick={() => navigate('principles')}>Read the Guide</button>
           </div>
         </div>
-      );
-    }
+        <div className="hero-scroll"><div className="scroll-line"/></div>
+      </section>
 
-    function WaterCard({ water }) {
-      const [open, setOpen] = useState(false);
-      return (
-        <div className="water-card">
-          <button className="water-card-header" onClick={()=>setOpen(!open)}>
-            <span style={{fontSize:18}}>{water.emoji}</span>
-            <div style={{flex:1}}>
-              <div style={{fontSize:14,fontWeight:500}}>{water.name}</div>
-              <div style={{fontSize:12,color:"#888"}}>{water.tagline}</div>
+      <Ticker/>
+
+      <div className="method-section">
+        <div className="container">
+          <div className="reveal" style={{marginBottom:'3.5rem'}}>
+            <div className="label" style={{marginBottom:'.75rem'}}>The Method</div>
+            <h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.8rem)',color:'var(--cream)'}}>How this works</h2>
+          </div>
+          <div className="method-inner reveal d1">
+            <div>
+              <div className="method-num">01</div>
+              <div className="method-verb">TEST</div>
+              <p className="method-desc">Every product category is researched, tested, and scrutinised against the highest standards. No affiliate pressure. No brand loyalty.</p>
             </div>
-            <span style={{fontSize:10,color:"#aaa",display:"inline-block",transform:open?"rotate(180deg)":"none",transition:"transform 0.2s"}}>▼</span>
-          </button>
-          {open && (
-            <div style={{padding:"0 1.25rem 1.25rem",borderTop:"0.5px solid #e0e0e0"}}>
-              <p style={{fontSize:13,lineHeight:1.6,color:"#666",margin:"1rem 0"}}>{water.desc}</p>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:10}}>
-                <div>
-                  <div style={{fontSize:11,fontWeight:500,color:"#2d9e6a",marginBottom:6}}>Pros</div>
-                  {water.pros.map((p,i)=><div key={i} style={{fontSize:12,padding:"2px 0"}}>+ {p}</div>)}
-                </div>
-                <div>
-                  <div style={{fontSize:11,fontWeight:500,color:"#e05252",marginBottom:6}}>Cons</div>
-                  {water.cons.map((c,i)=><div key={i} style={{fontSize:12,padding:"2px 0"}}>− {c}</div>)}
-                </div>
+            <div className="method-arrow">→</div>
+            <div>
+              <div className="method-num">02</div>
+              <div className="method-verb method-verb--rebel">SMASH</div>
+              <p className="method-desc">What fails gets eliminated. Ruthlessly. If it doesn't meet the standard, it's crossed out — no exceptions, no compromises.</p>
+            </div>
+            <div className="method-arrow">→</div>
+            <div>
+              <div className="method-num">03</div>
+              <div className="method-verb">SWAP</div>
+              <p className="method-desc">The best alternatives are placed in front of you. Curated, linked, and priced transparently. That's the only product you'll find here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section className="topics-section">
+        <div className="container">
+          <div className="reveal">
+            <div className="label" style={{marginBottom:'.75rem'}}>Topics</div>
+            <h2 style={{fontSize:'clamp(2rem,4vw,3.2rem)',color:'var(--cream)',marginBottom:'.5rem'}}>Choose your area</h2>
+            <p style={{color:'var(--text-dim)',fontStyle:'italic',fontSize:'1.05rem'}}>Each topic is independently researched, tested, and swapped. Water is live now.</p>
+          </div>
+          <div className="topic-grid">
+            <div className="topic-card topic-card--water reveal d1" onClick={() => navigate('swaps')}>
+              <div>
+                <span className="topic-badge badge-live">● Live Now</span>
+                <div className="topic-title">Living Water</div>
+                <p className="topic-desc">From cellular hydration and water structuring to the best sources, filtration systems, and salt brands — backed by science and lived experience.</p>
               </div>
-              <div style={{fontSize:12,color:"#888"}}>Best for: <strong style={{fontWeight:500}}>{water.best}</strong></div>
+              <div className="topic-actions">
+                <button className="btn btn-ghost btn-sm" onClick={e=>{e.stopPropagation();navigate('principles')}}>Principles</button>
+                <button className="btn btn-rebel btn-sm" onClick={e=>{e.stopPropagation();navigate('swaps')}}>Swaps →</button>
+              </div>
             </div>
-          )}
-        </div>
-      );
-    }
-
-    function App() {
-      const [tab, setTab] = useState("learn");
-      const [step, setStep] = useState(0);
-      const [answers, setAnswers] = useState({});
-      const [result, setResult] = useState(null);
-      const [loading, setLoading] = useState(false);
-      const [error, setError] = useState(null);
-
-      async function handleAnswer(qId, val) {
-        const newAnswers = {...answers,[qId]:val};
-        setAnswers(newAnswers);
-        if (step < questions.length - 1) { setStep(step+1); }
-        else {
-          setLoading(true); setError(null); setTab("result");
-          try { setResult(await getAIRecommendation(newAnswers)); }
-          catch(e) { setError("Something went wrong generating your recommendation. Please try again."); }
-          finally { setLoading(false); }
-        }
-      }
-
-      function resetQuiz() { setStep(0); setAnswers({}); setResult(null); setError(null); setLoading(false); setTab("quiz"); }
-
-      const recType = result ? typeMap[result.recommended] : null;
-      const tabs = ["learn","quiz",...(result||loading?["result"]:[])];
-      const riskClass = result ? `risk-${result.riskLevel}` : "risk-low";
-      const riskLabels = { low:"Low risk", medium:"Moderate risk", high:"Higher risk" };
-
-      return (
-        <div>
-          {/* Header */}
-          <div style={{borderBottom:"0.5px solid #e0e0e0",paddingBottom:"1.25rem",marginBottom:"1.5rem"}}>
-            <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:4}}>
-              <span style={{fontSize:21,fontWeight:500}}>💧 Water Literacy</span>
-              <span style={{fontSize:11,color:"#999",background:"#f0f0f0",padding:"2px 8px",borderRadius:20,border:"0.5px solid #e0e0e0"}}>AI-powered · open source</span>
-            </div>
-            <p style={{fontSize:13,color:"#666"}}>Understand what's in your water — and discover what's best for you.</p>
-          </div>
-
-          {/* Nav */}
-          <div style={{display:"flex",borderBottom:"0.5px solid #e0e0e0",marginBottom:"2rem"}}>
-            {tabs.map(t=>(
-              <button key={t} className={`tab-btn ${tab===t?"active":""}`} onClick={()=>setTab(t)}>
-                {t==="result"?"My result":t.charAt(0).toUpperCase()+t.slice(1)}
-              </button>
+            {[{title:'Supplements',sub:'What actually works — and what to throw out.'},{title:'Home & Environment',sub:'Air, EMF, cleaning products, and your living space.'},{title:'Clothing',sub:'Fabrics, dyes, and what you wear next to your skin.'}].map((t,i)=>(
+              <div key={t.title} className={`topic-card topic-card--soon reveal d${i+2}`}>
+                <span className="topic-badge badge-soon">Coming Soon</span>
+                <div className="topic-soon-title">{t.title}</div>
+                <div className="topic-soon-sub">{t.sub}</div>
+              </div>
             ))}
           </div>
-
-          {/* LEARN */}
-          {tab==="learn" && (
-            <div>
-              <h2 style={{fontSize:19,fontWeight:500,marginBottom:"0.4rem"}}>Water types</h2>
-              <p style={{fontSize:13,color:"#666",marginBottom:"1.25rem"}}>Each source has a different mineral profile, purity level, and cost.</p>
-              {waterTypes.map(w=><WaterCard key={w.id} water={w}/>)}
-
-              <h2 style={{fontSize:19,fontWeight:500,margin:"1.5rem 0 0.4rem"}}>What actually matters</h2>
-              <p style={{fontSize:13,color:"#666",marginBottom:"1.25rem"}}>Four parameters that define water quality.</p>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:10,marginBottom:"1.5rem"}}>
-                {keyFactors.map(f=>(
-                  <div key={f.name} className="card" style={{marginBottom:0}}>
-                    <div style={{fontSize:16,marginBottom:8}}>{f.icon}</div>
-                    <div style={{fontSize:13,fontWeight:500,marginBottom:3}}>{f.name}</div>
-                    <div style={{fontSize:11,color:"#2196b8",fontWeight:500,marginBottom:8}}>{f.ideal}</div>
-                    <div style={{fontSize:12,color:"#666",lineHeight:1.5}}>{f.desc}</div>
-                  </div>
-                ))}
-              </div>
-              <button className="primary-btn" onClick={()=>setTab("quiz")}>Find my water →</button>
-            </div>
-          )}
-
-          {/* QUIZ */}
-          {tab==="quiz" && !loading && (
-            <div>
-              <div style={{display:"flex",gap:4,marginBottom:"1.75rem"}}>
-                {questions.map((_,i)=>(
-                  <div key={i} style={{flex:1,height:3,borderRadius:2,background:i<=step?"#1a1a1a":"#e0e0e0",transition:"background 0.3s"}}/>
-                ))}
-              </div>
-              <div style={{fontSize:12,color:"#aaa",marginBottom:8}}>Question {step+1} of {questions.length}</div>
-              <h2 style={{fontSize:20,fontWeight:500,marginBottom:"1.5rem",lineHeight:1.35}}>{questions[step].text}</h2>
-              <div>
-                {questions[step].options.map(o=>(
-                  <button key={o.v} className="opt-btn" onClick={()=>handleAnswer(questions[step].id,o.v)}>{o.l}</button>
-                ))}
-              </div>
-              {step>0&&<button onClick={()=>setStep(step-1)} style={{fontSize:13,color:"#aaa",background:"none",border:"none",cursor:"pointer",marginTop:"1rem",padding:0,fontFamily:"inherit"}}>← Back</button>}
-            </div>
-          )}
-
-          {/* RESULT */}
-          {tab==="result" && (
-            <div>
-              {loading && (
-                <div className="loading-box">
-                  <div style={{fontSize:32,marginBottom:16}}>💧</div>
-                  <div style={{fontSize:14,color:"#666"}}>Analysing your water profile…</div>
-                  <div style={{fontSize:12,color:"#aaa",marginTop:6}}>Consulting WHO guidelines, EPA standards & nutritional science</div>
-                </div>
-              )}
-              {error && (
-                <div className="card" style={{border:"0.5px solid #e05252"}}>
-                  <div style={{fontSize:14,color:"#e05252",marginBottom:12}}>{error}</div>
-                  <button className="secondary-btn" onClick={resetQuiz}>Try again</button>
-                </div>
-              )}
-              {result && recType && (
-                <div>
-                  <div style={{marginBottom:"1.5rem"}}>
-                    <div style={{fontSize:11,color:"#aaa",marginBottom:6,textTransform:"uppercase",letterSpacing:"0.06em"}}>Your AI-powered recommendation</div>
-                    <h2 style={{fontSize:24,fontWeight:500,marginBottom:4}}>{recType.name} {recType.emoji}</h2>
-                    <div style={{fontSize:14,color:"#666",fontStyle:"italic"}}>{result.headline}</div>
-                  </div>
-
-                  <div className={`card ${riskClass}`} style={{marginBottom:12}}>
-                    <div className="risk-label label">{riskLabels[result.riskLevel] || "Risk level"}</div>
-                    <div style={{fontSize:13,lineHeight:1.5}}>{result.riskReason}</div>
-                  </div>
-
-                  <div className="card">
-                    <div className="label">Why this works for you</div>
-                    <p style={{fontSize:14,lineHeight:1.7}}>{result.why}</p>
-                  </div>
-
-                  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:12,marginBottom:12}}>
-                    <div className="card" style={{marginBottom:0}}>
-                      <div className="label" style={{color:"#2d9e6a"}}>Look for</div>
-                      {result.lookFor.map((l,i)=>(
-                        <div key={i} style={{fontSize:13,padding:"4px 0",display:"flex",gap:8,alignItems:"flex-start"}}>
-                          <span style={{color:"#2d9e6a",marginTop:1}}>✓</span><span>{l}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="card" style={{marginBottom:0}}>
-                      <div className="label" style={{color:"#e05252"}}>Avoid</div>
-                      {result.avoid.map((a,i)=>(
-                        <div key={i} style={{fontSize:13,padding:"4px 0",display:"flex",gap:8,alignItems:"flex-start"}}>
-                          <span style={{color:"#e05252",marginTop:1}}>✕</span><span>{a}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {result.minerals && (
-                    <div className="card">
-                      <div className="label">Ideal mineral priorities for you</div>
-                      <p style={{fontSize:12,color:"#888",marginBottom:"1rem"}}>How much to prioritise each mineral, based on your health profile.</p>
-                      {Object.entries(result.minerals).map(([k,v])=>(
-                        <MineralBar key={k} label={k.charAt(0).toUpperCase()+k.slice(1)} value={v}/>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="tip-box">
-                    <div className="label">Pro tip</div>
-                    <p className="pro-tip">{result.tip}</p>
-                  </div>
-
-                  <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-                    <button className="secondary-btn" onClick={resetQuiz}>Retake quiz</button>
-                    <button className="primary-btn" onClick={()=>setTab("learn")}>Explore water types</button>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
         </div>
-      );
-    }
+      </section>
 
-    ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
-  </script>
+      <section className="about-teaser">
+        <div className="container">
+          <div className="about-teaser-grid">
+            <div className="reveal">
+              <div className="about-photo-sm">
+                <img src="natalie.jpg" alt="Natalie — Discern Like A Rebel"/>
+              </div>
+            </div>
+            <div className="reveal d2">
+              <div className="label" style={{marginBottom:'1rem'}}>The Person Behind It</div>
+              <h2 style={{fontSize:'clamp(2rem,4vw,3rem)',color:'var(--cream)',marginBottom:'1.25rem'}}>Natalie</h2>
+              <p style={{color:'var(--text-dim)',fontSize:'1.05rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Environmental scientist. Holistic practitioner. Someone who tested everything on herself before recommending it to anyone else.</p>
+              <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'2rem',fontSize:'.98rem'}}>I studied environmental sciences at the University of Vienna, spent years in the lab, then had health challenges that sent me on a different kind of research journey. Today I combine laboratory precision with lived experience — and a healthy disrespect for anything that doesn't hold up to scrutiny.</p>
+              <div style={{display:'flex',gap:'1rem',flexWrap:'wrap'}}>
+                <button className="btn btn-gold" onClick={() => navigate('about')}>My Story</button>
+                <button className="btn btn-ghost" onClick={() => navigate('work')}>Work With Me</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/* ── ABOUT ── */
+function AboutPage({ navigate }) {
+  useReveal();
+  return (
+    <div className="page-in">
+      <div className="page-hero page-hero--water">
+        <div className="container" style={{position:'relative',zIndex:1}}>
+          <div className="label" style={{marginBottom:'1rem'}}>About</div>
+          <h1 style={{fontSize:'clamp(3rem,8vw,6.5rem)',color:'var(--cream)'}}><em style={{color:'var(--foam)'}}>Meet</em><br/>Natalie</h1>
+        </div>
+      </div>
+      <section style={{background:'linear-gradient(180deg,#0a2230 0%,var(--near-black) 100%)'}}>
+        <div className="container">
+          <div className="about-grid">
+            <div className="about-sticky reveal">
+              <div className="photo-frame">
+                <img src="natalie.jpg" alt="Natalie — Discern Like A Rebel"/>
+              </div>
+              <div className="photo-cap">Natalie · Discern Like A Rebel</div>
+            </div>
+            <div>
+              <div className="reveal d1">
+                <div className="label" style={{marginBottom:'1rem'}}>My Journey</div>
+                <h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.8rem)',color:'var(--cream)',marginBottom:'1.5rem'}}>From scientific curiosity to holistic mastery</h2>
+              </div>
+              <div className="reveal d2">
+                <p style={{fontSize:'1.1rem',fontStyle:'italic',color:'var(--mist)',lineHeight:1.8,marginBottom:'1.5rem'}}>"I first learnt about water while studying environmental sciences at the University of Vienna. After graduating, water chemistry drifted into the background — until quite challenging health issues brought it to the forefront of my life."</p>
+                <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.25rem'}}>That wake-up call set me on a journey. I looked into alternative water sources, learnt from holistic practitioners, and experimented with various methods — spending freely on equipment and protocols and using myself as a test subject. My confidence grew gradually, both in the science and in how to genuinely use this knowledge in daily life.</p>
+                <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.25rem'}}>Programming the remediation of uranium-contaminated aquifers in the lab was not my calling — but I'm genuinely grateful for the technical skills it gave me. They are now part of my toolkit for achieving real, effective results.</p>
+                <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'2rem'}}>Today, by weaving together holistic wisdom, solid scientific research, and hands-on experience, I've crafted a genuinely practical and personal approach to hydration that I love sharing with others.</p>
+              </div>
+              <div className="divider reveal"><div className="div-line"/><div className="div-mark">✦</div><div className="div-line"/></div>
+              <div className="reveal d1">
+                <div className="label" style={{marginBottom:'1rem'}}>Discern Like A Rebel</div>
+                <h3 style={{fontSize:'clamp(1.5rem,3vw,2.2rem)',color:'var(--cream)',marginBottom:'1rem'}}>Smashing the toxins out of the way</h3>
+                <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.5rem',fontStyle:'italic',fontSize:'1.05rem'}}>Discerning like a rebel means choosing to question the mainstream, look past the surface, and make decisions from a place of genuine knowledge and deep self-trust. If it doesn't pass the test — it's out. No compromise.</p>
+                <div className="values-grid">
+                  {[{title:'Rooted in Science',text:'Environmental science background. Lab experience. Real methodology.'},{title:'Lived Through It',text:'Personal health challenges shaped everything. This is not theoretical.'},{title:'Holistically Whole',text:'Science without wisdom is incomplete. Both have their place.'},{title:'Radically Honest',text:'No affiliate links. No brand allegiances. Just what actually works.'}].map(v=>(
+                    <div key={v.title} className="value-item"><h4>{v.title}</h4><p>{v.text}</p></div>
+                  ))}
+                </div>
+              </div>
+              <div className="reveal d2" style={{marginTop:'2.5rem'}}>
+                <div className="quote"><p>The feeling inside my body is the authority from which I speak most of the time. Everything else — the science, the research, the expert voices — supplements what lived experience has already taught me.</p></div>
+                <div style={{marginTop:'1.5rem',display:'flex',gap:'1rem',flexWrap:'wrap'}}>
+                  <button className="btn btn-rebel" onClick={() => navigate('work')}>Work With Me</button>
+                  <button className="btn btn-ghost" onClick={() => navigate('principles')}>Read the Guide</button>
+                </div>
+                <div style={{marginTop:'2.5rem'}}>
+                  <div className="label" style={{marginBottom:'1rem'}}>Find me here</div>
+                  <SocialLinks style="block"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/* ── ACCORDION ── */
+function Accordion({ item, navigate }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="accordion">
+      <button className={`acc-head ${open?'open':''}`} onClick={() => setOpen(!open)}>
+        <span className="acc-num">{item.num}</span>
+        <span className="acc-title">{item.title}</span>
+        <span className={`acc-chev ${open?'open':''}`}>▼</span>
+      </button>
+      <div className={`acc-body ${open?'open':''}`}>
+        <div className="acc-content" dangerouslySetInnerHTML={{__html:item.body}}/>
+        {item.link && <div style={{padding:'0 1.75rem 2rem'}}><button className="crosslink" onClick={() => navigate(item.link.page,item.link.section)}>{item.link.label}</button></div>}
+      </div>
+    </div>
+  );
+}
+
+/* ── QUIZ ── */
+function DehydrationQuiz({ navigate }) {
+  const [step,setStep] = useState(0);
+  const [score,setScore] = useState(0);
+  const [done,setDone] = useState(false);
+  function pick(p) { const ns=score+p; if(step<QUIZ_QS.length-1){setScore(ns);setStep(step+1);}else{setScore(ns);setDone(true);} }
+  function reset(){setStep(0);setScore(0);setDone(false);}
+  const res = done ? QUIZ_RES.find(r=>score>=r.min&&score<=r.max)||QUIZ_RES[2] : null;
+  return (
+    <section className="quiz-wrap" style={{padding:'6rem 0'}}>
+      <div className="quiz-inner">
+        <div style={{textAlign:'center',marginBottom:'3.5rem'}}>
+          <div className="label" style={{marginBottom:'.75rem'}}>Cellular Hydration Check</div>
+          <h2 style={{fontSize:'clamp(2rem,4vw,3rem)',color:'var(--cream)',fontStyle:'italic'}}>Are your cells truly hydrated?</h2>
+          <p style={{color:'var(--text-dim)',marginTop:'.75rem',fontStyle:'italic'}}>6 questions · 2 minutes · No email required</p>
+        </div>
+        {!done ? (
+          <div>
+            <div className="q-progress">{QUIZ_QS.map((_,i)=><div key={i} className="q-prog-bar"><div className="q-prog-fill" style={{width:i<step?'100%':i===step?'50%':'0%'}}/></div>)}</div>
+            <div style={{fontFamily:'var(--ff-ui)',fontSize:'.62rem',color:'var(--text-soft)',marginBottom:'.75rem',letterSpacing:'.1em'}}>{step+1} / {QUIZ_QS.length}</div>
+            <div key={step} className="q-text">{QUIZ_QS[step].text}</div>
+            <div className="q-opts">{QUIZ_QS[step].opts.map((o,i)=>(
+              <button key={i} className="q-opt" onClick={()=>pick(o.p)}><span className="q-letter">{String.fromCharCode(65+i)}</span><span className="q-opt-text">{o.t}</span></button>
+            ))}</div>
+            {step>0&&<button onClick={()=>setStep(step-1)} style={{marginTop:'1.25rem',fontFamily:'var(--ff-ui)',fontSize:'.65rem',letterSpacing:'.1em',color:'var(--text-soft)',background:'none',border:'none',cursor:'pointer'}}>← Back</button>}
+          </div>
+        ) : (
+          <div className="q-result">
+            <div className="q-score">{score}/{QUIZ_QS.length*2}</div>
+            <div className="q-level">{res.level}</div>
+            <div className="q-rtitle">{res.title}</div>
+            <p className="q-rmsg">{res.msg}</p>
+            <div className="q-ract">
+              <button className="btn btn-rebel" onClick={()=>navigate(res.cta)}>{res.ctaLabel}</button>
+              <button className="btn btn-ghost" onClick={reset}>Retake</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ── PRINCIPLES ── */
+function PrinciplesPage({ navigate }) {
+  useReveal();
+  return (
+    <div className="page-in">
+      <div className="page-hero page-hero--water">
+        <div className="container" style={{position:'relative',zIndex:1}}>
+          <div className="water-badge"><span className="water-dot"/><span style={{marginLeft:'.4rem'}}>Living Water</span></div>
+          <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)',marginTop:'1rem'}}>The <em style={{color:'var(--foam)'}}>why</em><br/>behind the water</h1>
+          <p style={{maxWidth:540,color:'var(--text-dim)',fontSize:'1.1rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Five foundational ideas that will permanently change how you relate to water and hydration.</p>
+        </div>
+      </div>
+      <section style={{background:'linear-gradient(180deg,#0a2230 0%,var(--near-black) 100%)'}}>
+        <div className="container">
+          <div style={{maxWidth:820}}>
+            {PRINCIPLES_DATA.map((item,i)=>(
+              <div key={item.num} className="reveal" style={{transitionDelay:`${i*.05}s`}}><Accordion item={item} navigate={navigate}/></div>
+            ))}
+          </div>
+          <div className="reveal" style={{marginTop:'3rem',display:'flex',gap:'1rem',flexWrap:'wrap'}}>
+            <button className="btn btn-rebel" onClick={()=>navigate('swaps')}>See the Swaps →</button>
+            <button className="btn btn-ghost" onClick={()=>navigate('work')}>Book a Consultation</button>
+          </div>
+        </div>
+      </section>
+      <DehydrationQuiz navigate={navigate}/>
+    </div>
+  );
+}
+
+/* ── SWAPS ── */
+function SwapsPage({ navigate, scrollTarget }) {
+  const [tab, setTab] = useState(scrollTarget||'sources');
+  useReveal();
+  useEffect(()=>{ if(scrollTarget) setTab(scrollTarget); },[scrollTarget]);
+  const tabs = [{id:'sources',l:'Water Sources'},{id:'salt',l:'Salt Guide'},{id:'brands',l:'Water Brands'},{id:'filtration',l:'Filtration'},{id:'structuring',l:'Structuring'},{id:'storage',l:'Storage'}];
+  const vs = {fontFamily:'var(--ff-ui)',fontSize:'.62rem',fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--rebel)',borderBottom:'1px solid rgba(150,45,73,.3)',paddingBottom:'1px',whiteSpace:'nowrap',textDecoration:'none'};
+  return (
+    <div className="page-in">
+      <div className="page-hero page-hero--water" style={{background:'linear-gradient(180deg,var(--near-black) 0%,#0d3044 100%)'}}>
+        <div className="container" style={{position:'relative',zIndex:1}}>
+          <div className="water-badge"><span className="water-dot"/><span style={{marginLeft:'.4rem'}}>Living Water</span></div>
+          <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)',marginTop:'1rem'}}>From knowing<br/><em style={{color:'var(--rebel-lt)'}}>to doing</em></h1>
+          <p style={{maxWidth:560,color:'var(--text-dim)',fontSize:'1.1rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Concrete, tested product recommendations — with prices, links, and zero compromise.</p>
+        </div>
+      </div>
+      <section style={{background:'linear-gradient(180deg,#0d3044 0%,var(--near-black) 100%)'}}>
+        <div className="container">
+          <div className="swap-tabs">{tabs.map(t=><button key={t.id} className={`s-tab ${tab===t.id?'on':''}`} onClick={()=>setTab(t.id)}>{t.l}</button>)}</div>
+
+          {tab==='sources' && <div key="sources" style={{animation:'fadeIn .4s ease both'}}>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Ranked by Quality</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>The Best Water Sources</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:580}}>The ideal water is living, structured, and mineral-rich. Where you are determines your options.</p></div>
+            <div className="src-list">{WATER_SOURCES.map(s=><div key={s.rank} className="src-item"><div className="src-rank">{s.rank}</div><div className="src-info"><div className="src-name">{s.name}</div><p className="src-desc">{s.desc}</p></div><div className={`badge ${s.badge}`}>{s.label}</div></div>)}</div>
+            <button className="crosslink" onClick={()=>navigate('principles')}>← Why this matters in Principles</button>
+          </div>}
+
+          {tab==='salt' && <div key="salt" style={{animation:'fadeIn .4s ease both'}}>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>The Supernutrient</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Salt — Your Friend</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>Quality salt contains over 60 trace minerals. These recommendations are based on third-party testing.</p></div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:'1.5rem',marginTop:'2rem'}}>
+              {Object.entries(SALT_DATA).map(([r,b])=>(
+                <div key={r} className="card" style={{cursor:'default'}}><div className="label" style={{marginBottom:'1rem'}}>{r.charAt(0).toUpperCase()+r.slice(1)}</div><ul style={{listStyle:'none'}}>{b.map(x=><li key={x} style={{display:'flex',alignItems:'center',gap:'.65rem',padding:'.42rem 0',borderBottom:'1px solid var(--border)',color:'var(--text-dim)',fontSize:'.95rem'}}><span style={{color:'var(--rebel)',fontSize:'.7rem'}}>◆</span>{x}</li>)}</ul></div>
+              ))}
+            </div>
+            <button className="crosslink" onClick={()=>navigate('principles')}>← Why salt matters in Principles</button>
+          </div>}
+
+          {tab==='brands' && <div key="brands" style={{animation:'fadeIn .4s ease both'}}>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Independent Research</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Brand Guide</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>All questionable brands listed are legal and generally below official toxicity limits, but have the highest number of independent reports of detectable pollutants.</p></div>
+            <div className="label" style={{marginBottom:'1rem',color:'var(--foam)'}}>Trusted Brands</div>
+            <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Region</th><th>Brands</th></tr></thead><tbody>{TRUSTED_WATER.map(r=><tr key={r.region}><td style={{color:'var(--gold)',fontWeight:600,whiteSpace:'nowrap'}}>{r.region}</td><td>{r.brands}</td></tr>)}</tbody></table></div>
+            <div className="label" style={{margin:'2rem 0 1rem',color:'#e08888'}}>Most Questionable Brands</div>
+            <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Region</th><th>Brands</th><th>Issues</th></tr></thead><tbody>{QUESTION_WATER.map(r=><tr key={r.region}><td style={{color:'var(--gold)',fontWeight:600,whiteSpace:'nowrap'}}>{r.region}</td><td>{r.brands}</td><td style={{color:'#e08888',fontSize:'.85rem'}}>{r.issues}</td></tr>)}</tbody></table></div>
+          </div>}
+
+          {tab==='filtration' && <div key="filtration" style={{animation:'fadeIn .4s ease both'}}>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>How to Filter</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Filtration Systems</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>The right filtration depends on your water source, location, and concerns. Always remineralise if using reverse osmosis.</p></div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'1rem',marginBottom:'3rem'}}>{FILTRATION_TYPES.map(f=><div key={f.name} className="card" style={{cursor:'default',padding:'1.5rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'1.05rem',color:'var(--cream)',marginBottom:'.5rem'}}>{f.name}</div><p style={{fontSize:'.88rem',color:'var(--text-dim)',lineHeight:1.65}}>{f.desc}</p></div>)}</div>
+            <div className="label" style={{marginBottom:'1rem'}}>Top Home Systems</div>
+            <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Product</th><th>Technology</th><th>Best For</th><th>Availability</th><th>Price</th><th>Link</th></tr></thead><tbody>{HOME_FILTERS.map(f=><tr key={f.name}><td style={{color:'var(--cream)',fontWeight:500}}>{f.name}{f.note&&<div style={{fontSize:'.78rem',color:'var(--text-soft)',fontStyle:'italic',marginTop:'.15rem'}}>{f.note}</div>}</td><td>{f.tech}</td><td>{f.best}</td><td style={{whiteSpace:'nowrap'}}>{f.avail}</td><td style={{whiteSpace:'nowrap'}}><PriceTier price={f.price}/></td><td><a href={f.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a></td></tr>)}</tbody></table></div>
+            <div className="label" style={{margin:'2rem 0 1rem'}}>Top Portable Systems</div>
+            <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Product</th><th>Method</th><th>Best For</th><th>Availability</th><th>Price</th><th>Link</th></tr></thead><tbody>{PORTABLE_FILTERS.map(f=><tr key={f.name}><td style={{color:'var(--cream)',fontWeight:500}}>{f.name}</td><td>{f.tech}</td><td>{f.best}</td><td style={{whiteSpace:'nowrap'}}>{f.avail}</td><td style={{whiteSpace:'nowrap'}}><PriceTier price={f.price}/></td><td><a href={f.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a></td></tr>)}</tbody></table></div>
+            <PriceLegend/>
+            <button className="crosslink" style={{marginTop:'1rem'}} onClick={()=>navigate('principles')}>← Understand why filtration matters</button>
+          </div>}
+
+          {tab==='structuring' && <div key="structuring" style={{animation:'fadeIn .4s ease both'}}>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>The Fourth Phase</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Structuring Tools</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>Structured water is the form your cells actually use. These products help recreate it at home.</p></div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'1.25rem',marginBottom:'2rem'}}>
+              {STRUCT_PRODUCTS.map(p=>(
+                <div key={p.name} className="card" style={{cursor:'default'}}>
+                  <div style={{fontFamily:'var(--ff-disp)',fontSize:'1.1rem',color:'var(--cream)',marginBottom:'.5rem'}}>{p.name}</div>
+                  <p style={{fontSize:'.92rem',color:'var(--text-dim)',lineHeight:1.65,marginBottom:'.75rem'}}>{p.desc}</p>
+                  <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'.5rem'}}>
+                    <div style={{display:'flex',alignItems:'center',gap:'.75rem'}}><div className="label" style={{fontSize:'.58rem'}}>{p.avail}</div><PriceTier price={p.price}/></div>
+                    <a href={p.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <PriceLegend/>
+            <div className="quote" style={{marginTop:'1.5rem'}}><p>"The simplest structuring practice costs nothing: swirl your water vigorously with a spoon before drinking. Hold gratitude in your heart as you do it."</p></div>
+            <button className="crosslink" onClick={()=>navigate('principles')}>← Read about Water Structuring in Principles</button>
+          </div>}
+
+          {tab==='storage' && <div key="storage" style={{animation:'fadeIn .4s ease both'}}>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Preserve What You Have</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Storage Guide</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>How you store water determines whether it retains its quality.</p></div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))',gap:'1.25rem'}}>
+              {[{title:'Glass — The Gold Standard',body:'Blue or violet glass is ideal. Miron violet glass creates a protective field and is excellent for long-term storage.',badge:'b-best',bl:'Best'},{title:'Copper Vessels',body:'From Ayurvedic tradition. Imparts antimicrobial benefits and subtle mineralisation. Requires regular cleaning.',badge:'b-good',bl:'Good'},{title:'Stainless Steel',body:'Durable and clean. Good for bulk storage and travel. Use food-grade only.',badge:'b-good',bl:'Good'},{title:'Plastic — Avoid',body:'Even BPA-free plastics leach microplastics and endocrine disruptors over time, especially with heat or sunlight.',badge:'b-avoid',bl:'Avoid'}].map(s=>(
+                <div key={s.title} className="card" style={{cursor:'default'}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'.75rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'1.1rem',color:'var(--cream)'}}>{s.title}</div><div className={`badge ${s.badge}`} style={{marginLeft:'.75rem',flexShrink:0}}>{s.bl}</div></div><p style={{fontSize:'.92rem',color:'var(--text-dim)',lineHeight:1.65}}>{s.body}</p></div>
+              ))}
+            </div>
+            <div className="card" style={{marginTop:'1.5rem',cursor:'default',background:'rgba(200,169,107,.06)',borderColor:'rgba(200,169,107,.2)'}}><div className="label" style={{marginBottom:'.75rem'}}>Storage Tips</div><p style={{color:'var(--text-dim)',fontSize:'.95rem',lineHeight:1.75}}>Store between <strong style={{color:'var(--cream)'}}>4–20°C (39–68°F)</strong>. Keep away from direct sunlight and electronics. Add a pinch of unrefined sea salt per litre for long-term storage. Place shungite or sun-charged quartz crystals in your storage container.</p></div>
+          </div>}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/* ── WORK ── */
+function WorkPage({ navigate }) {
+  useReveal();
+  return (
+    <div className="page-in">
+      <div className="page-hero page-hero--rebel">
+        <div className="container" style={{position:'relative',zIndex:1}}>
+          <div className="label label--rebel" style={{marginBottom:'1rem'}}>Consultancy</div>
+          <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)'}}>Work<br/><em style={{color:'var(--rebel-lt)'}}>With Me</em></h1>
+          <p style={{maxWidth:520,color:'var(--text-dim)',fontSize:'1.1rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Personal and company consultations — a tailored, honest look at your water reality, with a clear path forward.</p>
+        </div>
+      </div>
+      <section style={{background:'linear-gradient(180deg,#1a0810 0%,var(--near-black) 100%)'}}>
+        <div className="container">
+          <div className="offer-grid reveal">
+            <div className="offer-card">
+              <div className="offer-type">Individual</div>
+              <div className="offer-title">1-on-1 Consultation</div>
+              <p className="offer-desc">A personal deep-dive into your water reality. We look at your location, current sources, health goals, and existing habits. You leave with a clear, tailored action plan.</p>
+              <ul className="offer-list"><li>Full water source assessment for your location</li><li>Filtration and structuring recommendations</li><li>Personalised mineral and salt protocol</li><li>Dehydrating agent audit for your lifestyle</li><li>Written summary with product recommendations</li></ul>
+              <a href="mailto:discernlikearebel@proton.me?subject=1-on-1 Consultation Enquiry" className="btn btn-rebel">Book a Session</a>
+            </div>
+            <div className="offer-card">
+              <div className="offer-type">Organisations</div>
+              <div className="offer-title">Company Consultation</div>
+              <p className="offer-desc">Helping organisations understand and improve the water environment they create for their teams. Because hydration culture is a legitimate part of workplace wellbeing.</p>
+              <ul className="offer-list"><li>Office water quality assessment</li><li>Filtration and dispenser recommendations</li><li>Team education — principles and practical swaps</li><li>Ongoing advisory relationship available</li><li>Customised to your organisation's scale</li></ul>
+              <a href="mailto:discernlikearebel@proton.me?subject=Company Consultation Enquiry" className="btn btn-ghost">Get in Touch</a>
+            </div>
+          </div>
+          <div className="divider reveal" style={{margin:'4rem 0'}}><div className="div-line"/><div className="div-mark">✦</div><div className="div-line"/></div>
+          <div className="reveal" style={{textAlign:'center',marginBottom:'2.5rem'}}><div className="label" style={{marginBottom:'.75rem'}}>How It Works</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.8rem)',color:'var(--cream)'}}>The process, simply</h2></div>
+          <div className="process-grid reveal d1">
+            {[{num:'01',title:'Reach Out',body:'Send an email with a brief note about what you are dealing with. I will reply personally.'},{num:'02',title:'Deep Dive',body:'We go through your water sources, location, habits, health context, and goals in a focused conversation.'},{num:'03',title:'Your Plan',body:'You receive a written, personalised protocol — clear, actionable, and built around your actual life.'}].map(s=>(
+              <div key={s.num} className="process-step"><div className="process-step__num">{s.num}</div><h4>{s.title}</h4><p>{s.body}</p></div>
+            ))}
+          </div>
+          <div className="reveal" style={{textAlign:'center',marginTop:'4rem'}}>
+            <div className="quote" style={{borderLeft:'none',borderTop:'1px solid var(--rebel)',borderBottom:'1px solid var(--rebel)',textAlign:'center',padding:'2rem'}}><p>"Nothing hits more than when you finally see improvement in your own health. That is what I work towards for every person I work with."</p></div>
+            <div style={{marginTop:'2rem'}}><a href="mailto:discernlikearebel@proton.me" className="btn btn-rebel">discernlikearebel@proton.me</a></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/* ── CONTACT ── */
+function ContactPage({ navigate }) {
+  useReveal();
+  return (
+    <div className="page-in">
+      <div className="contact-wrap">
+        <div className="narrow reveal" style={{position:'relative',zIndex:1,textAlign:'center'}}>
+          <div className="label label--rebel" style={{marginBottom:'1.25rem'}}>Get in Touch</div>
+          <h1 style={{fontSize:'clamp(2.8rem,7vw,5.5rem)',color:'var(--cream)',fontStyle:'italic',lineHeight:1.1,marginBottom:'1.25rem'}}>Let's talk<br/>about your water</h1>
+          <p style={{color:'var(--text-dim)',fontSize:'1.1rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Whether you have a question, want to book a consultation, or simply want to share something water-related that moved you — I'd love to hear from you.</p>
+          <a className="email-link" href="mailto:discernlikearebel@proton.me">discernlikearebel@proton.me</a>
+          <p style={{color:'var(--text-soft)',fontSize:'.9rem',fontStyle:'italic',marginBottom:'2.5rem'}}>I read every message and reply personally.</p>
+          <div style={{display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap'}}>
+            <a href="mailto:discernlikearebel@proton.me?subject=Consultation" className="btn btn-rebel">Book a Consultation</a>
+            <button className="btn btn-ghost" onClick={()=>navigate('principles')}>Explore the Guide</button>
+          </div>
+          <div style={{marginTop:'3rem'}}>
+            <div className="label label--rebel" style={{marginBottom:'1rem',textAlign:'left'}}>Follow Along</div>
+            <SocialLinks style="block"/>
+          </div>
+          <div style={{marginTop:'2rem',padding:'2rem',border:'1px solid rgba(150,45,73,.25)',borderRadius:4,background:'rgba(150,45,73,.05)'}}>
+            <div className="label label--rebel" style={{marginBottom:'.75rem',textAlign:'left'}}>Discern Like A Rebel</div>
+            <p style={{color:'var(--text-dim)',fontSize:'1rem',fontStyle:'italic',lineHeight:1.75,textAlign:'left'}}>An invitation to choose knowledge over convenience, presence over habit, and the intelligence of nature over the noise of marketing. One glass of living water at a time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── FOOTER ── */
+function Footer({ navigate }) {
+  return (
+    <footer className="footer">
+      <div className="footer-inner">
+        <div><div className="footer-brand">Discern Like A Rebel</div><div className="footer-copy" style={{marginTop:'.35rem'}}>Living Water — first topic</div></div>
+        <div className="footer-links">
+          {[['home','Home'],['principles','Principles'],['swaps','Swaps'],['about','About'],['work','Work With Me'],['contact','Contact']].map(([id,l])=>(
+            <button key={id} className="footer-link" onClick={()=>navigate(id)}>{l}</button>
+          ))}
+        </div>
+        <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:'.75rem'}}>
+          <SocialLinks style="footer"/>
+          <div className="footer-copy">© 2025 Discern Like A Rebel. All rights reserved.<br/>Educational purposes only — not a substitute for medical advice.</div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ── APP ── */
+function App() {
+  const getPage = () => { const h = window.location.hash.replace('#',''); return ['home','principles','swaps','about','work','contact'].includes(h)?h:'home'; };
+  const [page, setPage] = useState(getPage);
+  const [scrollTarget, setScrollTarget] = useState(null);
+  function navigate(p, section=null) { setPage(p); setScrollTarget(section); window.location.hash=p; window.scrollTo({top:0,behavior:'smooth'}); }
+  useEffect(() => {
+    const h = () => { const p=window.location.hash.replace('#',''); if(['home','principles','swaps','about','work','contact'].includes(p)) setPage(p); };
+    window.addEventListener('hashchange',h);
+    return ()=>window.removeEventListener('hashchange',h);
+  },[]);
+  return (
+    <div>
+      <BrandBar/>
+      <Nav page={page} navigate={navigate}/>
+      <main style={{paddingTop:'98px'}}>
+        {page==='home'       && <HomePage navigate={navigate}/>}
+        {page==='about'      && <AboutPage navigate={navigate}/>}
+        {page==='principles' && <PrinciplesPage navigate={navigate}/>}
+        {page==='swaps'      && <SwapsPage navigate={navigate} scrollTarget={scrollTarget}/>}
+        {page==='work'       && <WorkPage navigate={navigate}/>}
+        {page==='contact'    && <ContactPage navigate={navigate}/>}
+      </main>
+      <Footer navigate={navigate}/>
+      <FloatingSwapsBtn navigate={navigate}/>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
 </body>
 </html>
