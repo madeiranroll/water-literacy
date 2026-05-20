@@ -65,7 +65,7 @@
                 pointerEvents:'none', overflow:'hidden' });
 
     dimEl = mk('div');
-    S(dimEl, { position:'absolute', inset:'0', background:'rgba(0,0,0,0.30)',
+    S(dimEl, { position:'absolute', inset:'0', background:'rgba(0,0,0,0.60)',
                transition:'opacity 1.2s ease', pointerEvents:'none' });
     gameEl.appendChild(dimEl);
 
@@ -74,27 +74,28 @@
     taglineEl.textContent = "Give 'em hell, child.";
     S(taglineEl, {
       position     : 'absolute',
-      bottom       : '44px',
+      top          : '38px',
       left         : '50%',
-      transform    : 'translateX(-50%) translateY(8px)',
+      transform    : 'translateX(-50%) translateY(-12px)',
       fontFamily   : "'Raleway','Georgia',serif",
       fontStyle    : 'italic',
-      fontSize     : '18px',
-      fontWeight   : '500',
-      letterSpacing: '0.06em',
+      fontSize     : '52px',
+      fontWeight   : '700',
+      letterSpacing: '0.04em',
       color        : 'rgba(237,224,230,0)',
-      textShadow   : '0 0 18px rgba(150,45,73,0)',
+      textShadow   : '0 0 0px rgba(150,45,73,0)',
       pointerEvents: 'none',
       whiteSpace   : 'nowrap',
-      zIndex       : '500',
+      zIndex       : '502',
       transition   : 'color 1s ease, text-shadow 1s ease, transform 1s ease',
     });
     gameEl.appendChild(taglineEl);
     /* fade in after a short delay so it doesn't fight the initial load */
     setTimeout(() => {
       if (!taglineEl) return;
-      taglineEl.style.color      = 'rgba(237,224,230,0.62)';
-      taglineEl.style.textShadow = '0 0 18px rgba(150,45,73,0.55)';
+      taglineEl.style.color      = 'rgba(237,224,230,1)';
+      taglineEl.style.textShadow =
+        '0 0 30px rgba(150,45,73,0.9), 0 0 60px rgba(150,45,73,0.5), 0 2px 4px rgba(0,0,0,0.8)';
       taglineEl.style.transform  = 'translateX(-50%) translateY(0)';
     }, 800);
 
@@ -280,11 +281,7 @@
     }
     setTimeout(() => { if (dimEl.parentNode) dimEl.remove(); }, 1300);
 
-    document.removeEventListener('mousemove', onMove);
-    if (cursorEl) cursorEl.style.display = 'none';
-    document.body.style.cursor = '';
-
-    /* snapshot height BEFORE appending fallContainer (avoids reflow loop) */
+    /* cursor stays active for the full 15 s — cleaned up in onResting() */
     const docH = document.body.scrollHeight;
     docGround  = docH - 32;
 
@@ -316,7 +313,12 @@
 
   /* ── ON RESTING ─────────────────────────────────────────── */
   function onResting() {
-    /* crosshair cursor appears only when hovering a surviving label */
+    /* game over — restore normal cursor globally */
+    document.removeEventListener('mousemove', onMove);
+    document.body.style.cursor = '';
+    if (cursorEl) cursorEl.style.display = 'none';
+
+    /* crosshair cursor reappears only when hovering a surviving label */
     objs.forEach(o => {
       if (!o.alive || !o.rest) return;
       o.el.style.pointerEvents = 'auto';
