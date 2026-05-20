@@ -74,12 +74,12 @@
     taglineEl.textContent = "Give 'em hell, child.";
     S(taglineEl, {
       position     : 'absolute',
-      top          : '38px',
+      top          : '50%',
       left         : '50%',
-      transform    : 'translateX(-50%) translateY(-12px)',
+      transform    : 'translateX(-50%) translateY(calc(-50% + 14px))',
       fontFamily   : "'Raleway','Georgia',serif",
       fontStyle    : 'italic',
-      fontSize     : '52px',
+      fontSize     : '104px',
       fontWeight   : '700',
       letterSpacing: '0.04em',
       color        : 'rgba(237,224,230,0)',
@@ -96,7 +96,7 @@
       taglineEl.style.color      = 'rgba(237,224,230,1)';
       taglineEl.style.textShadow =
         '0 0 30px rgba(150,45,73,0.9), 0 0 60px rgba(150,45,73,0.5), 0 2px 4px rgba(0,0,0,0.8)';
-      taglineEl.style.transform  = 'translateX(-50%) translateY(0)';
+      taglineEl.style.transform  = 'translateX(-50%) translateY(-50%)';
     }, 800);
 
     /* canvas is a standalone fixed element so it survives gameEl removal */
@@ -109,13 +109,17 @@
     /* labels */
     LABELS.forEach(txt => {
       const bx = lerp(0.09, 0.91, Math.random()) * innerWidth;
-      const by = lerp(0.14, 0.76, Math.random()) * innerHeight;
+      /* split labels into upper / lower halves so they never drift
+         into the centre where the tagline lives                    */
+      const upperHalf = Math.random() > 0.5;
+      const by = upperHalf
+        ? lerp(0.10, 0.34, Math.random()) * innerHeight
+        : lerp(0.66, 0.88, Math.random()) * innerHeight;
+
+      /* visible label pill */
       const lbl = mk('div');
       lbl.textContent = txt;
       S(lbl, {
-        position     : 'absolute',
-        left         : bx+'px', top: by+'px',
-        transform    : 'translate(-50%,-50%)',
         background   : 'linear-gradient(140deg,#5C1828 0%,#962D49 55%,#5C1828 100%)',
         border       : '2px solid rgba(184,56,88,0.85)',
         borderRadius : '26px', padding: '9px 22px',
@@ -125,24 +129,38 @@
         color        : '#EDE0E6',
         textShadow   : '0 0 10px rgba(212,104,130,0.7)',
         boxShadow    : '0 0 20px rgba(150,45,73,0.75),0 0 40px rgba(150,45,73,0.28),inset 0 0 12px rgba(92,24,40,0.40)',
-        pointerEvents: 'auto', cursor: 'none',
         userSelect   : 'none', whiteSpace: 'nowrap',
-        zIndex       : '501', willChange: 'left,top,transform',
+        pointerEvents: 'none',   /* clicks handled by hitZone */
       });
 
+      /* transparent hit-zone wrapper — 28 px larger on every side */
+      const hitZone = mk('div');
+      S(hitZone, {
+        position     : 'absolute',
+        left         : bx+'px', top: by+'px',
+        transform    : 'translate(-50%,-50%)',
+        padding      : '28px',
+        cursor       : 'none',
+        pointerEvents: 'auto',
+        zIndex       : '501',
+        willChange   : 'left,top,transform',
+      });
+      hitZone.appendChild(lbl);
+
       const o = {
-        el:lbl, txt,
+        el: hitZone, txt,
         x:bx, y:by, bx, by,
-        dx:(Math.random()-0.5)*0.28, dy:(Math.random()-0.5)*0.20,
-        ph:Math.random()*Math.PI*2,  ps:0.006+Math.random()*0.012,
+        upperHalf,
+        dx:(Math.random()-0.5)*0.14, dy:(Math.random()-0.5)*0.10,
+        ph:Math.random()*Math.PI*2,  ps:0.003+Math.random()*0.006,
         ax:55+Math.random()*95,      ay:38+Math.random()*62,
         vfx:0, vfy:0, alive:true, rest:false,
       };
-      lbl.addEventListener('click', e => {
+      hitZone.addEventListener('click', e => {
         e.stopPropagation();
         if (o.alive) { o.alive = false; shoot(o, e.clientX, e.clientY); }
       });
-      gameEl.appendChild(lbl);
+      gameEl.appendChild(hitZone);
       objs.push(o);
     });
 
@@ -232,8 +250,13 @@
       o.bx += o.dx; o.by += o.dy;
       if (o.bx < 100)   o.dx =  Math.abs(o.dx);
       if (o.bx > W-100) o.dx = -Math.abs(o.dx);
-      if (o.by < 110)   o.dy =  Math.abs(o.dy);
-      if (o.by > H-110) o.dy = -Math.abs(o.dy);
+      if (o.upperHalf) {
+        if (o.by < 110)      o.dy =  Math.abs(o.dy);
+        if (o.by > H * 0.35) o.dy = -Math.abs(o.dy);  /* stay clear of tagline */
+      } else {
+        if (o.by < H * 0.65) o.dy =  Math.abs(o.dy);  /* stay clear of tagline */
+        if (o.by > H - 110)  o.dy = -Math.abs(o.dy);
+      }
       o.x = o.bx + Math.sin(o.ph)        * o.ax;
       o.y = o.by + Math.cos(o.ph * 0.71) * o.ay;
       const rot = Math.sin(o.ph * 1.3) * 7;
@@ -277,7 +300,7 @@
     if (taglineEl) {
       taglineEl.style.color      = 'rgba(237,224,230,0)';
       taglineEl.style.textShadow = '0 0 18px rgba(150,45,73,0)';
-      taglineEl.style.transform  = 'translateX(-50%) translateY(8px)';
+      taglineEl.style.transform  = 'translateX(-50%) translateY(calc(-50% + 22px))';
     }
     setTimeout(() => { if (dimEl.parentNode) dimEl.remove(); }, 1300);
 
