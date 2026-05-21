@@ -29,7 +29,7 @@
   let parts     = [];
   let triggered = false;
   let gameEl, dimEl, taglineEl, cvs, ctx, raf, fallTimer, heroObs;
-  let cursorEl, fallContainer, docGround;
+  let cursorEl, fallContainer, docGround, heroEl;
 
   /* ── BOOT ───────────────────────────────────────────────── */
   function boot() {
@@ -41,6 +41,28 @@
   /* ── BUILD ──────────────────────────────────────────────── */
   function build() {
     triggered = false; state = 'floating'; objs = []; parts = [];
+
+    /* inject hero transition styles once */
+    if (!document.getElementById('toxic-game-styles')) {
+      const st = mk('style');
+      st.id = 'toxic-game-styles';
+      st.textContent = [
+        /* transitions always on — so the return animation is also smooth */
+        '.brand-hero{transition:padding-right .9s cubic-bezier(.4,0,.2,1)!important}',
+        '.brand-hero .brand-hero__title{transition:font-size .9s cubic-bezier(.4,0,.2,1)!important}',
+        '.brand-hero .brand-hero__tag{transition:font-size .9s cubic-bezier(.4,0,.2,1),max-width .9s cubic-bezier(.4,0,.2,1)!important}',
+        '.brand-hero .label{transition:font-size .9s cubic-bezier(.4,0,.2,1)!important}',
+        '.brand-hero .btn{transition:font-size .9s cubic-bezier(.4,0,.2,1),padding .9s cubic-bezier(.4,0,.2,1)!important}',
+        /* game-intro state — shift content to left half, shrink titles */
+        '.brand-hero.game-intro{padding-right:52%!important}',
+        '.brand-hero.game-intro .brand-hero__title{font-size:4.4rem!important}',
+        '.brand-hero.game-intro .brand-hero__title--italic{font-size:3.2rem!important}',
+        '.brand-hero.game-intro .brand-hero__tag{font-size:.82rem!important;max-width:100%!important}',
+        '.brand-hero.game-intro .label{font-size:.65rem!important}',
+        '.brand-hero.game-intro .btn{font-size:.78rem!important;padding:.5em 1.1em!important}',
+      ].join('');
+      document.head.appendChild(st);
+    }
 
     /* custom cursor */
     document.body.style.cursor = 'none';
@@ -223,6 +245,8 @@
     const try_ = () => {
       const hero = document.querySelector('.brand-hero');
       if (hero) {
+        heroEl = hero;
+        hero.classList.add('game-intro');   /* shift left + shrink text */
         heroObs = new IntersectionObserver(entries => {
           if (!entries[0].isIntersecting && !triggered) triggerFall();
         }, { threshold: 0.05 });
@@ -302,6 +326,8 @@
       taglineEl.style.textShadow = '0 0 18px rgba(150,45,73,0)';
       taglineEl.style.transform  = 'translateX(-50%) translateY(calc(-50% + 22px))';
     }
+    /* restore hero layout simultaneously with labels falling */
+    if (heroEl) heroEl.classList.remove('game-intro');
     setTimeout(() => { if (dimEl.parentNode) dimEl.remove(); }, 1300);
 
     /* cursor stays active for the full 15 s — cleaned up in onResting() */
