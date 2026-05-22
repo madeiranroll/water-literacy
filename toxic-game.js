@@ -94,12 +94,17 @@
     gameEl.appendChild(dimEl);
 
     /* tagline */
+    /* On desktop the hero is pushed to the left 48% via .game-intro padding-right:52%,
+       so we centre the tagline in the right half (midpoint = 74%).
+       On mobile the layout stacks so we keep it centred. */
+    const taglineLeft = innerWidth <= 768 ? '50%' : '74%';
+
     taglineEl = mk('div');
     taglineEl.textContent = "Give 'em hell, child.";
     S(taglineEl, {
       position     : 'absolute',
       top          : '50%',
-      left         : '50%',
+      left         : taglineLeft,
       transform    : 'translateX(-50%) translateY(calc(-50% + 14px))',
       fontFamily   : "'Raleway','Georgia',serif",
       fontStyle    : 'italic',
