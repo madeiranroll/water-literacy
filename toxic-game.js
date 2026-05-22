@@ -49,12 +49,14 @@
       st.textContent = [
         /* transitions always on — so the return animation is also smooth */
         '.brand-hero{transition:padding-right .9s cubic-bezier(.4,0,.2,1)!important}',
+        '.brand-hero .container{transition:transform .9s cubic-bezier(.4,0,.2,1)!important}',
         '.brand-hero .brand-hero__title{transition:font-size .9s cubic-bezier(.4,0,.2,1)!important}',
         '.brand-hero .brand-hero__tag{transition:font-size .9s cubic-bezier(.4,0,.2,1),max-width .9s cubic-bezier(.4,0,.2,1)!important}',
         '.brand-hero .label{transition:font-size .9s cubic-bezier(.4,0,.2,1)!important}',
         '.brand-hero .btn{transition:font-size .9s cubic-bezier(.4,0,.2,1),padding .9s cubic-bezier(.4,0,.2,1)!important}',
-        /* game-intro state — shift content to left half, shrink titles */
+        /* game-intro state — shift content to upper-left corner */
         '.brand-hero.game-intro{padding-right:52%!important}',
+        '.brand-hero.game-intro .container{transform:translateY(-28vh)!important}',
         '.brand-hero.game-intro .brand-hero__title{font-size:4.4rem!important}',
         '.brand-hero.game-intro .brand-hero__title--italic{font-size:3.2rem!important}',
         '.brand-hero.game-intro .brand-hero__tag{font-size:.82rem!important;max-width:100%!important}',
@@ -101,7 +103,7 @@
       transform    : 'translateX(-50%) translateY(calc(-50% + 14px))',
       fontFamily   : "'Raleway','Georgia',serif",
       fontStyle    : 'italic',
-      fontSize     : '104px',
+      fontSize     : '52px',
       fontWeight   : '700',
       letterSpacing: '0.04em',
       color        : 'rgba(237,224,230,0)',
