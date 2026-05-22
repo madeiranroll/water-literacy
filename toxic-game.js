@@ -60,7 +60,7 @@
         '.brand-hero.game-intro .container{transform:translateY(-28vh)!important;max-width:44vw!important;width:44vw!important;overflow:hidden!important}',
         '.brand-hero.game-intro .brand-hero__title{font-size:4.4rem!important;white-space:normal!important}',
         '.brand-hero.game-intro .brand-hero__title--italic{font-size:3.2rem!important;white-space:normal!important}',
-        '.brand-hero.game-intro .brand-hero__tag{font-size:.82rem!important;max-width:100%!important;white-space:normal!important}',
+        '.brand-hero.game-intro .brand-hero__tag{font-size:.82rem!important;max-width:24vw!important;width:24vw!important;white-space:normal!important;word-wrap:break-word!important}',
         '.brand-hero.game-intro .label{font-size:.65rem!important}',
         '.brand-hero.game-intro .btn{font-size:.78rem!important;padding:.5em 1.1em!important}',
       ].join('');
