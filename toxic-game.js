@@ -49,17 +49,18 @@
       st.textContent = [
         /* transitions always on — so the return animation is also smooth */
         '.brand-hero{transition:padding-right .9s cubic-bezier(.4,0,.2,1)!important}',
-        '.brand-hero .container{transition:transform .9s cubic-bezier(.4,0,.2,1)!important}',
+        '.brand-hero .container{transition:transform .9s cubic-bezier(.4,0,.2,1),max-width .9s cubic-bezier(.4,0,.2,1),width .9s cubic-bezier(.4,0,.2,1)!important}',
         '.brand-hero .brand-hero__title{transition:font-size .9s cubic-bezier(.4,0,.2,1)!important}',
         '.brand-hero .brand-hero__tag{transition:font-size .9s cubic-bezier(.4,0,.2,1),max-width .9s cubic-bezier(.4,0,.2,1)!important}',
         '.brand-hero .label{transition:font-size .9s cubic-bezier(.4,0,.2,1)!important}',
         '.brand-hero .btn{transition:font-size .9s cubic-bezier(.4,0,.2,1),padding .9s cubic-bezier(.4,0,.2,1)!important}',
-        /* game-intro state — shift content to upper-left corner */
+        /* game-intro state — shift content to compact left rectangle */
         '.brand-hero.game-intro{padding-right:52%!important}',
-        '.brand-hero.game-intro .container{transform:translateY(-28vh)!important}',
-        '.brand-hero.game-intro .brand-hero__title{font-size:4.4rem!important}',
-        '.brand-hero.game-intro .brand-hero__title--italic{font-size:3.2rem!important}',
-        '.brand-hero.game-intro .brand-hero__tag{font-size:.82rem!important;max-width:100%!important}',
+        /* cap the container so text wraps and never bleeds past ~44vw */
+        '.brand-hero.game-intro .container{transform:translateY(-28vh)!important;max-width:44vw!important;width:44vw!important;overflow:hidden!important}',
+        '.brand-hero.game-intro .brand-hero__title{font-size:4.4rem!important;white-space:normal!important}',
+        '.brand-hero.game-intro .brand-hero__title--italic{font-size:3.2rem!important;white-space:normal!important}',
+        '.brand-hero.game-intro .brand-hero__tag{font-size:.82rem!important;max-width:100%!important;white-space:normal!important}',
         '.brand-hero.game-intro .label{font-size:.65rem!important}',
         '.brand-hero.game-intro .btn{font-size:.78rem!important;padding:.5em 1.1em!important}',
       ].join('');
@@ -94,17 +95,12 @@
     gameEl.appendChild(dimEl);
 
     /* tagline */
-    /* On desktop the hero is pushed to the left 48% via .game-intro padding-right:52%,
-       so we centre the tagline in the right half (midpoint = 74%).
-       On mobile the layout stacks so we keep it centred. */
-    const taglineLeft = innerWidth <= 768 ? '50%' : '74%';
-
     taglineEl = mk('div');
     taglineEl.textContent = "Give 'em hell, child.";
     S(taglineEl, {
       position     : 'absolute',
       top          : '50%',
-      left         : taglineLeft,
+      left         : '50%',
       transform    : 'translateX(-50%) translateY(calc(-50% + 14px))',
       fontFamily   : "'Raleway','Georgia',serif",
       fontStyle    : 'italic',
