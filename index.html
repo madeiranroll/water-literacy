@@ -28,7 +28,8 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--ff-body);background:var(--near-black);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:18px;line-height:1.75}
+html{font-size:18px}
+body{font-family:var(--ff-body);background:var(--near-black);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:21px;line-height:1.75}
 img{max-width:100%;display:block} a{color:inherit;text-decoration:none} button{cursor:pointer;font-family:inherit}
 h1,h2,h3,h4{font-family:var(--ff-disp);font-weight:400;line-height:1.1}
 .label{font-family:var(--ff-ui);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--rose-gold)}
@@ -306,12 +307,12 @@ section{padding:6rem 0}
 .unruly-row-divider{display:grid;grid-template-columns:1fr 52px 1fr 52px 1fr 52px 1fr;align-items:center;height:52px;margin:.25rem 0}
 .unruly-hline{height:1px;background:linear-gradient(90deg,transparent,rgba(150,45,73,.3),transparent)}
 .unruly-hole-spacer{opacity:0;pointer-events:none}
-.unruly-item{padding:0 1.75rem 3rem}
+.unruly-item{padding:0 1.75rem 3rem;text-align:center}
 .unruly-num{font-family:var(--ff-body);font-size:.82rem;font-style:italic;color:rgba(200,169,107,.45);margin-bottom:.55rem}
 .unruly-verb{font-family:var(--ff-ui);font-size:clamp(1.28rem,2.45vw,2.6rem);font-weight:900;letter-spacing:-.01em;color:var(--cream);line-height:1.1;margin-bottom:1rem;text-transform:uppercase}
 .unruly-verb--rebel{color:var(--rebel);text-shadow:0 0 40px rgba(150,45,73,.35)}
 .unruly-desc{font-family:var(--ff-body);font-size:1.17rem;color:var(--text);line-height:1.75}
-.shotgun-hole{width:52px;height:52px;cursor:pointer;display:flex;align-items:center;justify-content:center;align-self:start;padding-top:1.2rem}
+.shotgun-hole{width:52px;height:52px;cursor:pointer;display:flex;align-items:center;justify-content:center;align-self:center;padding-top:0}
 .shotgun-hole.fired{animation:shotgunFire .4s ease both}
 @keyframes shotgunFire{
   0%{transform:scale(1) rotate(0deg)}
@@ -518,7 +519,7 @@ function SocialLinks({ style='bar' }) {
           <span style={{color:'var(--rose-gold)'}}>{s.icon}</span>
           <div>
             <div style={{fontFamily:'var(--ff-ui)',fontSize:'.56rem',fontWeight:700,letterSpacing:'.16em',textTransform:'uppercase',color:'var(--text-soft)',marginBottom:'.15rem'}}>{s.name}</div>
-            <div style={{fontFamily:'var(--ff-body)',fontSize:'1rem',color:'var(--text-dim)'}}>{s.handle}</div>
+            <div style={{fontFamily:'var(--ff-body)',fontSize:'1.1rem',color:'var(--text-dim)'}}>{s.handle}</div>
           </div>
         </a>
       ))}
@@ -722,7 +723,7 @@ function HomePage({ navigate }) {
           <div className="reveal">
             <div className="label" style={{marginBottom:'.75rem'}}>Topics</div>
             <h2 style={{fontSize:'clamp(2rem,4vw,3.2rem)',color:'var(--cream)',marginBottom:'.5rem'}}>Choose your area</h2>
-            <p style={{color:'var(--text-dim)',fontStyle:'italic',fontSize:'1.05rem'}}>Each topic is independently researched, tested, and swapped. Water is live now.</p>
+            <p style={{color:'var(--text-dim)',fontStyle:'italic',fontSize:'1.17rem'}}>Each topic is independently researched, tested, and swapped. Water is live now.</p>
           </div>
           <div className="topic-grid">
             <div className="topic-card topic-card--water reveal d1" onClick={() => navigate('swaps')}>
@@ -758,8 +759,8 @@ function HomePage({ navigate }) {
             <div className="reveal d2">
               <div className="label" style={{marginBottom:'1rem'}}>The Person Behind It</div>
               <h2 style={{fontSize:'clamp(2rem,4vw,3rem)',color:'var(--cream)',marginBottom:'1.25rem'}}>Natalie</h2>
-              <p style={{color:'var(--text-dim)',fontSize:'1.05rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Environmental scientist. Holistic practitioner. Someone who tested everything on herself before recommending it to anyone else.</p>
-              <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'2rem',fontSize:'.98rem'}}>I studied environmental sciences at the University of Vienna, spent years in the lab, then had health challenges that sent me on a different kind of research journey. Today I combine laboratory precision with lived experience — and a healthy disrespect for anything that doesn't hold up to scrutiny.</p>
+              <p style={{color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Environmental scientist. Holistic practitioner. Someone who tested everything on herself before recommending it to anyone else.</p>
+              <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'2rem',fontSize:'1.17rem'}}>I studied environmental sciences at the University of Vienna, spent years in the lab, then had health challenges that sent me on a different kind of research journey. Today I combine laboratory precision with lived experience — and a healthy disrespect for anything that doesn't hold up to scrutiny.</p>
               <div style={{display:'flex',gap:'1rem',flexWrap:'wrap'}}>
                 <button className="btn btn-gold" onClick={() => navigate('about')}>My Story</button>
                 <button className="btn btn-ghost" onClick={() => navigate('work')}>Work With Me</button>
@@ -798,7 +799,7 @@ function AboutPage({ navigate }) {
                 <h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.8rem)',color:'var(--cream)',marginBottom:'1.5rem'}}>From scientific curiosity to holistic mastery</h2>
               </div>
               <div className="reveal d2">
-                <p style={{fontSize:'1.1rem',fontStyle:'italic',color:'var(--mist)',lineHeight:1.8,marginBottom:'1.5rem'}}>"I first learnt about water while studying environmental sciences at the University of Vienna. After graduating, water chemistry drifted into the background — until quite challenging health issues brought it to the forefront of my life."</p>
+                <p style={{fontSize:'1.17rem',fontStyle:'italic',color:'var(--mist)',lineHeight:1.8,marginBottom:'1.5rem'}}>"I first learnt about water while studying environmental sciences at the University of Vienna. After graduating, water chemistry drifted into the background — until quite challenging health issues brought it to the forefront of my life."</p>
                 <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.25rem'}}>That wake-up call set me on a journey. I looked into alternative water sources, learnt from holistic practitioners, and experimented with various methods — spending freely on equipment and protocols and using myself as a test subject. My confidence grew gradually, both in the science and in how to genuinely use this knowledge in daily life.</p>
                 <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.25rem'}}>Programming the remediation of uranium-contaminated aquifers in the lab was not my calling — but I'm genuinely grateful for the technical skills it gave me. They are now part of my toolkit for achieving real, effective results.</p>
                 <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'2rem'}}>Today, by weaving together holistic wisdom, solid scientific research, and hands-on experience, I've crafted a genuinely practical and personal approach to hydration that I love sharing with others.</p>
@@ -807,7 +808,7 @@ function AboutPage({ navigate }) {
               <div className="reveal d1">
                 <div className="label" style={{marginBottom:'1rem'}}>Discern Like A Rebel</div>
                 <h3 style={{fontSize:'clamp(1.5rem,3vw,2.2rem)',color:'var(--cream)',marginBottom:'1rem'}}>Smashing the toxins out of the way</h3>
-                <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.5rem',fontStyle:'italic',fontSize:'1.05rem'}}>Discerning like a rebel means choosing to question the mainstream, look past the surface, and make decisions from a place of genuine knowledge and deep self-trust. If it doesn't pass the test — it's out. No compromise.</p>
+                <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.5rem',fontStyle:'italic',fontSize:'1.17rem'}}>Discerning like a rebel means choosing to question the mainstream, look past the surface, and make decisions from a place of genuine knowledge and deep self-trust. If it doesn't pass the test — it's out. No compromise.</p>
                 <div className="values-grid">
                   {[{title:'Rooted in Science',text:'Environmental science background. Lab experience. Real methodology.'},{title:'Lived Through It',text:'Personal health challenges shaped everything. This is not theoretical.'},{title:'Holistically Whole',text:'Science without wisdom is incomplete. Both have their place.'},{title:'Radically Honest',text:'No affiliate links. No brand allegiances. Just what actually works.'}].map(v=>(
                     <div key={v.title} className="value-item"><h4>{v.title}</h4><p>{v.text}</p></div>
@@ -903,7 +904,7 @@ function PrinciplesPage({ navigate }) {
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div className="water-badge"><span className="water-dot"/><span style={{marginLeft:'.4rem'}}>Living Water</span></div>
           <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)',marginTop:'1rem'}}>The <em style={{color:'var(--foam)'}}>why</em><br/>behind the water</h1>
-          <p style={{maxWidth:540,color:'var(--text-dim)',fontSize:'1.1rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Five foundational ideas that will permanently change how you relate to water and hydration.</p>
+          <p style={{maxWidth:540,color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Five foundational ideas that will permanently change how you relate to water and hydration.</p>
         </div>
       </div>
       <section style={{background:'linear-gradient(180deg,#0a2230 0%,var(--near-black) 100%)'}}>
@@ -937,7 +938,7 @@ function SwapsPage({ navigate, scrollTarget }) {
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div className="water-badge"><span className="water-dot"/><span style={{marginLeft:'.4rem'}}>Living Water</span></div>
           <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)',marginTop:'1rem'}}>From knowing<br/><em style={{color:'var(--rebel-lt)'}}>to doing</em></h1>
-          <p style={{maxWidth:560,color:'var(--text-dim)',fontSize:'1.1rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Concrete, tested product recommendations — with prices, links, and zero compromise.</p>
+          <p style={{maxWidth:560,color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Concrete, tested product recommendations — with prices, links, and zero compromise.</p>
         </div>
       </div>
       <section style={{background:'linear-gradient(180deg,#0d3044 0%,var(--near-black) 100%)'}}>
@@ -954,7 +955,7 @@ function SwapsPage({ navigate, scrollTarget }) {
             <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>The Supernutrient</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Salt — Your Friend</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>Quality salt contains over 60 trace minerals. These recommendations are based on third-party testing.</p></div>
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:'1.5rem',marginTop:'2rem'}}>
               {Object.entries(SALT_DATA).map(([r,b])=>(
-                <div key={r} className="card" style={{cursor:'default'}}><div className="label" style={{marginBottom:'1rem'}}>{r.charAt(0).toUpperCase()+r.slice(1)}</div><ul style={{listStyle:'none'}}>{b.map(x=><li key={x} style={{display:'flex',alignItems:'center',gap:'.65rem',padding:'.42rem 0',borderBottom:'1px solid var(--border)',color:'var(--text-dim)',fontSize:'.95rem'}}><span style={{color:'var(--rebel)',fontSize:'.7rem'}}>◆</span>{x}</li>)}</ul></div>
+                <div key={r} className="card" style={{cursor:'default'}}><div className="label" style={{marginBottom:'1rem'}}>{r.charAt(0).toUpperCase()+r.slice(1)}</div><ul style={{listStyle:'none'}}>{b.map(x=><li key={x} style={{display:'flex',alignItems:'center',gap:'.65rem',padding:'.42rem 0',borderBottom:'1px solid var(--border)',color:'var(--text-dim)',fontSize:'1.1rem'}}><span style={{color:'var(--rebel)',fontSize:'.7rem'}}>◆</span>{x}</li>)}</ul></div>
               ))}
             </div>
             <button className="crosslink" onClick={()=>navigate('principles')}>← Why salt matters in Principles</button>
@@ -970,7 +971,7 @@ function SwapsPage({ navigate, scrollTarget }) {
 
           {tab==='filtration' && <div key="filtration" style={{animation:'fadeIn .4s ease both'}}>
             <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>How to Filter</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Filtration Systems</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>The right filtration depends on your water source, location, and concerns. Always remineralise if using reverse osmosis.</p></div>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'1rem',marginBottom:'3rem'}}>{FILTRATION_TYPES.map(f=><div key={f.name} className="card" style={{cursor:'default',padding:'1.5rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'1.05rem',color:'var(--cream)',marginBottom:'.5rem'}}>{f.name}</div><p style={{fontSize:'.88rem',color:'var(--text-dim)',lineHeight:1.65}}>{f.desc}</p></div>)}</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'1rem',marginBottom:'3rem'}}>{FILTRATION_TYPES.map(f=><div key={f.name} className="card" style={{cursor:'default',padding:'1.5rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'1.17rem',color:'var(--cream)',marginBottom:'.5rem'}}>{f.name}</div><p style={{fontSize:'1.1rem',color:'var(--text-dim)',lineHeight:1.65}}>{f.desc}</p></div>)}</div>
             <div className="label" style={{marginBottom:'1rem'}}>Top Home Systems</div>
             <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Product</th><th>Technology</th><th>Best For</th><th>Availability</th><th>Price</th><th>Link</th></tr></thead><tbody>{HOME_FILTERS.map(f=><tr key={f.name}><td style={{color:'var(--cream)',fontWeight:500}}>{f.name}{f.note&&<div style={{fontSize:'.78rem',color:'var(--text-soft)',fontStyle:'italic',marginTop:'.15rem'}}>{f.note}</div>}</td><td>{f.tech}</td><td>{f.best}</td><td style={{whiteSpace:'nowrap'}}>{f.avail}</td><td style={{whiteSpace:'nowrap'}}><PriceTier price={f.price}/></td><td><a href={f.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a></td></tr>)}</tbody></table></div>
             <div className="label" style={{margin:'2rem 0 1rem'}}>Top Portable Systems</div>
@@ -984,8 +985,8 @@ function SwapsPage({ navigate, scrollTarget }) {
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'1.25rem',marginBottom:'2rem'}}>
               {STRUCT_PRODUCTS.map(p=>(
                 <div key={p.name} className="card" style={{cursor:'default'}}>
-                  <div style={{fontFamily:'var(--ff-disp)',fontSize:'1.1rem',color:'var(--cream)',marginBottom:'.5rem'}}>{p.name}</div>
-                  <p style={{fontSize:'.92rem',color:'var(--text-dim)',lineHeight:1.65,marginBottom:'.75rem'}}>{p.desc}</p>
+                  <div style={{fontFamily:'var(--ff-disp)',fontSize:'1.17rem',color:'var(--cream)',marginBottom:'.5rem'}}>{p.name}</div>
+                  <p style={{fontSize:'1.1rem',color:'var(--text-dim)',lineHeight:1.65,marginBottom:'.75rem'}}>{p.desc}</p>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'.5rem'}}>
                     <div style={{display:'flex',alignItems:'center',gap:'.75rem'}}><div className="label" style={{fontSize:'.58rem'}}>{p.avail}</div><PriceTier price={p.price}/></div>
                     <a href={p.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a>
@@ -1002,10 +1003,10 @@ function SwapsPage({ navigate, scrollTarget }) {
             <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Preserve What You Have</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Storage Guide</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>How you store water determines whether it retains its quality.</p></div>
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))',gap:'1.25rem'}}>
               {[{title:'Glass — The Gold Standard',body:'Blue or violet glass is ideal. Miron violet glass creates a protective field and is excellent for long-term storage.',badge:'b-best',bl:'Best'},{title:'Copper Vessels',body:'From Ayurvedic tradition. Imparts antimicrobial benefits and subtle mineralisation. Requires regular cleaning.',badge:'b-good',bl:'Good'},{title:'Stainless Steel',body:'Durable and clean. Good for bulk storage and travel. Use food-grade only.',badge:'b-good',bl:'Good'},{title:'Plastic — Avoid',body:'Even BPA-free plastics leach microplastics and endocrine disruptors over time, especially with heat or sunlight.',badge:'b-avoid',bl:'Avoid'}].map(s=>(
-                <div key={s.title} className="card" style={{cursor:'default'}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'.75rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'1.1rem',color:'var(--cream)'}}>{s.title}</div><div className={`badge ${s.badge}`} style={{marginLeft:'.75rem',flexShrink:0}}>{s.bl}</div></div><p style={{fontSize:'.92rem',color:'var(--text-dim)',lineHeight:1.65}}>{s.body}</p></div>
+                <div key={s.title} className="card" style={{cursor:'default'}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'.75rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'1.17rem',color:'var(--cream)'}}>{s.title}</div><div className={`badge ${s.badge}`} style={{marginLeft:'.75rem',flexShrink:0}}>{s.bl}</div></div><p style={{fontSize:'1.1rem',color:'var(--text-dim)',lineHeight:1.65}}>{s.body}</p></div>
               ))}
             </div>
-            <div className="card" style={{marginTop:'1.5rem',cursor:'default',background:'rgba(200,169,107,.06)',borderColor:'rgba(200,169,107,.2)'}}><div className="label" style={{marginBottom:'.75rem'}}>Storage Tips</div><p style={{color:'var(--text-dim)',fontSize:'.95rem',lineHeight:1.75}}>Store between <strong style={{color:'var(--cream)'}}>4–20°C (39–68°F)</strong>. Keep away from direct sunlight and electronics. Add a pinch of unrefined sea salt per litre for long-term storage. Place shungite or sun-charged quartz crystals in your storage container.</p></div>
+            <div className="card" style={{marginTop:'1.5rem',cursor:'default',background:'rgba(200,169,107,.06)',borderColor:'rgba(200,169,107,.2)'}}><div className="label" style={{marginBottom:'.75rem'}}>Storage Tips</div><p style={{color:'var(--text-dim)',fontSize:'1.1rem',lineHeight:1.75}}>Store between <strong style={{color:'var(--cream)'}}>4–20°C (39–68°F)</strong>. Keep away from direct sunlight and electronics. Add a pinch of unrefined sea salt per litre for long-term storage. Place shungite or sun-charged quartz crystals in your storage container.</p></div>
           </div>}
         </div>
       </section>
@@ -1022,7 +1023,7 @@ function WorkPage({ navigate }) {
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div className="label label--rebel" style={{marginBottom:'1rem'}}>Consultancy</div>
           <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)'}}>Work<br/><em style={{color:'var(--rebel-lt)'}}>With Me</em></h1>
-          <p style={{maxWidth:520,color:'var(--text-dim)',fontSize:'1.1rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Personal and company consultations — a tailored, honest look at your water reality, with a clear path forward.</p>
+          <p style={{maxWidth:520,color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Personal and company consultations — a tailored, honest look at your water reality, with a clear path forward.</p>
         </div>
       </div>
       <section style={{background:'linear-gradient(180deg,#1a0810 0%,var(--near-black) 100%)'}}>
@@ -1069,7 +1070,7 @@ function ContactPage({ navigate }) {
         <div className="narrow reveal" style={{position:'relative',zIndex:1,textAlign:'center'}}>
           <div className="label label--rebel" style={{marginBottom:'1.25rem'}}>Get in Touch</div>
           <h1 style={{fontSize:'clamp(2.8rem,7vw,5.5rem)',color:'var(--cream)',fontStyle:'italic',lineHeight:1.1,marginBottom:'1.25rem'}}>Let's talk<br/>about your water</h1>
-          <p style={{color:'var(--text-dim)',fontSize:'1.1rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Whether you have a question, want to book a consultation, or simply want to share something water-related that moved you — I'd love to hear from you.</p>
+          <p style={{color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Whether you have a question, want to book a consultation, or simply want to share something water-related that moved you — I'd love to hear from you.</p>
           <a className="email-link" href="mailto:discernlikearebel@proton.me">discernlikearebel@proton.me</a>
           <p style={{color:'var(--text-soft)',fontSize:'.9rem',fontStyle:'italic',marginBottom:'2.5rem'}}>I read every message and reply personally.</p>
           <div style={{display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap'}}>
@@ -1082,7 +1083,7 @@ function ContactPage({ navigate }) {
           </div>
           <div style={{marginTop:'2rem',padding:'2rem',border:'1px solid rgba(150,45,73,.25)',borderRadius:4,background:'rgba(150,45,73,.05)'}}>
             <div className="label label--rebel" style={{marginBottom:'.75rem',textAlign:'left'}}>Discern Like A Rebel</div>
-            <p style={{color:'var(--text-dim)',fontSize:'1rem',fontStyle:'italic',lineHeight:1.75,textAlign:'left'}}>An invitation to choose knowledge over convenience, presence over habit, and the intelligence of nature over the noise of marketing. One glass of living water at a time.</p>
+            <p style={{color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',lineHeight:1.75,textAlign:'left'}}>An invitation to choose knowledge over convenience, presence over habit, and the intelligence of nature over the noise of marketing. One glass of living water at a time.</p>
           </div>
         </div>
       </div>
