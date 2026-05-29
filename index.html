@@ -28,11 +28,11 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-html{font-size:9px;overflow-x:hidden}
-body{font-family:var(--ff-body);background:var(--near-black);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:10.5px;line-height:1.75}
+html{font-size:18px;overflow-x:hidden}
+body{font-family:var(--ff-body);background:var(--near-black);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:21px;line-height:1.75}
 img{max-width:100%;display:block} a{color:inherit;text-decoration:none} button{cursor:pointer;font-family:inherit}
 h1,h2,h3,h4{font-family:var(--ff-disp);font-weight:400;line-height:1.1}
-.label{font-family:var(--ff-ui);font-size:0.31rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--rose-gold)}
+.label{font-family:var(--ff-ui);font-size:0.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--rose-gold)}
 .label--rebel{color:var(--rebel)}
 .container{width:90%;max-width:1600px;margin:0 auto;padding:0 2rem}
 .narrow{width:90%;max-width:860px;margin:0 auto;padding:0 2rem}
@@ -40,30 +40,30 @@ section{padding:6rem 0}
 
 /* BRAND BAR */
 .brand-bar{background:var(--rebel);height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;position:fixed;top:0;left:0;right:0;z-index:300}
-.brand-bar__name{font-family:var(--ff-ui);font-size:0.3rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.95)}
-.brand-bar__tag{font-family:var(--ff-body);font-size:0.41rem;font-style:italic;color:rgba(255,255,255,.65)}
+.brand-bar__name{font-family:var(--ff-ui);font-size:0.6rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.95)}
+.brand-bar__tag{font-family:var(--ff-body);font-size:0.82rem;font-style:italic;color:rgba(255,255,255,.65)}
 
 /* NAV */
 .nav{position:fixed;top:36px;left:0;right:0;z-index:200;background:rgba(24,13,18,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;height:62px;padding:0 2.5rem;width:90%;max-width:1600px;margin:0 auto}
 .nav__logo{display:flex;flex-direction:column;gap:1px;cursor:pointer}
-.nav__logo-sub{font-family:var(--ff-ui);font-size:0.28rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--rebel)}
-.nav__logo-title{font-family:var(--ff-disp);font-size:0.5rem;color:var(--text);font-style:italic}
+.nav__logo-sub{font-family:var(--ff-ui);font-size:0.56rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--rebel)}
+.nav__logo-title{font-family:var(--ff-disp);font-size:1rem;color:var(--text);font-style:italic}
 .nav__links{display:flex;align-items:center;gap:2rem;list-style:none}
-.nav__link{font-family:var(--ff-ui);font-size:0.33rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;transition:color .2s;cursor:pointer;position:relative}
+.nav__link{font-family:var(--ff-ui);font-size:0.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;transition:color .2s;cursor:pointer;position:relative}
 .nav__link:hover,.nav__link.on{color:var(--text)}
 .nav__link.on::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--rose-gold)}
-.nav__cta{font-family:var(--ff-ui);font-size:0.33rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--rebel);border:none;padding:.5rem 1.4rem;border-radius:2px;transition:background .2s,transform .2s;cursor:pointer}
+.nav__cta{font-family:var(--ff-ui);font-size:0.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--rebel);border:none;padding:.5rem 1.4rem;border-radius:2px;transition:background .2s,transform .2s;cursor:pointer}
 .nav__cta:hover{background:var(--rebel-lt);transform:translateY(-1px)}
 .dropdown{position:relative}
-.dropdown__btn{font-family:var(--ff-ui);font-size:0.33rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:color .2s;position:relative}
+.dropdown__btn{font-family:var(--ff-ui);font-size:0.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:color .2s;position:relative}
 .dropdown__btn:hover,.dropdown__btn.on{color:var(--text)}
 .dropdown__btn.on::after{content:'';position:absolute;bottom:-22px;left:0;right:0;height:1px;background:var(--rose-gold)}
-.dropdown__chev{font-size:0.275rem;transition:transform .2s;display:inline-block}
+.dropdown__chev{font-size:0.55rem;transition:transform .2s;display:inline-block}
 .dropdown__chev.open{transform:rotate(180deg)}
 .dropdown__menu{position:absolute;top:calc(100% + 18px);left:0;background:rgba(24,13,18,.98);border:1px solid var(--border);border-radius:4px;min-width:160px;overflow:hidden;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s,transform .2s}
 .dropdown__menu.open{opacity:1;pointer-events:all;transform:translateY(0)}
-.dropdown__item{display:block;width:100%;font-family:var(--ff-ui);font-size:0.33rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;padding:.9rem 1.2rem;text-align:left;cursor:pointer;transition:all .15s;border-bottom:1px solid var(--border)}
+.dropdown__item{display:block;width:100%;font-family:var(--ff-ui);font-size:0.66rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;padding:.9rem 1.2rem;text-align:left;cursor:pointer;transition:all .15s;border-bottom:1px solid var(--border)}
 .dropdown__item:last-child{border-bottom:none}
 .dropdown__item:hover{background:rgba(150,45,73,.1);color:var(--text)}
 .dropdown__item--water{color:var(--water-link) !important}
@@ -74,16 +74,16 @@ section{padding:6rem 0}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:all .3s}
 .mob-nav{display:none;flex-direction:column;background:rgba(24,13,18,.98);border-top:1px solid var(--border)}
 .mob-nav.open{display:flex}
-.mob-link{font-family:var(--ff-ui);font-size:0.39rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;border-bottom:1px solid var(--border);padding:.9rem 2.5rem;text-align:left;transition:color .2s;cursor:pointer}
+.mob-link{font-family:var(--ff-ui);font-size:0.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;border-bottom:1px solid var(--border);padding:.9rem 2.5rem;text-align:left;transition:color .2s;cursor:pointer}
 .mob-link:hover,.mob-link.on{color:var(--cream)}
 .mob-link--rebel{color:var(--rebel) !important}
 
 /* FLOAT BTN */
-.float-swaps{position:fixed;bottom:2rem;right:2rem;z-index:250;background:var(--rebel);color:#fff;font-family:var(--ff-ui);font-size:0.33rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:.8rem 1.4rem;border-radius:2px;border:none;cursor:pointer;box-shadow:0 6px 24px var(--rebel-glow);animation:pulseFloat 3s ease-in-out infinite;transition:transform .2s,background .2s,box-shadow .2s}
+.float-swaps{position:fixed;bottom:2rem;right:2rem;z-index:250;background:var(--rebel);color:#fff;font-family:var(--ff-ui);font-size:0.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:.8rem 1.4rem;border-radius:2px;border:none;cursor:pointer;box-shadow:0 6px 24px var(--rebel-glow);animation:pulseFloat 3s ease-in-out infinite;transition:transform .2s,background .2s,box-shadow .2s}
 .float-swaps:hover{transform:translateY(-3px) scale(1.03);background:var(--rebel-lt);box-shadow:0 10px 32px rgba(150,45,73,.55);animation:none}
 
 /* BUTTONS */
-.btn{display:inline-block;font-family:var(--ff-ui);font-size:0.35rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;border-radius:2px;border:none;cursor:pointer;transition:all .25s var(--ease)}
+.btn{display:inline-block;font-family:var(--ff-ui);font-size:0.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;border-radius:2px;border:none;cursor:pointer;transition:all .25s var(--ease)}
 .btn-rebel{background:var(--rebel);color:#fff}
 .btn-rebel:hover{background:var(--rebel-lt);transform:translateY(-2px);box-shadow:0 10px 32px rgba(150,45,73,.35)}
 .btn-gold{background:var(--gold);color:var(--near-black)}
@@ -92,16 +92,16 @@ section{padding:6rem 0}
 .btn-ghost:hover{border-color:var(--cream);background:rgba(244,237,227,.05);transform:translateY(-2px)}
 .btn-teal{background:transparent;color:var(--foam);border:1px solid rgba(123,189,209,.35)}
 .btn-teal:hover{border-color:var(--foam);background:rgba(123,189,209,.06);transform:translateX(4px)}
-.btn-sm{padding:.5rem 1.1rem;font-size:0.31rem}
+.btn-sm{padding:.5rem 1.1rem;font-size:0.62rem}
 
 /* CARDS */
 .card{background:rgba(34,19,24,.8);border:1px solid var(--border);border-radius:4px;padding:2rem;transition:all .3s var(--ease)}
 .card:hover{background:var(--card);border-color:rgba(150,45,73,.38);transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,.35)}
 .divider{display:flex;align-items:center;gap:1.5rem;margin:2.5rem 0}
 .div-line{flex:1;height:1px;background:var(--border)}
-.div-mark{color:var(--rose-gold);font-size:0.375rem}
+.div-mark{color:var(--rose-gold);font-size:0.75rem}
 .quote{border-left:2px solid var(--rose-gold);padding:1.5rem 2rem;margin:2rem 0;background:rgba(150,45,73,.04)}
-.quote p{font-family:var(--ff-body);font-size:0.65rem;font-style:italic;font-weight:300;color:var(--text-dim);line-height:1.6}
+.quote p{font-family:var(--ff-body);font-size:1.3rem;font-style:italic;font-weight:300;color:var(--text-dim);line-height:1.6}
 
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
@@ -125,10 +125,10 @@ section{padding:6rem 0}
 /* BRAND HERO */
 .brand-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:12rem 0 6rem;position:relative;overflow:hidden;background:var(--near-black)}
 .brand-hero__bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(150,45,73,.14) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(92,24,40,.12) 0%,transparent 60%)}
-.brand-hero__title{font-family:var(--ff-disp);font-size:clamp(2.25rem,6vw,5rem);font-weight:700;line-height:.9;color:var(--cream);display:block}
+.brand-hero__title{font-family:var(--ff-disp);font-size:clamp(4.5rem,12vw,10rem);font-weight:700;line-height:.9;color:var(--cream);display:block}
 .brand-hero__title--red{color:var(--rebel);animation:pulseGlow 4s ease-in-out infinite}
-.brand-hero__title--italic{font-style:italic;font-weight:400;font-size:clamp(1.5rem,4vw,3.5rem);color:rgba(243,236,226,.7);display:block}
-.brand-hero__tag{font-family:var(--ff-ui);font-size:clamp(0.375rem,0.75vw,0.5rem);font-weight:500;letter-spacing:.08em;color:rgba(243,236,226,.55);margin-top:2rem;max-width:560px;line-height:1.7;display:block}
+.brand-hero__title--italic{font-style:italic;font-weight:400;font-size:clamp(3rem,8vw,7rem);color:rgba(243,236,226,.7);display:block}
+.brand-hero__tag{font-family:var(--ff-ui);font-size:clamp(0.75rem,1.5vw,1rem);font-weight:500;letter-spacing:.08em;color:rgba(243,236,226,.55);margin-top:2rem;max-width:560px;line-height:1.7;display:block}
 .smash-word{position:relative;display:inline}
 .smash-strike{position:absolute;left:0;top:48%;height:3px;background:var(--rebel);border-radius:2px;width:0;animation:strikeAnim .55s ease 2.2s forwards;display:block}
 .hero-scroll{position:absolute;bottom:2.5rem;left:50%;z-index:2;animation:bounce 2s ease-in-out infinite,fadeIn 1s var(--ease) 2s both}
@@ -137,17 +137,17 @@ section{padding:6rem 0}
 /* TICKER */
 .ticker-wrap{background:var(--rebel);padding:.72rem 0;overflow:hidden}
 .ticker-inner{display:flex;width:fit-content;animation:ticker 22s linear infinite}
-.ticker-item{font-family:var(--ff-ui);font-size:0.34rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.9);padding:0 2.5rem;white-space:nowrap;display:flex;align-items:center;gap:2.5rem}
-.ticker-sep{opacity:.45;font-size:0.275rem}
+.ticker-item{font-family:var(--ff-ui);font-size:0.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.9);padding:0 2.5rem;white-space:nowrap;display:flex;align-items:center;gap:2.5rem}
+.ticker-sep{opacity:.45;font-size:0.55rem}
 
 /* METHOD */
 .method-section{background:linear-gradient(180deg,var(--near-black) 0%,var(--surface) 100%);padding:7rem 0;border-top:1px solid rgba(150,45,73,.2)}
 .method-inner{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:2rem}
-.method-num{font-family:var(--ff-body);font-size:0.41rem;font-style:italic;color:rgba(200,169,107,.45);margin-bottom:.6rem}
-.method-verb{font-family:var(--ff-ui);font-size:clamp(1.1rem,2.5vw,2rem);font-weight:900;letter-spacing:-.02em;color:var(--cream);line-height:1;margin-bottom:1rem}
+.method-num{font-family:var(--ff-body);font-size:0.82rem;font-style:italic;color:rgba(200,169,107,.45);margin-bottom:.6rem}
+.method-verb{font-family:var(--ff-ui);font-size:clamp(2.2rem,5vw,4rem);font-weight:900;letter-spacing:-.02em;color:var(--cream);line-height:1;margin-bottom:1rem}
 .method-verb--rebel{color:var(--rebel);text-shadow:0 0 40px rgba(150,45,73,.35)}
-.method-desc{font-family:var(--ff-body);font-size:0.49rem;color:var(--text-dim);line-height:1.75}
-.method-arrow{font-family:var(--ff-ui);font-size:0.9rem;color:rgba(150,45,73,.4);align-self:center;padding-top:3.5rem;font-weight:300}
+.method-desc{font-family:var(--ff-body);font-size:0.98rem;color:var(--text-dim);line-height:1.75}
+.method-arrow{font-family:var(--ff-ui);font-size:1.8rem;color:rgba(150,45,73,.4);align-self:center;padding-top:3.5rem;font-weight:300}
 
 /* TOPICS */
 .topics-section{background:var(--surface);padding:7rem 0}
@@ -158,14 +158,14 @@ section{padding:6rem 0}
 .topic-card--water::before{content:'';position:absolute;top:-30%;right:-10%;width:280px;height:280px;background:radial-gradient(circle,rgba(150,45,73,.15) 0%,transparent 70%);pointer-events:none}
 .topic-card--soon{background:rgba(255,255,255,.02);border:1px solid rgba(237,224,230,.07);display:flex;flex-direction:column;justify-content:flex-end}
 .topic-card--soon:hover{background:rgba(150,45,73,.04);border-color:rgba(150,45,73,.18)}
-.topic-badge{font-family:var(--ff-ui);font-size:0.28rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;display:inline-block;padding:.22rem .7rem;border-radius:2px;margin-bottom:1.25rem}
+.topic-badge{font-family:var(--ff-ui);font-size:0.56rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;display:inline-block;padding:.22rem .7rem;border-radius:2px;margin-bottom:1.25rem}
 .badge-live{background:rgba(150,45,73,.25);color:var(--rose-lt);border:1px solid rgba(150,45,73,.4)}
 .badge-soon{background:rgba(255,255,255,.04);color:rgba(237,224,230,.3);border:1px solid rgba(237,224,230,.08)}
-.topic-title{font-family:var(--ff-disp);font-size:clamp(1.15rem,2.3vw,1.7rem);color:var(--cream);margin-bottom:.75rem}
-.topic-desc{font-family:var(--ff-body);font-size:0.585rem;color:var(--text);line-height:1.75;margin-bottom:2rem;max-width:380px}
+.topic-title{font-family:var(--ff-disp);font-size:clamp(2.3rem,4.6vw,3.4rem);color:var(--cream);margin-bottom:.75rem}
+.topic-desc{font-family:var(--ff-body);font-size:1.17rem;color:var(--text);line-height:1.75;margin-bottom:2rem;max-width:380px}
 .topic-actions{display:flex;gap:.75rem;flex-wrap:wrap}
-.topic-soon-title{font-family:var(--ff-disp);font-size:0.8rem;color:rgba(243,236,226,.3);margin-bottom:.35rem}
-.topic-soon-sub{font-family:var(--ff-body);font-size:0.45rem;color:rgba(243,236,226,.18);font-style:italic}
+.topic-soon-title{font-family:var(--ff-disp);font-size:1.6rem;color:rgba(243,236,226,.3);margin-bottom:.35rem}
+.topic-soon-sub{font-family:var(--ff-body);font-size:0.9rem;color:rgba(243,236,226,.18);font-style:italic}
 
 /* PAGE HEROES */
 .page-hero{min-height:44vh;display:flex;align-items:flex-end;padding:10rem 0 4rem;position:relative;overflow:hidden}
@@ -173,7 +173,7 @@ section{padding:6rem 0}
 .page-hero--rebel{background:linear-gradient(160deg,var(--near-black) 0%,#1a0810 100%)}
 .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 25% 55%,rgba(29,80,110,.25) 0%,transparent 70%)}
 .page-hero--rebel::before{background:radial-gradient(ellipse 50% 60% at 80% 40%,rgba(150,45,73,.18) 0%,transparent 70%)}
-.water-badge{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--ff-ui);font-size:0.29rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--foam);background:rgba(45,122,150,.15);border:1px solid rgba(45,122,150,.3);padding:.3rem .85rem;border-radius:2px;margin-bottom:1rem}
+.water-badge{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--ff-ui);font-size:0.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--foam);background:rgba(45,122,150,.15);border:1px solid rgba(45,122,150,.3);padding:.3rem .85rem;border-radius:2px;margin-bottom:1rem}
 .water-dot{width:6px;height:6px;border-radius:50%;background:var(--foam);display:inline-block}
 
 /* ABOUT */
@@ -181,43 +181,43 @@ section{padding:6rem 0}
 .about-teaser-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:center}
 .about-photo-sm{aspect-ratio:3/4;background:linear-gradient(135deg,var(--rebel-dk),var(--elevated));border-radius:4px;overflow:hidden;border:1px solid var(--border);max-width:280px}
 .about-photo-sm img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.photo-placeholder-sm{display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--ff-disp);font-size:2.5rem;color:var(--mauve);font-style:italic}
+.photo-placeholder-sm{display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--ff-disp);font-size:5rem;color:var(--mauve);font-style:italic}
 .about-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:5rem;align-items:start}
 .about-sticky{position:sticky;top:110px}
 .photo-frame{aspect-ratio:3/4;background:linear-gradient(135deg,var(--rebel-dk),var(--elevated));border-radius:4px;overflow:hidden;border:1px solid var(--border)}
 .photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.photo-placeholder{display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--ff-disp);font-size:3rem;color:var(--mauve);font-style:italic}
-.photo-cap{margin-top:1rem;text-align:center;font-family:var(--ff-ui);font-size:0.3rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose-gold)}
+.photo-placeholder{display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--ff-disp);font-size:6rem;color:var(--mauve);font-style:italic}
+.photo-cap{margin-top:1rem;text-align:center;font-family:var(--ff-ui);font-size:0.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose-gold)}
 .values-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
 .value-item{padding:1.25rem;border:1px solid var(--border);border-radius:4px;background:rgba(150,45,73,.06)}
-.value-item h4{font-family:var(--ff-disp);font-size:0.61rem;color:var(--text);margin-bottom:.4rem}
-.value-item p{font-family:var(--ff-body);font-size:0.585rem;color:var(--text);line-height:1.6}
+.value-item h4{font-family:var(--ff-disp);font-size:1.22rem;color:var(--text);margin-bottom:.4rem}
+.value-item p{font-family:var(--ff-body);font-size:1.17rem;color:var(--text);line-height:1.6}
 
 /* SWAPS */
 .swap-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden;flex-wrap:wrap;margin-bottom:2rem}
-.s-tab{flex:1;font-family:var(--ff-ui);font-size:0.315rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1rem;background:none;border:none;color:var(--text-dim);transition:all .2s;cursor:pointer;border-right:1px solid var(--border);white-space:nowrap}
+.s-tab{flex:1;font-family:var(--ff-ui);font-size:0.63rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1rem;background:none;border:none;color:var(--text-dim);transition:all .2s;cursor:pointer;border-right:1px solid var(--border);white-space:nowrap}
 .s-tab:last-child{border-right:none}
 .s-tab:hover{background:rgba(17,45,64,.3);color:var(--cream)}
 .s-tab.on{background:rgba(45,122,150,.2);color:var(--cream)}
 .src-list{display:flex;flex-direction:column;gap:.85rem}
 .src-item{display:flex;align-items:center;gap:1.5rem;padding:1.2rem 1.5rem;background:rgba(17,45,64,.3);border:1px solid var(--border);border-radius:4px;transition:all .22s}
 .src-item:hover{background:rgba(17,45,64,.5);border-color:rgba(45,122,150,.4)}
-.src-rank{font-family:var(--ff-disp);font-size:1.25rem;color:rgba(200,169,107,.22);min-width:3rem;font-style:italic;line-height:1}
+.src-rank{font-family:var(--ff-disp);font-size:2.5rem;color:rgba(200,169,107,.22);min-width:3rem;font-style:italic;line-height:1}
 .src-info{flex:1}
-.src-name{font-family:var(--ff-disp);font-size:0.69rem;color:var(--cream);margin-bottom:.25rem}
-.src-desc{font-family:var(--ff-body);font-size:0.585rem;color:var(--text);line-height:1.6}
-.badge{font-family:var(--ff-ui);font-size:0.29rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .65rem;border-radius:2px}
+.src-name{font-family:var(--ff-disp);font-size:1.38rem;color:var(--cream);margin-bottom:.25rem}
+.src-desc{font-family:var(--ff-body);font-size:1.17rem;color:var(--text);line-height:1.6}
+.badge{font-family:var(--ff-ui);font-size:0.58rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .65rem;border-radius:2px}
 .b-best{background:rgba(45,158,106,.18);color:#6bcea0;border:1px solid rgba(45,158,106,.28)}
 .b-good{background:rgba(45,122,150,.18);color:var(--foam);border:1px solid var(--border)}
 .b-caution{background:rgba(200,169,107,.1);color:var(--gold);border:1px solid rgba(200,169,107,.28)}
 .b-avoid{background:rgba(224,82,82,.1);color:#e08888;border:1px solid rgba(224,82,82,.2)}
 .tbl-wrap{overflow-x:auto;border-radius:4px;border:1px solid var(--border)}
-.dtbl{width:100%;border-collapse:collapse;font-size:0.465rem}
-.dtbl th{font-family:var(--ff-ui);font-size:0.29rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);padding:.95rem 1.2rem;text-align:left;background:rgba(12,33,48,.8);border-bottom:1px solid var(--border);white-space:nowrap}
-.dtbl td{padding:.88rem 1.2rem;border-bottom:1px solid rgba(45,122,150,.08);color:var(--text);vertical-align:top;line-height:1.55;font-size:0.525rem}
+.dtbl{width:100%;border-collapse:collapse;font-size:0.93rem}
+.dtbl th{font-family:var(--ff-ui);font-size:0.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);padding:.95rem 1.2rem;text-align:left;background:rgba(12,33,48,.8);border-bottom:1px solid var(--border);white-space:nowrap}
+.dtbl td{padding:.88rem 1.2rem;border-bottom:1px solid rgba(45,122,150,.08);color:var(--text);vertical-align:top;line-height:1.55;font-size:1.05rem}
 .dtbl tr:last-child td{border-bottom:none}
 .dtbl tr:hover td{background:rgba(17,45,64,.2)}
-.crosslink{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--ff-ui);font-size:0.315rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--foam);background:none;border:1px solid rgba(123,189,209,.28);padding:.38rem .95rem;border-radius:2px;cursor:pointer;transition:all .2s;margin-top:1rem}
+.crosslink{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--ff-ui);font-size:0.63rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--foam);background:none;border:1px solid rgba(123,189,209,.28);padding:.38rem .95rem;border-radius:2px;cursor:pointer;transition:all .2s;margin-top:1rem}
 .crosslink:hover{border-color:var(--foam);background:rgba(123,189,209,.05)}
 
 /* ACCORDION */
@@ -226,22 +226,22 @@ section{padding:6rem 0}
 .acc-head{display:flex;align-items:center;gap:1.25rem;padding:1.4rem 1.75rem;background:rgba(17,45,64,.35);cursor:pointer;border:none;width:100%;text-align:left;transition:background .2s}
 .acc-head:hover{background:rgba(17,45,64,.55)}
 .acc-head.open{background:rgba(17,45,64,.6);border-bottom:1px solid var(--border)}
-.acc-num{font-family:var(--ff-body);font-size:0.44rem;font-style:italic;color:var(--gold);min-width:26px}
-.acc-title{font-family:var(--ff-disp);font-size:0.725rem;color:var(--cream);flex:1}
-.acc-chev{font-size:0.375rem;color:var(--text-soft);transition:transform .3s}
+.acc-num{font-family:var(--ff-body);font-size:0.88rem;font-style:italic;color:var(--gold);min-width:26px}
+.acc-title{font-family:var(--ff-disp);font-size:1.45rem;color:var(--cream);flex:1}
+.acc-chev{font-size:0.75rem;color:var(--text-soft);transition:transform .3s}
 .acc-chev.open{transform:rotate(180deg)}
 .acc-body{max-height:0;overflow:hidden;transition:max-height .55s var(--ease)}
 .acc-body.open{max-height:2400px}
-.acc-content{padding:2rem 1.75rem;font-size:0.585rem;line-height:1.85;color:var(--text)}
+.acc-content{padding:2rem 1.75rem;font-size:1.17rem;line-height:1.85;color:var(--text)}
 .acc-content p{margin-bottom:1rem}
 .acc-content strong{color:var(--cream);font-weight:600}
 .symp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.75rem;margin:1.25rem 0}
-.symp-item{display:flex;align-items:center;gap:.7rem;font-size:0.55rem}
+.symp-item{display:flex;align-items:center;gap:.7rem;font-size:1.1rem}
 .symp-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
 .toxin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.25rem 0}
 .toxin-item{padding:1rem;border:1px solid var(--border);border-radius:3px;background:rgba(26,80,106,.08)}
-.toxin-item h4{font-family:var(--ff-disp);font-size:0.585rem;color:var(--cream);margin-bottom:.3rem}
-.toxin-item p{font-size:0.55rem;color:var(--text);line-height:1.55}
+.toxin-item h4{font-family:var(--ff-disp);font-size:1.17rem;color:var(--cream);margin-bottom:.3rem}
+.toxin-item p{font-size:1.1rem;color:var(--text);line-height:1.55}
 
 /* QUIZ */
 .quiz-wrap{background:linear-gradient(180deg,#0a2230 0%,var(--near-black) 100%);position:relative;overflow:hidden}
@@ -250,17 +250,17 @@ section{padding:6rem 0}
 .q-progress{display:flex;gap:3px;margin-bottom:2.5rem}
 .q-prog-bar{flex:1;height:2px;background:rgba(45,122,150,.18);border-radius:1px;overflow:hidden}
 .q-prog-fill{height:100%;background:var(--gold);transition:width .45s var(--ease);border-radius:1px}
-.q-text{font-family:var(--ff-disp);font-size:clamp(0.75rem,2vw,1rem);font-style:italic;color:var(--cream);margin-bottom:2rem;line-height:1.3;animation:fadeUp .5s var(--ease) both}
+.q-text{font-family:var(--ff-disp);font-size:clamp(1.5rem,4vw,2rem);font-style:italic;color:var(--cream);margin-bottom:2rem;line-height:1.3;animation:fadeUp .5s var(--ease) both}
 .q-opts{display:flex;flex-direction:column;gap:.7rem}
 .q-opt{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 1.5rem;background:rgba(17,45,64,.3);border:1px solid var(--border);border-radius:4px;cursor:pointer;text-align:left;transition:all .2s;width:100%}
 .q-opt:hover{background:rgba(17,45,64,.55);border-color:rgba(45,122,150,.45);transform:translateX(4px)}
-.q-letter{font-family:var(--ff-ui);font-size:0.3rem;font-weight:600;letter-spacing:.1em;color:var(--gold);min-width:20px;padding-top:2px}
-.q-opt-text{font-family:var(--ff-body);font-size:0.585rem;color:var(--text);line-height:1.5}
+.q-letter{font-family:var(--ff-ui);font-size:0.6rem;font-weight:600;letter-spacing:.1em;color:var(--gold);min-width:20px;padding-top:2px}
+.q-opt-text{font-family:var(--ff-body);font-size:1.17rem;color:var(--text);line-height:1.5}
 .q-result{text-align:center;padding:2rem 0}
-.q-score{font-family:var(--ff-disp);font-size:3.25rem;color:var(--gold);line-height:1;animation:fadeUp .6s var(--ease) both}
-.q-level{font-family:var(--ff-ui);font-size:0.31rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--foam);margin:.6rem 0 1.5rem;animation:fadeUp .6s var(--ease) .1s both}
-.q-rtitle{font-family:var(--ff-disp);font-size:1.15rem;color:var(--cream);margin-bottom:1rem;animation:fadeUp .6s var(--ease) .2s both}
-.q-rmsg{font-family:var(--ff-body);font-size:0.585rem;font-style:italic;color:var(--text);max-width:540px;margin:0 auto 2rem;line-height:1.75;animation:fadeUp .6s var(--ease) .3s both}
+.q-score{font-family:var(--ff-disp);font-size:6.5rem;color:var(--gold);line-height:1;animation:fadeUp .6s var(--ease) both}
+.q-level{font-family:var(--ff-ui);font-size:0.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--foam);margin:.6rem 0 1.5rem;animation:fadeUp .6s var(--ease) .1s both}
+.q-rtitle{font-family:var(--ff-disp);font-size:2.3rem;color:var(--cream);margin-bottom:1rem;animation:fadeUp .6s var(--ease) .2s both}
+.q-rmsg{font-family:var(--ff-body);font-size:1.17rem;font-style:italic;color:var(--text);max-width:540px;margin:0 auto 2rem;line-height:1.75;animation:fadeUp .6s var(--ease) .3s both}
 .q-ract{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s var(--ease) .4s both}
 
 /* WORK */
@@ -268,33 +268,33 @@ section{padding:6rem 0}
 .offer-card{border:1px solid var(--border);border-radius:4px;padding:2.5rem;position:relative;overflow:hidden;transition:all .3s var(--ease);background:rgba(150,45,73,.06)}
 .offer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--rebel),transparent)}
 .offer-card:hover{transform:translateY(-5px);box-shadow:0 22px 50px rgba(0,0,0,.32);border-color:rgba(150,45,73,.38)}
-.offer-type{font-family:var(--ff-ui);font-size:0.3rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--rebel);margin-bottom:1rem}
-.offer-title{font-family:var(--ff-disp);font-size:1.15rem;color:var(--text);margin-bottom:.85rem}
-.offer-desc{font-family:var(--ff-body);font-size:0.585rem;color:var(--text);line-height:1.8;margin-bottom:1.5rem}
+.offer-type{font-family:var(--ff-ui);font-size:0.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--rebel);margin-bottom:1rem}
+.offer-title{font-family:var(--ff-disp);font-size:2.3rem;color:var(--text);margin-bottom:.85rem}
+.offer-desc{font-family:var(--ff-body);font-size:1.17rem;color:var(--text);line-height:1.8;margin-bottom:1.5rem}
 .offer-list{list-style:none;margin-bottom:2rem}
-.offer-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:0.585rem;color:var(--text);padding:.45rem 0;border-bottom:1px solid rgba(150,45,73,.1)}
+.offer-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:1.17rem;color:var(--text);padding:.45rem 0;border-bottom:1px solid rgba(150,45,73,.1)}
 .offer-list li::before{content:'—';color:var(--rebel);flex-shrink:0}
 .offer-list li:last-child{border-bottom:none}
 .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
 .process-step{text-align:center;padding:2rem 1.5rem;border:1px solid var(--border);border-radius:4px;background:rgba(150,45,73,.05)}
-.process-step__num{font-family:var(--ff-disp);font-size:1.5rem;color:rgba(150,45,73,.3);line-height:1;margin-bottom:.75rem;font-style:italic}
-.process-step h4{font-family:var(--ff-disp);font-size:0.65rem;color:var(--text);margin-bottom:.5rem}
-.process-step p{font-family:var(--ff-body);font-size:0.585rem;color:var(--text);line-height:1.65}
+.process-step__num{font-family:var(--ff-disp);font-size:3rem;color:rgba(150,45,73,.3);line-height:1;margin-bottom:.75rem;font-style:italic}
+.process-step h4{font-family:var(--ff-disp);font-size:1.3rem;color:var(--text);margin-bottom:.5rem}
+.process-step p{font-family:var(--ff-body);font-size:1.17rem;color:var(--text);line-height:1.65}
 
 /* CONTACT */
 .contact-wrap{min-height:65vh;display:flex;align-items:center;padding:8rem 0;background:linear-gradient(180deg,var(--near-black) 0%,var(--surface) 100%);position:relative;overflow:hidden}
 .contact-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(150,45,73,.12) 0%,transparent 70%)}
-.email-link{display:inline-block;font-family:var(--ff-body);font-size:clamp(0.6rem,1.5vw,0.9rem);font-style:italic;color:var(--rebel-lt);margin:1.5rem 0;border-bottom:1px solid rgba(150,45,73,.35);padding-bottom:.3rem;transition:all .2s}
+.email-link{display:inline-block;font-family:var(--ff-body);font-size:clamp(1.2rem,3vw,1.8rem);font-style:italic;color:var(--rebel-lt);margin:1.5rem 0;border-bottom:1px solid rgba(150,45,73,.35);padding-bottom:.3rem;transition:all .2s}
 .email-link:hover{color:var(--rebel);border-color:var(--rebel)}
 
 /* FOOTER */
 .footer{background:var(--surface);border-top:1px solid rgba(150,45,73,.2);padding:3rem 2rem}
 .footer-inner{width:90%;max-width:1600px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
-.footer-brand{font-family:var(--ff-disp);font-size:0.5rem;font-style:italic;color:rgba(243,236,226,.4)}
+.footer-brand{font-family:var(--ff-disp);font-size:1rem;font-style:italic;color:rgba(243,236,226,.4)}
 .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
-.footer-link{font-family:var(--ff-ui);font-size:0.29rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-soft);background:none;border:none;cursor:pointer;transition:color .2s}
+.footer-link{font-family:var(--ff-ui);font-size:0.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-soft);background:none;border:none;cursor:pointer;transition:color .2s}
 .footer-link:hover{color:var(--cream)}
-.footer-copy{font-family:var(--ff-ui);font-size:0.29rem;letter-spacing:.08em;color:var(--text-soft);text-align:right}
+.footer-copy{font-family:var(--ff-ui);font-size:0.58rem;letter-spacing:.08em;color:var(--text-soft);text-align:right}
 
 /* WAVE */
 .wave-wrap{position:absolute;bottom:0;left:0;right:0;z-index:1;overflow:hidden;line-height:0}
@@ -316,10 +316,10 @@ section{padding:6rem 0}
 }
 .unruly-hole-spacer{opacity:0;pointer-events:none}
 .unruly-item{padding:0 1.75rem 3rem;text-align:left}
-.unruly-num{font-family:var(--ff-body);font-size:0.41rem;font-style:italic;color:rgba(200,169,107,.45);margin-bottom:.55rem;text-align:center}
-.unruly-verb{font-family:var(--ff-ui);font-size:clamp(0.64rem,1.225vw,1.3rem);font-weight:900;letter-spacing:-.01em;color:var(--cream);line-height:1.1;margin-bottom:1rem;text-transform:uppercase;text-align:center}
+.unruly-num{font-family:var(--ff-body);font-size:0.82rem;font-style:italic;color:rgba(200,169,107,.45);margin-bottom:.55rem;text-align:center}
+.unruly-verb{font-family:var(--ff-ui);font-size:clamp(1.28rem,2.45vw,2.6rem);font-weight:900;letter-spacing:-.01em;color:var(--cream);line-height:1.1;margin-bottom:1rem;text-transform:uppercase;text-align:center}
 .unruly-verb--rebel{color:var(--rebel);text-shadow:0 0 40px rgba(150,45,73,.35)}
-.unruly-desc{font-family:var(--ff-body);font-size:0.585rem;color:var(--text);line-height:1.75;text-align:left}
+.unruly-desc{font-family:var(--ff-body);font-size:1.17rem;color:var(--text);line-height:1.75;text-align:left}
 
 
 /* RESPONSIVE */
@@ -452,16 +452,16 @@ function useReveal() {
 }
 function PriceTier({ price }) {
   const tip = PRICE_TOOLTIPS[price] || price;
-  if (price.includes('–')) return <span title={tip} style={{fontFamily:'var(--ff-ui)',fontSize:'0.39rem',fontWeight:700,color:'var(--rose-gold)',letterSpacing:'.04em',cursor:'help'}}>{price}</span>;
+  if (price.includes('–')) return <span title={tip} style={{fontFamily:'var(--ff-ui)',fontSize:'0.78rem',fontWeight:700,color:'var(--rose-gold)',letterSpacing:'.04em',cursor:'help'}}>{price}</span>;
   const n = price.length;
-  return <span title={tip} style={{fontFamily:'var(--ff-ui)',fontSize:'0.39rem',fontWeight:700,letterSpacing:'.04em',cursor:'help'}}><span style={{color:'var(--rose-gold)'}}>{'€'.repeat(n)}</span><span style={{color:'rgba(196,146,156,.18)'}}>{'€'.repeat(4-n)}</span></span>;
+  return <span title={tip} style={{fontFamily:'var(--ff-ui)',fontSize:'0.78rem',fontWeight:700,letterSpacing:'.04em',cursor:'help'}}><span style={{color:'var(--rose-gold)'}}>{'€'.repeat(n)}</span><span style={{color:'rgba(196,146,156,.18)'}}>{'€'.repeat(4-n)}</span></span>;
 }
 function PriceLegend() {
   return (
     <div style={{display:'flex',alignItems:'center',gap:'1.5rem',flexWrap:'wrap',padding:'.65rem 1rem',background:'rgba(150,45,73,.06)',border:'1px solid rgba(150,45,73,.18)',borderRadius:3,margin:'1.5rem 0 0'}}>
-      <span style={{fontFamily:'var(--ff-ui)',fontSize:'0.29rem',fontWeight:600,letterSpacing:'.15em',textTransform:'uppercase',color:'var(--text-soft)'}}>Price guide</span>
+      <span style={{fontFamily:'var(--ff-ui)',fontSize:'0.58rem',fontWeight:600,letterSpacing:'.15em',textTransform:'uppercase',color:'var(--text-soft)'}}>Price guide</span>
       {Object.entries(PRICE_TOOLTIPS).filter(([k])=>!k.includes('–')).map(([t,l])=>(
-        <span key={t} style={{display:'flex',alignItems:'center',gap:'.4rem'}}><PriceTier price={t}/><span style={{fontFamily:'var(--ff-ui)',fontSize:'0.3rem',color:'var(--text-soft)'}}>{l}</span></span>
+        <span key={t} style={{display:'flex',alignItems:'center',gap:'.4rem'}}><PriceTier price={t}/><span style={{fontFamily:'var(--ff-ui)',fontSize:'0.6rem',color:'var(--text-soft)'}}>{l}</span></span>
       ))}
     </div>
   );
@@ -494,7 +494,7 @@ function SocialLinks({ style='bar' }) {
     <div style={{display:'flex',gap:'1.25rem',flexWrap:'wrap',alignItems:'center'}}>
       {SOCIALS.map(s => (
         <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer"
-          style={{display:'flex',alignItems:'center',gap:'.45rem',fontFamily:'var(--ff-ui)',fontSize:'0.3rem',fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--text-soft)',textDecoration:'none',transition:'color .2s'}}
+          style={{display:'flex',alignItems:'center',gap:'.45rem',fontFamily:'var(--ff-ui)',fontSize:'0.6rem',fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--text-soft)',textDecoration:'none',transition:'color .2s'}}
           onMouseEnter={e=>e.currentTarget.style.color='var(--rose-gold)'} onMouseLeave={e=>e.currentTarget.style.color='var(--text-soft)'}>
           {s.icon}<span>{s.handle}</span>
         </a>
@@ -510,8 +510,8 @@ function SocialLinks({ style='bar' }) {
           onMouseLeave={e=>{e.currentTarget.style.background='rgba(150,45,73,.06)';e.currentTarget.style.borderColor='rgba(150,45,73,.2)';}}>
           <span style={{color:'var(--rose-gold)'}}>{s.icon}</span>
           <div>
-            <div style={{fontFamily:'var(--ff-ui)',fontSize:'0.28rem',fontWeight:700,letterSpacing:'.16em',textTransform:'uppercase',color:'var(--text-soft)',marginBottom:'.15rem'}}>{s.name}</div>
-            <div style={{fontFamily:'var(--ff-body)',fontSize:'0.55rem',color:'var(--text-dim)'}}>{s.handle}</div>
+            <div style={{fontFamily:'var(--ff-ui)',fontSize:'0.56rem',fontWeight:700,letterSpacing:'.16em',textTransform:'uppercase',color:'var(--text-soft)',marginBottom:'.15rem'}}>{s.name}</div>
+            <div style={{fontFamily:'var(--ff-body)',fontSize:'1.1rem',color:'var(--text-dim)'}}>{s.handle}</div>
           </div>
         </a>
       ))}
@@ -640,8 +640,8 @@ function HomePage({ navigate }) {
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div className="reveal" style={{marginBottom:'3.5rem'}}>
             <div className="label" style={{marginBottom:'.75rem'}}>THE UNRULY WAY</div>
-            <h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.4rem)',color:'var(--cream)',marginBottom:'.75rem'}}>This isn't a method.</h2>
-            <p style={{fontFamily:'var(--ff-body)',fontSize:'clamp(0.5rem,1vw,0.6rem)',fontStyle:'italic',color:'var(--text-dim)',lineHeight:1.65}}>It's a middle finger to toxins, served with a cup of bone broth and zero apology.</p>
+            <h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.8rem)',color:'var(--cream)',marginBottom:'.75rem'}}>This isn't a method.</h2>
+            <p style={{fontFamily:'var(--ff-body)',fontSize:'clamp(1rem,2vw,1.2rem)',fontStyle:'italic',color:'var(--text-dim)',lineHeight:1.65}}>It's a middle finger to toxins, served with a cup of bone broth and zero apology.</p>
           </div>
           <div className="reveal d1">
             <div className="unruly-row">
@@ -696,8 +696,8 @@ function HomePage({ navigate }) {
         <div className="container">
           <div className="reveal">
             <div className="label" style={{marginBottom:'.75rem'}}>Topics</div>
-            <h2 style={{fontSize:'clamp(1rem,2vw,1.6rem)',color:'var(--cream)',marginBottom:'.5rem'}}>Choose your area</h2>
-            <p style={{color:'var(--text-dim)',fontStyle:'italic',fontSize:'0.585rem'}}>Each topic is independently researched, tested, and swapped. Water is live now.</p>
+            <h2 style={{fontSize:'clamp(2rem,4vw,3.2rem)',color:'var(--cream)',marginBottom:'.5rem'}}>Choose your area</h2>
+            <p style={{color:'var(--text-dim)',fontStyle:'italic',fontSize:'1.17rem'}}>Each topic is independently researched, tested, and swapped. Water is live now.</p>
           </div>
           <div className="topic-grid">
             <div className="topic-card topic-card--water reveal d1" onClick={() => navigate('swaps')}>
@@ -732,9 +732,9 @@ function HomePage({ navigate }) {
             </div>
             <div className="reveal d2">
               <div className="label" style={{marginBottom:'1rem'}}>The Person Behind It</div>
-              <h2 style={{fontSize:'clamp(1rem,2vw,1.5rem)',color:'var(--cream)',marginBottom:'1.25rem'}}>Natalie</h2>
-              <p style={{color:'var(--text-dim)',fontSize:'0.585rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Environmental scientist. Holistic practitioner. Someone who tested everything on herself before recommending it to anyone else.</p>
-              <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'2rem',fontSize:'0.585rem'}}>I studied environmental sciences at the University of Vienna, spent years in the lab, then had health challenges that sent me on a different kind of research journey. Today I combine laboratory precision with lived experience — and a healthy disrespect for anything that doesn't hold up to scrutiny.</p>
+              <h2 style={{fontSize:'clamp(2rem,4vw,3rem)',color:'var(--cream)',marginBottom:'1.25rem'}}>Natalie</h2>
+              <p style={{color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Environmental scientist. Holistic practitioner. Someone who tested everything on herself before recommending it to anyone else.</p>
+              <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'2rem',fontSize:'1.17rem'}}>I studied environmental sciences at the University of Vienna, spent years in the lab, then had health challenges that sent me on a different kind of research journey. Today I combine laboratory precision with lived experience — and a healthy disrespect for anything that doesn't hold up to scrutiny.</p>
               <div style={{display:'flex',gap:'1rem',flexWrap:'wrap'}}>
                 <button className="btn btn-gold" onClick={() => navigate('about')}>My Story</button>
                 <button className="btn btn-ghost" onClick={() => navigate('work')}>Work With Me</button>
@@ -755,7 +755,7 @@ function AboutPage({ navigate }) {
       <div className="page-hero page-hero--water">
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div className="label" style={{marginBottom:'1rem'}}>About</div>
-          <h1 style={{fontSize:'clamp(1.5rem,4vw,3.25rem)',color:'var(--cream)'}}><em style={{color:'var(--foam)'}}>Meet</em><br/>Natalie</h1>
+          <h1 style={{fontSize:'clamp(3rem,8vw,6.5rem)',color:'var(--cream)'}}><em style={{color:'var(--foam)'}}>Meet</em><br/>Natalie</h1>
         </div>
       </div>
       <section style={{background:'linear-gradient(180deg,#0a2230 0%,var(--near-black) 100%)'}}>
@@ -770,10 +770,10 @@ function AboutPage({ navigate }) {
             <div>
               <div className="reveal d1">
                 <div className="label" style={{marginBottom:'1rem'}}>My Journey</div>
-                <h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.4rem)',color:'var(--cream)',marginBottom:'1.5rem'}}>From scientific curiosity to holistic mastery</h2>
+                <h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.8rem)',color:'var(--cream)',marginBottom:'1.5rem'}}>From scientific curiosity to holistic mastery</h2>
               </div>
               <div className="reveal d2">
-                <p style={{fontSize:'0.585rem',fontStyle:'italic',color:'var(--mist)',lineHeight:1.8,marginBottom:'1.5rem'}}>"I first learnt about water while studying environmental sciences at the University of Vienna. After graduating, water chemistry drifted into the background — until quite challenging health issues brought it to the forefront of my life."</p>
+                <p style={{fontSize:'1.17rem',fontStyle:'italic',color:'var(--mist)',lineHeight:1.8,marginBottom:'1.5rem'}}>"I first learnt about water while studying environmental sciences at the University of Vienna. After graduating, water chemistry drifted into the background — until quite challenging health issues brought it to the forefront of my life."</p>
                 <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.25rem'}}>That wake-up call set me on a journey. I looked into alternative water sources, learnt from holistic practitioners, and experimented with various methods — spending freely on equipment and protocols and using myself as a test subject. My confidence grew gradually, both in the science and in how to genuinely use this knowledge in daily life.</p>
                 <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.25rem'}}>Programming the remediation of uranium-contaminated aquifers in the lab was not my calling — but I'm genuinely grateful for the technical skills it gave me. They are now part of my toolkit for achieving real, effective results.</p>
                 <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'2rem'}}>Today, by weaving together holistic wisdom, solid scientific research, and hands-on experience, I've crafted a genuinely practical and personal approach to hydration that I love sharing with others.</p>
@@ -781,8 +781,8 @@ function AboutPage({ navigate }) {
               <div className="divider reveal"><div className="div-line"/><div className="div-mark">✦</div><div className="div-line"/></div>
               <div className="reveal d1">
                 <div className="label" style={{marginBottom:'1rem'}}>Discern Like A Rebel</div>
-                <h3 style={{fontSize:'clamp(0.75rem,1.5vw,1.1rem)',color:'var(--cream)',marginBottom:'1rem'}}>Smashing the toxins out of the way</h3>
-                <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.5rem',fontStyle:'italic',fontSize:'0.585rem'}}>Discerning like a rebel means choosing to question the mainstream, look past the surface, and make decisions from a place of genuine knowledge and deep self-trust. If it doesn't pass the test — it's out. No compromise.</p>
+                <h3 style={{fontSize:'clamp(1.5rem,3vw,2.2rem)',color:'var(--cream)',marginBottom:'1rem'}}>Smashing the toxins out of the way</h3>
+                <p style={{color:'var(--text-dim)',lineHeight:1.85,marginBottom:'1.5rem',fontStyle:'italic',fontSize:'1.17rem'}}>Discerning like a rebel means choosing to question the mainstream, look past the surface, and make decisions from a place of genuine knowledge and deep self-trust. If it doesn't pass the test — it's out. No compromise.</p>
                 <div className="values-grid">
                   {[{title:'Rooted in Science',text:'Environmental science background. Lab experience. Real methodology.'},{title:'Lived Through It',text:'Personal health challenges shaped everything. This is not theoretical.'},{title:'Holistically Whole',text:'Science without wisdom is incomplete. Both have their place.'},{title:'Radically Honest',text:'No affiliate links. No brand allegiances. Just what actually works.'}].map(v=>(
                     <div key={v.title} className="value-item"><h4>{v.title}</h4><p>{v.text}</p></div>
@@ -839,18 +839,18 @@ function DehydrationQuiz({ navigate }) {
       <div className="quiz-inner">
         <div style={{textAlign:'center',marginBottom:'3.5rem'}}>
           <div className="label" style={{marginBottom:'.75rem'}}>Cellular Hydration Check</div>
-          <h2 style={{fontSize:'clamp(1rem,2vw,1.5rem)',color:'var(--cream)',fontStyle:'italic'}}>Are your cells truly hydrated?</h2>
+          <h2 style={{fontSize:'clamp(2rem,4vw,3rem)',color:'var(--cream)',fontStyle:'italic'}}>Are your cells truly hydrated?</h2>
           <p style={{color:'var(--text-dim)',marginTop:'.75rem',fontStyle:'italic'}}>6 questions · 2 minutes · No email required</p>
         </div>
         {!done ? (
           <div>
             <div className="q-progress">{QUIZ_QS.map((_,i)=><div key={i} className="q-prog-bar"><div className="q-prog-fill" style={{width:i<step?'100%':i===step?'50%':'0%'}}/></div>)}</div>
-            <div style={{fontFamily:'var(--ff-ui)',fontSize:'0.31rem',color:'var(--text-soft)',marginBottom:'.75rem',letterSpacing:'.1em'}}>{step+1} / {QUIZ_QS.length}</div>
+            <div style={{fontFamily:'var(--ff-ui)',fontSize:'0.62rem',color:'var(--text-soft)',marginBottom:'.75rem',letterSpacing:'.1em'}}>{step+1} / {QUIZ_QS.length}</div>
             <div key={step} className="q-text">{QUIZ_QS[step].text}</div>
             <div className="q-opts">{QUIZ_QS[step].opts.map((o,i)=>(
               <button key={i} className="q-opt" onClick={()=>pick(o.p)}><span className="q-letter">{String.fromCharCode(65+i)}</span><span className="q-opt-text">{o.t}</span></button>
             ))}</div>
-            {step>0&&<button onClick={()=>setStep(step-1)} style={{marginTop:'1.25rem',fontFamily:'var(--ff-ui)',fontSize:'0.325rem',letterSpacing:'.1em',color:'var(--text-soft)',background:'none',border:'none',cursor:'pointer'}}>← Back</button>}
+            {step>0&&<button onClick={()=>setStep(step-1)} style={{marginTop:'1.25rem',fontFamily:'var(--ff-ui)',fontSize:'0.65rem',letterSpacing:'.1em',color:'var(--text-soft)',background:'none',border:'none',cursor:'pointer'}}>← Back</button>}
           </div>
         ) : (
           <div className="q-result">
@@ -877,8 +877,8 @@ function PrinciplesPage({ navigate }) {
       <div className="page-hero page-hero--water">
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div className="water-badge"><span className="water-dot"/><span style={{marginLeft:'.4rem'}}>Living Water</span></div>
-          <h1 style={{fontSize:'clamp(1.4rem,3.5vw,3rem)',color:'var(--cream)',marginTop:'1rem'}}>The <em style={{color:'var(--foam)'}}>why</em><br/>behind the water</h1>
-          <p style={{maxWidth:540,color:'var(--text-dim)',fontSize:'0.585rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Five foundational ideas that will permanently change how you relate to water and hydration.</p>
+          <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)',marginTop:'1rem'}}>The <em style={{color:'var(--foam)'}}>why</em><br/>behind the water</h1>
+          <p style={{maxWidth:540,color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Five foundational ideas that will permanently change how you relate to water and hydration.</p>
         </div>
       </div>
       <section style={{background:'linear-gradient(180deg,#0a2230 0%,var(--near-black) 100%)'}}>
@@ -905,14 +905,14 @@ function SwapsPage({ navigate, scrollTarget }) {
   useReveal();
   useEffect(()=>{ if(scrollTarget) setTab(scrollTarget); },[scrollTarget]);
   const tabs = [{id:'sources',l:'Water Sources'},{id:'salt',l:'Salt Guide'},{id:'brands',l:'Water Brands'},{id:'filtration',l:'Filtration'},{id:'structuring',l:'Structuring'},{id:'storage',l:'Storage'}];
-  const vs = {fontFamily:'var(--ff-ui)',fontSize:'0.31rem',fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--rebel)',borderBottom:'1px solid rgba(150,45,73,.3)',paddingBottom:'1px',whiteSpace:'nowrap',textDecoration:'none'};
+  const vs = {fontFamily:'var(--ff-ui)',fontSize:'0.62rem',fontWeight:600,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--rebel)',borderBottom:'1px solid rgba(150,45,73,.3)',paddingBottom:'1px',whiteSpace:'nowrap',textDecoration:'none'};
   return (
     <div className="page-in">
       <div className="page-hero page-hero--water" style={{background:'linear-gradient(180deg,var(--near-black) 0%,#0d3044 100%)'}}>
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div className="water-badge"><span className="water-dot"/><span style={{marginLeft:'.4rem'}}>Living Water</span></div>
-          <h1 style={{fontSize:'clamp(1.4rem,3.5vw,3rem)',color:'var(--cream)',marginTop:'1rem'}}>From knowing<br/><em style={{color:'var(--rebel-lt)'}}>to doing</em></h1>
-          <p style={{maxWidth:560,color:'var(--text-dim)',fontSize:'0.585rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Concrete, tested product recommendations — with prices, links, and zero compromise.</p>
+          <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)',marginTop:'1rem'}}>From knowing<br/><em style={{color:'var(--rebel-lt)'}}>to doing</em></h1>
+          <p style={{maxWidth:560,color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Concrete, tested product recommendations — with prices, links, and zero compromise.</p>
         </div>
       </div>
       <section style={{background:'linear-gradient(180deg,#0d3044 0%,var(--near-black) 100%)'}}>
@@ -920,34 +920,34 @@ function SwapsPage({ navigate, scrollTarget }) {
           <div className="swap-tabs">{tabs.map(t=><button key={t.id} className={`s-tab ${tab===t.id?'on':''}`} onClick={()=>setTab(t.id)}>{t.l}</button>)}</div>
 
           {tab==='sources' && <div key="sources" style={{animation:'fadeIn .4s ease both'}}>
-            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Ranked by Quality</div><h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.3rem)',color:'var(--cream)',marginBottom:'.75rem'}}>The Best Water Sources</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:580}}>The ideal water is living, structured, and mineral-rich. Where you are determines your options.</p></div>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Ranked by Quality</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>The Best Water Sources</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:580}}>The ideal water is living, structured, and mineral-rich. Where you are determines your options.</p></div>
             <div className="src-list">{WATER_SOURCES.map(s=><div key={s.rank} className="src-item"><div className="src-rank">{s.rank}</div><div className="src-info"><div className="src-name">{s.name}</div><p className="src-desc">{s.desc}</p></div><div className={`badge ${s.badge}`}>{s.label}</div></div>)}</div>
             <button className="crosslink" onClick={()=>navigate('principles')}>← Why this matters in Principles</button>
           </div>}
 
           {tab==='salt' && <div key="salt" style={{animation:'fadeIn .4s ease both'}}>
-            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>The Supernutrient</div><h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.3rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Salt — Your Friend</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>Quality salt contains over 60 trace minerals. These recommendations are based on third-party testing.</p></div>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>The Supernutrient</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Salt — Your Friend</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>Quality salt contains over 60 trace minerals. These recommendations are based on third-party testing.</p></div>
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:'1.5rem',marginTop:'2rem'}}>
               {Object.entries(SALT_DATA).map(([r,b])=>(
-                <div key={r} className="card" style={{cursor:'default'}}><div className="label" style={{marginBottom:'1rem'}}>{r.charAt(0).toUpperCase()+r.slice(1)}</div><ul style={{listStyle:'none'}}>{b.map(x=><li key={x} style={{display:'flex',alignItems:'center',gap:'.65rem',padding:'.42rem 0',borderBottom:'1px solid var(--border)',color:'var(--text-dim)',fontSize:'0.55rem'}}><span style={{color:'var(--rebel)',fontSize:'0.35rem'}}>◆</span>{x}</li>)}</ul></div>
+                <div key={r} className="card" style={{cursor:'default'}}><div className="label" style={{marginBottom:'1rem'}}>{r.charAt(0).toUpperCase()+r.slice(1)}</div><ul style={{listStyle:'none'}}>{b.map(x=><li key={x} style={{display:'flex',alignItems:'center',gap:'.65rem',padding:'.42rem 0',borderBottom:'1px solid var(--border)',color:'var(--text-dim)',fontSize:'1.1rem'}}><span style={{color:'var(--rebel)',fontSize:'0.7rem'}}>◆</span>{x}</li>)}</ul></div>
               ))}
             </div>
             <button className="crosslink" onClick={()=>navigate('principles')}>← Why salt matters in Principles</button>
           </div>}
 
           {tab==='brands' && <div key="brands" style={{animation:'fadeIn .4s ease both'}}>
-            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Independent Research</div><h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.3rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Brand Guide</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>All questionable brands listed are legal and generally below official toxicity limits, but have the highest number of independent reports of detectable pollutants.</p></div>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Independent Research</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Brand Guide</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>All questionable brands listed are legal and generally below official toxicity limits, but have the highest number of independent reports of detectable pollutants.</p></div>
             <div className="label" style={{marginBottom:'1rem',color:'var(--foam)'}}>Trusted Brands</div>
             <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Region</th><th>Brands</th></tr></thead><tbody>{TRUSTED_WATER.map(r=><tr key={r.region}><td style={{color:'var(--gold)',fontWeight:600,whiteSpace:'nowrap'}}>{r.region}</td><td>{r.brands}</td></tr>)}</tbody></table></div>
             <div className="label" style={{margin:'2rem 0 1rem',color:'#e08888'}}>Most Questionable Brands</div>
-            <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Region</th><th>Brands</th><th>Issues</th></tr></thead><tbody>{QUESTION_WATER.map(r=><tr key={r.region}><td style={{color:'var(--gold)',fontWeight:600,whiteSpace:'nowrap'}}>{r.region}</td><td>{r.brands}</td><td style={{color:'#e08888',fontSize:'0.425rem'}}>{r.issues}</td></tr>)}</tbody></table></div>
+            <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Region</th><th>Brands</th><th>Issues</th></tr></thead><tbody>{QUESTION_WATER.map(r=><tr key={r.region}><td style={{color:'var(--gold)',fontWeight:600,whiteSpace:'nowrap'}}>{r.region}</td><td>{r.brands}</td><td style={{color:'#e08888',fontSize:'0.85rem'}}>{r.issues}</td></tr>)}</tbody></table></div>
           </div>}
 
           {tab==='filtration' && <div key="filtration" style={{animation:'fadeIn .4s ease both'}}>
-            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>How to Filter</div><h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.3rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Filtration Systems</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>The right filtration depends on your water source, location, and concerns. Always remineralise if using reverse osmosis.</p></div>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'1rem',marginBottom:'3rem'}}>{FILTRATION_TYPES.map(f=><div key={f.name} className="card" style={{cursor:'default',padding:'1.5rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'0.585rem',color:'var(--cream)',marginBottom:'.5rem'}}>{f.name}</div><p style={{fontSize:'0.55rem',color:'var(--text-dim)',lineHeight:1.65}}>{f.desc}</p></div>)}</div>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>How to Filter</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Filtration Systems</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>The right filtration depends on your water source, location, and concerns. Always remineralise if using reverse osmosis.</p></div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'1rem',marginBottom:'3rem'}}>{FILTRATION_TYPES.map(f=><div key={f.name} className="card" style={{cursor:'default',padding:'1.5rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'1.17rem',color:'var(--cream)',marginBottom:'.5rem'}}>{f.name}</div><p style={{fontSize:'1.1rem',color:'var(--text-dim)',lineHeight:1.65}}>{f.desc}</p></div>)}</div>
             <div className="label" style={{marginBottom:'1rem'}}>Top Home Systems</div>
-            <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Product</th><th>Technology</th><th>Best For</th><th>Availability</th><th>Price</th><th>Link</th></tr></thead><tbody>{HOME_FILTERS.map(f=><tr key={f.name}><td style={{color:'var(--cream)',fontWeight:500}}>{f.name}{f.note&&<div style={{fontSize:'0.39rem',color:'var(--text-soft)',fontStyle:'italic',marginTop:'.15rem'}}>{f.note}</div>}</td><td>{f.tech}</td><td>{f.best}</td><td style={{whiteSpace:'nowrap'}}>{f.avail}</td><td style={{whiteSpace:'nowrap'}}><PriceTier price={f.price}/></td><td><a href={f.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a></td></tr>)}</tbody></table></div>
+            <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Product</th><th>Technology</th><th>Best For</th><th>Availability</th><th>Price</th><th>Link</th></tr></thead><tbody>{HOME_FILTERS.map(f=><tr key={f.name}><td style={{color:'var(--cream)',fontWeight:500}}>{f.name}{f.note&&<div style={{fontSize:'0.78rem',color:'var(--text-soft)',fontStyle:'italic',marginTop:'.15rem'}}>{f.note}</div>}</td><td>{f.tech}</td><td>{f.best}</td><td style={{whiteSpace:'nowrap'}}>{f.avail}</td><td style={{whiteSpace:'nowrap'}}><PriceTier price={f.price}/></td><td><a href={f.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a></td></tr>)}</tbody></table></div>
             <div className="label" style={{margin:'2rem 0 1rem'}}>Top Portable Systems</div>
             <div className="tbl-wrap"><table className="dtbl"><thead><tr><th>Product</th><th>Method</th><th>Best For</th><th>Availability</th><th>Price</th><th>Link</th></tr></thead><tbody>{PORTABLE_FILTERS.map(f=><tr key={f.name}><td style={{color:'var(--cream)',fontWeight:500}}>{f.name}</td><td>{f.tech}</td><td>{f.best}</td><td style={{whiteSpace:'nowrap'}}>{f.avail}</td><td style={{whiteSpace:'nowrap'}}><PriceTier price={f.price}/></td><td><a href={f.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a></td></tr>)}</tbody></table></div>
             <PriceLegend/>
@@ -955,14 +955,14 @@ function SwapsPage({ navigate, scrollTarget }) {
           </div>}
 
           {tab==='structuring' && <div key="structuring" style={{animation:'fadeIn .4s ease both'}}>
-            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>The Fourth Phase</div><h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.3rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Structuring Tools</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>Structured water is the form your cells actually use. These products help recreate it at home.</p></div>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>The Fourth Phase</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Structuring Tools</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>Structured water is the form your cells actually use. These products help recreate it at home.</p></div>
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'1.25rem',marginBottom:'2rem'}}>
               {STRUCT_PRODUCTS.map(p=>(
                 <div key={p.name} className="card" style={{cursor:'default'}}>
-                  <div style={{fontFamily:'var(--ff-disp)',fontSize:'0.585rem',color:'var(--cream)',marginBottom:'.5rem'}}>{p.name}</div>
-                  <p style={{fontSize:'0.55rem',color:'var(--text-dim)',lineHeight:1.65,marginBottom:'.75rem'}}>{p.desc}</p>
+                  <div style={{fontFamily:'var(--ff-disp)',fontSize:'1.17rem',color:'var(--cream)',marginBottom:'.5rem'}}>{p.name}</div>
+                  <p style={{fontSize:'1.1rem',color:'var(--text-dim)',lineHeight:1.65,marginBottom:'.75rem'}}>{p.desc}</p>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'.5rem'}}>
-                    <div style={{display:'flex',alignItems:'center',gap:'.75rem'}}><div className="label" style={{fontSize:'0.29rem'}}>{p.avail}</div><PriceTier price={p.price}/></div>
+                    <div style={{display:'flex',alignItems:'center',gap:'.75rem'}}><div className="label" style={{fontSize:'0.58rem'}}>{p.avail}</div><PriceTier price={p.price}/></div>
                     <a href={p.url} target="_blank" rel="noopener noreferrer" style={vs}>Visit →</a>
                   </div>
                 </div>
@@ -974,13 +974,13 @@ function SwapsPage({ navigate, scrollTarget }) {
           </div>}
 
           {tab==='storage' && <div key="storage" style={{animation:'fadeIn .4s ease both'}}>
-            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Preserve What You Have</div><h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.3rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Storage Guide</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>How you store water determines whether it retains its quality.</p></div>
+            <div style={{marginBottom:'2rem'}}><div className="label" style={{marginBottom:'.75rem'}}>Preserve What You Have</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.6rem)',color:'var(--cream)',marginBottom:'.75rem'}}>Water Storage Guide</h2><p style={{color:'var(--text-dim)',fontStyle:'italic',maxWidth:620}}>How you store water determines whether it retains its quality.</p></div>
             <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))',gap:'1.25rem'}}>
               {[{title:'Glass — The Gold Standard',body:'Blue or violet glass is ideal. Miron violet glass creates a protective field and is excellent for long-term storage.',badge:'b-best',bl:'Best'},{title:'Copper Vessels',body:'From Ayurvedic tradition. Imparts antimicrobial benefits and subtle mineralisation. Requires regular cleaning.',badge:'b-good',bl:'Good'},{title:'Stainless Steel',body:'Durable and clean. Good for bulk storage and travel. Use food-grade only.',badge:'b-good',bl:'Good'},{title:'Plastic — Avoid',body:'Even BPA-free plastics leach microplastics and endocrine disruptors over time, especially with heat or sunlight.',badge:'b-avoid',bl:'Avoid'}].map(s=>(
-                <div key={s.title} className="card" style={{cursor:'default'}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'.75rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'0.585rem',color:'var(--cream)'}}>{s.title}</div><div className={`badge ${s.badge}`} style={{marginLeft:'.75rem',flexShrink:0}}>{s.bl}</div></div><p style={{fontSize:'0.55rem',color:'var(--text-dim)',lineHeight:1.65}}>{s.body}</p></div>
+                <div key={s.title} className="card" style={{cursor:'default'}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'.75rem'}}><div style={{fontFamily:'var(--ff-disp)',fontSize:'1.17rem',color:'var(--cream)'}}>{s.title}</div><div className={`badge ${s.badge}`} style={{marginLeft:'.75rem',flexShrink:0}}>{s.bl}</div></div><p style={{fontSize:'1.1rem',color:'var(--text-dim)',lineHeight:1.65}}>{s.body}</p></div>
               ))}
             </div>
-            <div className="card" style={{marginTop:'1.5rem',cursor:'default',background:'rgba(200,169,107,.06)',borderColor:'rgba(200,169,107,.2)'}}><div className="label" style={{marginBottom:'.75rem'}}>Storage Tips</div><p style={{color:'var(--text-dim)',fontSize:'0.55rem',lineHeight:1.75}}>Store between <strong style={{color:'var(--cream)'}}>4–20°C (39–68°F)</strong>. Keep away from direct sunlight and electronics. Add a pinch of unrefined sea salt per litre for long-term storage. Place shungite or sun-charged quartz crystals in your storage container.</p></div>
+            <div className="card" style={{marginTop:'1.5rem',cursor:'default',background:'rgba(200,169,107,.06)',borderColor:'rgba(200,169,107,.2)'}}><div className="label" style={{marginBottom:'.75rem'}}>Storage Tips</div><p style={{color:'var(--text-dim)',fontSize:'1.1rem',lineHeight:1.75}}>Store between <strong style={{color:'var(--cream)'}}>4–20°C (39–68°F)</strong>. Keep away from direct sunlight and electronics. Add a pinch of unrefined sea salt per litre for long-term storage. Place shungite or sun-charged quartz crystals in your storage container.</p></div>
           </div>}
         </div>
       </section>
@@ -996,8 +996,8 @@ function WorkPage({ navigate }) {
       <div className="page-hero page-hero--rebel">
         <div className="container" style={{position:'relative',zIndex:1}}>
           <div className="label label--rebel" style={{marginBottom:'1rem'}}>Consultancy</div>
-          <h1 style={{fontSize:'clamp(1.4rem,3.5vw,3rem)',color:'var(--cream)'}}>Work<br/><em style={{color:'var(--rebel-lt)'}}>With Me</em></h1>
-          <p style={{maxWidth:520,color:'var(--text-dim)',fontSize:'0.585rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Personal and company consultations — a tailored, honest look at your water reality, with a clear path forward.</p>
+          <h1 style={{fontSize:'clamp(2.8rem,7vw,6rem)',color:'var(--cream)'}}>Work<br/><em style={{color:'var(--rebel-lt)'}}>With Me</em></h1>
+          <p style={{maxWidth:520,color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',marginTop:'1.25rem',lineHeight:1.75}}>Personal and company consultations — a tailored, honest look at your water reality, with a clear path forward.</p>
         </div>
       </div>
       <section style={{background:'linear-gradient(180deg,#1a0810 0%,var(--near-black) 100%)'}}>
@@ -1019,7 +1019,7 @@ function WorkPage({ navigate }) {
             </div>
           </div>
           <div className="divider reveal" style={{margin:'4rem 0'}}><div className="div-line"/><div className="div-mark">✦</div><div className="div-line"/></div>
-          <div className="reveal" style={{textAlign:'center',marginBottom:'2.5rem'}}><div className="label" style={{marginBottom:'.75rem'}}>How It Works</div><h2 style={{fontSize:'clamp(0.9rem,1.75vw,1.4rem)',color:'var(--cream)'}}>The process, simply</h2></div>
+          <div className="reveal" style={{textAlign:'center',marginBottom:'2.5rem'}}><div className="label" style={{marginBottom:'.75rem'}}>How It Works</div><h2 style={{fontSize:'clamp(1.8rem,3.5vw,2.8rem)',color:'var(--cream)'}}>The process, simply</h2></div>
           <div className="process-grid reveal d1">
             {[{num:'01',title:'Reach Out',body:'Send an email with a brief note about what you are dealing with. I will reply personally.'},{num:'02',title:'Deep Dive',body:'We go through your water sources, location, habits, health context, and goals in a focused conversation.'},{num:'03',title:'Your Plan',body:'You receive a written, personalised protocol — clear, actionable, and built around your actual life.'}].map(s=>(
               <div key={s.num} className="process-step"><div className="process-step__num">{s.num}</div><h4>{s.title}</h4><p>{s.body}</p></div>
@@ -1043,10 +1043,10 @@ function ContactPage({ navigate }) {
       <div className="contact-wrap">
         <div className="narrow reveal" style={{position:'relative',zIndex:1,textAlign:'center'}}>
           <div className="label label--rebel" style={{marginBottom:'1.25rem'}}>Get in Touch</div>
-          <h1 style={{fontSize:'clamp(1.4rem,3.5vw,2.75rem)',color:'var(--cream)',fontStyle:'italic',lineHeight:1.1,marginBottom:'1.25rem'}}>Let's talk<br/>about your water</h1>
-          <p style={{color:'var(--text-dim)',fontSize:'0.585rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Whether you have a question, want to book a consultation, or simply want to share something water-related that moved you — I'd love to hear from you.</p>
+          <h1 style={{fontSize:'clamp(2.8rem,7vw,5.5rem)',color:'var(--cream)',fontStyle:'italic',lineHeight:1.1,marginBottom:'1.25rem'}}>Let's talk<br/>about your water</h1>
+          <p style={{color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',lineHeight:1.8,marginBottom:'1rem'}}>Whether you have a question, want to book a consultation, or simply want to share something water-related that moved you — I'd love to hear from you.</p>
           <a className="email-link" href="mailto:discernlikearebel@proton.me">discernlikearebel@proton.me</a>
-          <p style={{color:'var(--text-soft)',fontSize:'0.45rem',fontStyle:'italic',marginBottom:'2.5rem'}}>I read every message and reply personally.</p>
+          <p style={{color:'var(--text-soft)',fontSize:'0.9rem',fontStyle:'italic',marginBottom:'2.5rem'}}>I read every message and reply personally.</p>
           <div style={{display:'flex',gap:'1rem',justifyContent:'center',flexWrap:'wrap'}}>
             <a href="mailto:discernlikearebel@proton.me?subject=Consultation" className="btn btn-rebel">Book a Consultation</a>
             <button className="btn btn-ghost" onClick={()=>navigate('principles')}>Explore the Guide</button>
@@ -1057,7 +1057,7 @@ function ContactPage({ navigate }) {
           </div>
           <div style={{marginTop:'2rem',padding:'2rem',border:'1px solid rgba(150,45,73,.25)',borderRadius:4,background:'rgba(150,45,73,.05)'}}>
             <div className="label label--rebel" style={{marginBottom:'.75rem',textAlign:'left'}}>Discern Like A Rebel</div>
-            <p style={{color:'var(--text-dim)',fontSize:'0.585rem',fontStyle:'italic',lineHeight:1.75,textAlign:'left'}}>An invitation to choose knowledge over convenience, presence over habit, and the intelligence of nature over the noise of marketing. One glass of living water at a time.</p>
+            <p style={{color:'var(--text-dim)',fontSize:'1.17rem',fontStyle:'italic',lineHeight:1.75,textAlign:'left'}}>An invitation to choose knowledge over convenience, presence over habit, and the intelligence of nature over the noise of marketing. One glass of living water at a time.</p>
           </div>
         </div>
       </div>
