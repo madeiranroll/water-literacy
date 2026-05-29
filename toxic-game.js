@@ -29,6 +29,7 @@
   let parts     = [];
   let triggered = false;
   let gameEl, dimEl, taglineEl, cvs, ctx, raf, fallTimer, heroObs;
+  let loopRunning = false;
   let cursorEl, fallContainer, docGround, heroEl;
 
   /* ── BOOT ───────────────────────────────────────────────── */
@@ -190,7 +191,7 @@
     });
 
     document.body.appendChild(gameEl);
-    raf       = requestAnimationFrame(loop);
+    ensureLoop();
     fallTimer = setTimeout(() => { if (!triggered) triggerFall(); }, FALL_MS);
     watchHero();
   }
@@ -265,7 +266,15 @@
     tickParts();
     if      (state === 'floating') tickFloat();
     else if (state === 'falling')  tickFall();
-    raf = requestAnimationFrame(loop);
+    /* keep running only while something is actually animating */
+    if (state === 'floating' || state === 'falling' || parts.length > 0) {
+      raf = requestAnimationFrame(loop);
+    } else {
+      loopRunning = false;                 /* idle — stop burning frames */
+    }
+  }
+  function ensureLoop() {
+    if (!loopRunning) { loopRunning = true; raf = requestAnimationFrame(loop); }
   }
 
   /* ── FLOATING PHYSICS ───────────────────────────────────── */
@@ -392,6 +401,7 @@
 
   /* ── SHOOT ──────────────────────────────────────────────── */
   function shoot(o, cx, cy) {
+    ensureLoop();
     flashScreen();
     muzzleFlash(cx, cy);
     if (state === 'floating') screenShake();
