@@ -367,7 +367,7 @@ function PriceTier({
     title: tip,
     style: {
       fontFamily: 'var(--ff-ui)',
-      fontSize: '0.78rem',
+      fontSize: '0.741rem',
       fontWeight: 700,
       color: 'var(--rose-gold)',
       letterSpacing: '.04em',
@@ -379,7 +379,7 @@ function PriceTier({
     title: tip,
     style: {
       fontFamily: 'var(--ff-ui)',
-      fontSize: '0.78rem',
+      fontSize: '0.741rem',
       fontWeight: 700,
       letterSpacing: '.04em',
       cursor: 'help'
@@ -410,7 +410,7 @@ function PriceLegend() {
   }, React.createElement("span", {
     style: {
       fontFamily: 'var(--ff-ui)',
-      fontSize: '0.58rem',
+      fontSize: '0.551rem',
       fontWeight: 600,
       letterSpacing: '.15em',
       textTransform: 'uppercase',
@@ -428,7 +428,7 @@ function PriceLegend() {
   }), React.createElement("span", {
     style: {
       fontFamily: 'var(--ff-ui)',
-      fontSize: '0.6rem',
+      fontSize: '0.57rem',
       color: 'var(--text-soft)'
     }
   }, l))));
@@ -515,7 +515,7 @@ function SocialLinks({
       alignItems: 'center',
       gap: '.45rem',
       fontFamily: 'var(--ff-ui)',
-      fontSize: '0.6rem',
+      fontSize: '0.57rem',
       fontWeight: 600,
       letterSpacing: '.1em',
       textTransform: 'uppercase',
@@ -563,7 +563,7 @@ function SocialLinks({
   }, s.icon), React.createElement("div", null, React.createElement("div", {
     style: {
       fontFamily: 'var(--ff-ui)',
-      fontSize: '0.56rem',
+      fontSize: '0.532rem',
       fontWeight: 700,
       letterSpacing: '.16em',
       textTransform: 'uppercase',
@@ -573,7 +573,7 @@ function SocialLinks({
   }, s.name), React.createElement("div", {
     style: {
       fontFamily: 'var(--ff-body)',
-      fontSize: '1.1rem',
+      fontSize: '1.045rem',
       color: 'var(--text-dim)'
     }
   }, s.handle)))));
@@ -903,14 +903,14 @@ function HomePage({
     }
   }, "THE UNRULY WAY"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.8rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.66rem)',
       color: 'var(--cream)',
       marginBottom: '.75rem'
     }
   }, "This isn't a method."), React.createElement("p", {
     style: {
       fontFamily: 'var(--ff-body)',
-      fontSize: 'clamp(1rem,2vw,1.2rem)',
+      fontSize: 'clamp(0.95rem,1.9vw,1.14rem)',
       fontStyle: 'italic',
       color: 'var(--text-dim)',
       lineHeight: 1.65
@@ -998,7 +998,7 @@ function HomePage({
     }
   }, "Topics"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(2rem,4vw,3.2rem)',
+      fontSize: 'clamp(1.9rem,3.8vw,3.04rem)',
       color: 'var(--cream)',
       marginBottom: '.5rem'
     }
@@ -1006,7 +1006,7 @@ function HomePage({
     style: {
       color: 'var(--text-dim)',
       fontStyle: 'italic',
-      fontSize: '1.17rem'
+      fontSize: '1.1115rem'
     }
   }, "Each topic is independently researched, tested, and swapped. Water is live now.")), React.createElement("div", {
     className: "topic-grid"
@@ -1073,14 +1073,14 @@ function HomePage({
     }
   }, "The Person Behind It"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(2rem,4vw,3rem)',
+      fontSize: 'clamp(1.9rem,3.8vw,2.85rem)',
       color: 'var(--cream)',
       marginBottom: '1.25rem'
     }
   }, "Natalie"), React.createElement("p", {
     style: {
       color: 'var(--text-dim)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       fontStyle: 'italic',
       lineHeight: 1.8,
       marginBottom: '1rem'
@@ -1090,7 +1090,7 @@ function HomePage({
       color: 'var(--text-dim)',
       lineHeight: 1.85,
       marginBottom: '2rem',
-      fontSize: '1.17rem'
+      fontSize: '1.1115rem'
     }
   }, "I studied environmental sciences at the University of Vienna, spent years in the lab, then had health challenges that sent me on a different kind of research journey. Today I combine laboratory precision with lived experience \u2014 and a healthy disrespect for anything that doesn't hold up to scrutiny."), React.createElement("div", {
     style: {
@@ -1127,7 +1127,7 @@ function AboutPage({
     }
   }, "About"), React.createElement("h1", {
     style: {
-      fontSize: 'clamp(3rem,8vw,6.5rem)',
+      fontSize: 'clamp(2.85rem,7.6vw,6.175rem)',
       color: 'var(--cream)'
     }
   }, React.createElement("em", {
@@ -1160,7 +1160,7 @@ function AboutPage({
     }
   }, "My Journey"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.8rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.66rem)',
       color: 'var(--cream)',
       marginBottom: '1.5rem'
     }
@@ -1168,7 +1168,7 @@ function AboutPage({
     className: "reveal d2"
   }, React.createElement("p", {
     style: {
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       fontStyle: 'italic',
       color: 'var(--mist)',
       lineHeight: 1.8,
@@ -1209,7 +1209,7 @@ function AboutPage({
     }
   }, "Discern Like A Rebel"), React.createElement("h3", {
     style: {
-      fontSize: 'clamp(1.5rem,3vw,2.2rem)',
+      fontSize: 'clamp(1.425rem,2.85vw,2.09rem)',
       color: 'var(--cream)',
       marginBottom: '1rem'
     }
@@ -1219,7 +1219,7 @@ function AboutPage({
       lineHeight: 1.85,
       marginBottom: '1.5rem',
       fontStyle: 'italic',
-      fontSize: '1.17rem'
+      fontSize: '1.1115rem'
     }
   }, "Discerning like a rebel means choosing to question the mainstream, look past the surface, and make decisions from a place of genuine knowledge and deep self-trust. If it doesn't pass the test \u2014 it's out. No compromise."), React.createElement("div", {
     className: "values-grid"
@@ -1344,7 +1344,7 @@ function DehydrationQuiz({
     }
   }, "Cellular Hydration Check"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(2rem,4vw,3rem)',
+      fontSize: 'clamp(1.9rem,3.8vw,2.85rem)',
       color: 'var(--cream)',
       fontStyle: 'italic'
     }
@@ -1367,7 +1367,7 @@ function DehydrationQuiz({
   })))), React.createElement("div", {
     style: {
       fontFamily: 'var(--ff-ui)',
-      fontSize: '0.62rem',
+      fontSize: '0.589rem',
       color: 'var(--text-soft)',
       marginBottom: '.75rem',
       letterSpacing: '.1em'
@@ -1390,7 +1390,7 @@ function DehydrationQuiz({
     style: {
       marginTop: '1.25rem',
       fontFamily: 'var(--ff-ui)',
-      fontSize: '0.65rem',
+      fontSize: '0.6175rem',
       letterSpacing: '.1em',
       color: 'var(--text-soft)',
       background: 'none',
@@ -1441,7 +1441,7 @@ function PrinciplesPage({
     }
   }, "Living Water")), React.createElement("h1", {
     style: {
-      fontSize: 'clamp(2.8rem,7vw,6rem)',
+      fontSize: 'clamp(2.66rem,6.65vw,5.7rem)',
       color: 'var(--cream)',
       marginTop: '1rem'
     }
@@ -1453,7 +1453,7 @@ function PrinciplesPage({
     style: {
       maxWidth: 540,
       color: 'var(--text-dim)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       fontStyle: 'italic',
       marginTop: '1.25rem',
       lineHeight: 1.75
@@ -1525,7 +1525,7 @@ function SwapsPage({
   }];
   const vs = {
     fontFamily: 'var(--ff-ui)',
-    fontSize: '0.62rem',
+    fontSize: '0.589rem',
     fontWeight: 600,
     letterSpacing: '.1em',
     textTransform: 'uppercase',
@@ -1558,7 +1558,7 @@ function SwapsPage({
     }
   }, "Living Water")), React.createElement("h1", {
     style: {
-      fontSize: 'clamp(2.8rem,7vw,6rem)',
+      fontSize: 'clamp(2.66rem,6.65vw,5.7rem)',
       color: 'var(--cream)',
       marginTop: '1rem'
     }
@@ -1570,7 +1570,7 @@ function SwapsPage({
     style: {
       maxWidth: 560,
       color: 'var(--text-dim)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       fontStyle: 'italic',
       marginTop: '1.25rem',
       lineHeight: 1.75
@@ -1603,7 +1603,7 @@ function SwapsPage({
     }
   }, "Ranked by Quality"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.6rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.47rem)',
       color: 'var(--cream)',
       marginBottom: '.75rem'
     }
@@ -1647,7 +1647,7 @@ function SwapsPage({
     }
   }, "The Supernutrient"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.6rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.47rem)',
       color: 'var(--cream)',
       marginBottom: '.75rem'
     }
@@ -1688,12 +1688,12 @@ function SwapsPage({
       padding: '.42rem 0',
       borderBottom: '1px solid var(--border)',
       color: 'var(--text-dim)',
-      fontSize: '1.1rem'
+      fontSize: '1.045rem'
     }
   }, React.createElement("span", {
     style: {
       color: 'var(--rebel)',
-      fontSize: '0.7rem'
+      fontSize: '0.665rem'
     }
   }, "\u25C6"), x)))))), React.createElement("button", {
     className: "crosslink",
@@ -1714,7 +1714,7 @@ function SwapsPage({
     }
   }, "Independent Research"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.6rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.47rem)',
       color: 'var(--cream)',
       marginBottom: '.75rem'
     }
@@ -1763,7 +1763,7 @@ function SwapsPage({
   }, r.region), React.createElement("td", null, r.brands), React.createElement("td", {
     style: {
       color: '#e08888',
-      fontSize: '0.85rem'
+      fontSize: '0.8075rem'
     }
   }, r.issues))))))), tab === 'filtration' && React.createElement("div", {
     key: "filtration",
@@ -1781,7 +1781,7 @@ function SwapsPage({
     }
   }, "How to Filter"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.6rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.47rem)',
       color: 'var(--cream)',
       marginBottom: '.75rem'
     }
@@ -1808,13 +1808,13 @@ function SwapsPage({
   }, React.createElement("div", {
     style: {
       fontFamily: 'var(--ff-disp)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       color: 'var(--cream)',
       marginBottom: '.5rem'
     }
   }, f.name), React.createElement("p", {
     style: {
-      fontSize: '1.1rem',
+      fontSize: '1.045rem',
       color: 'var(--text-dim)',
       lineHeight: 1.65
     }
@@ -1836,7 +1836,7 @@ function SwapsPage({
     }
   }, f.name, f.note && React.createElement("div", {
     style: {
-      fontSize: '0.78rem',
+      fontSize: '0.741rem',
       color: 'var(--text-soft)',
       fontStyle: 'italic',
       marginTop: '.15rem'
@@ -1909,7 +1909,7 @@ function SwapsPage({
     }
   }, "The Fourth Phase"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.6rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.47rem)',
       color: 'var(--cream)',
       marginBottom: '.75rem'
     }
@@ -1935,13 +1935,13 @@ function SwapsPage({
   }, React.createElement("div", {
     style: {
       fontFamily: 'var(--ff-disp)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       color: 'var(--cream)',
       marginBottom: '.5rem'
     }
   }, p.name), React.createElement("p", {
     style: {
-      fontSize: '1.1rem',
+      fontSize: '1.045rem',
       color: 'var(--text-dim)',
       lineHeight: 1.65,
       marginBottom: '.75rem'
@@ -1963,7 +1963,7 @@ function SwapsPage({
   }, React.createElement("div", {
     className: "label",
     style: {
-      fontSize: '0.58rem'
+      fontSize: '0.551rem'
     }
   }, p.avail), React.createElement(PriceTier, {
     price: p.price
@@ -1996,7 +1996,7 @@ function SwapsPage({
     }
   }, "Preserve What You Have"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.6rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.47rem)',
       color: 'var(--cream)',
       marginBottom: '.75rem'
     }
@@ -2048,7 +2048,7 @@ function SwapsPage({
   }, React.createElement("div", {
     style: {
       fontFamily: 'var(--ff-disp)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       color: 'var(--cream)'
     }
   }, s.title), React.createElement("div", {
@@ -2059,7 +2059,7 @@ function SwapsPage({
     }
   }, s.bl)), React.createElement("p", {
     style: {
-      fontSize: '1.1rem',
+      fontSize: '1.045rem',
       color: 'var(--text-dim)',
       lineHeight: 1.65
     }
@@ -2079,7 +2079,7 @@ function SwapsPage({
   }, "Storage Tips"), React.createElement("p", {
     style: {
       color: 'var(--text-dim)',
-      fontSize: '1.1rem',
+      fontSize: '1.045rem',
       lineHeight: 1.75
     }
   }, "Store between ", React.createElement("strong", {
@@ -2109,7 +2109,7 @@ function WorkPage({
     }
   }, "Consultancy"), React.createElement("h1", {
     style: {
-      fontSize: 'clamp(2.8rem,7vw,6rem)',
+      fontSize: 'clamp(2.66rem,6.65vw,5.7rem)',
       color: 'var(--cream)'
     }
   }, "Work", React.createElement("br", null), React.createElement("em", {
@@ -2120,7 +2120,7 @@ function WorkPage({
     style: {
       maxWidth: 520,
       color: 'var(--text-dim)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       fontStyle: 'italic',
       marginTop: '1.25rem',
       lineHeight: 1.75
@@ -2183,7 +2183,7 @@ function WorkPage({
     }
   }, "How It Works"), React.createElement("h2", {
     style: {
-      fontSize: 'clamp(1.8rem,3.5vw,2.8rem)',
+      fontSize: 'clamp(1.71rem,3.325vw,2.66rem)',
       color: 'var(--cream)'
     }
   }, "The process, simply")), React.createElement("div", {
@@ -2251,7 +2251,7 @@ function ContactPage({
     }
   }, "Get in Touch"), React.createElement("h1", {
     style: {
-      fontSize: 'clamp(2.8rem,7vw,5.5rem)',
+      fontSize: 'clamp(2.66rem,6.65vw,5.225rem)',
       color: 'var(--cream)',
       fontStyle: 'italic',
       lineHeight: 1.1,
@@ -2260,7 +2260,7 @@ function ContactPage({
   }, "Let's talk", React.createElement("br", null), "about your water"), React.createElement("p", {
     style: {
       color: 'var(--text-dim)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       fontStyle: 'italic',
       lineHeight: 1.8,
       marginBottom: '1rem'
@@ -2271,7 +2271,7 @@ function ContactPage({
   }, "discernlikearebel@proton.me"), React.createElement("p", {
     style: {
       color: 'var(--text-soft)',
-      fontSize: '0.9rem',
+      fontSize: '0.855rem',
       fontStyle: 'italic',
       marginBottom: '2.5rem'
     }
@@ -2317,7 +2317,7 @@ function ContactPage({
   }, "Discern Like A Rebel"), React.createElement("p", {
     style: {
       color: 'var(--text-dim)',
-      fontSize: '1.17rem',
+      fontSize: '1.1115rem',
       fontStyle: 'italic',
       lineHeight: 1.75,
       textAlign: 'left'
