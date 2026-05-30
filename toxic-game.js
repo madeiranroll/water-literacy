@@ -502,12 +502,13 @@
       const d  = mk('div');
       d.textContent = ch;
       S(d, {
-        position:'fixed', left:x+'px', top:y+'px',
+        position:'fixed', left:'0', top:'0',
         fontFamily:"'Raleway','Arial Black',sans-serif",
         fontSize:'15px', fontWeight:'800',
         color:'#EDE0E6', textShadow:'0 0 8px rgba(212,104,130,0.9)',
         pointerEvents:'none', zIndex:'608',
-        transform:'translate(-50%,-50%)',
+        transform:`translate(${x}px,${y}px) translate(-50%,-50%)`,
+        willChange:'transform,opacity',
         letterSpacing:'0.12em', lineHeight:'1',
       });
       document.body.appendChild(d);
@@ -516,10 +517,9 @@
       const step = () => {
         lf -= 0.026; if (lf <= 0) { d.remove(); return; }
         vy += 0.32; px += vx; py += vy;
-        d.style.left    = px+'px';
-        d.style.top     = py+'px';
+        const sc = 1 + (1-lf)*0.73;
+        d.style.transform = `translate(${px}px,${py}px) translate(-50%,-50%) scale(${sc})`;
         d.style.opacity = Math.max(0,lf)+'';
-        d.style.fontSize = (15+(1-lf)*11)+'px';
         requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
@@ -542,18 +542,19 @@
         ctx.arc(p.x, p.y, p.r*(1.45-p.life*0.45), 0, Math.PI*2);
         ctx.fill();
       } else if (p.type === 'spark') {
+        ctx.globalCompositeOperation = 'lighter';
         ctx.strokeStyle = p.col; ctx.lineWidth = 1.6;
-        ctx.shadowColor = p.col; ctx.shadowBlur = 9;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(p.x-p.vx*0.52, p.y-p.vy*0.52);
         ctx.stroke();
       } else if (p.type === 'rect') {
         ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-        ctx.fillStyle = p.col; ctx.shadowColor = p.col; ctx.shadowBlur = 5;
+        ctx.fillStyle = p.col;
         ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
       } else {
-        ctx.fillStyle = p.col; ctx.shadowColor = p.col; ctx.shadowBlur = 7;
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.fillStyle = p.col;
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
       }
       ctx.restore();
