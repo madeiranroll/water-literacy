@@ -77,6 +77,7 @@
       zIndex       : '1000',
       pointerEvents: 'none',
       transform    : 'translate(-50%,-50%)',
+      willChange   : 'transform',
       display      : 'none',
       filter       : 'drop-shadow(0 0 7px #962D49) drop-shadow(0 0 14px rgba(150,45,73,0.4))',
     });
@@ -163,13 +164,13 @@
       const hitZone = mk('div');
       S(hitZone, {
         position     : 'absolute',
-        left         : bx+'px', top: by+'px',
-        transform    : 'translate(-50%,-50%)',
+        left         : '0', top: '0',
+        transform    : `translate(${bx}px,${by}px) translate(-50%,-50%)`,
         padding      : '28px',
         cursor       : 'none',
         pointerEvents: 'auto',
         zIndex       : '501',
-        willChange   : 'left,top,transform',
+        willChange   : 'transform',
       });
       hitZone.appendChild(lbl);
 
@@ -240,8 +241,7 @@
   function onMove(e) {
     if (!cursorEl || state === 'idle' || state === 'resting') return;
     cursorEl.style.display = 'block';
-    cursorEl.style.left    = e.clientX + 'px';
-    cursorEl.style.top     = e.clientY + 'px';
+    cursorEl.style.transform = `translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%)`;
   }
 
   /* ── HERO OBSERVER ──────────────────────────────────────── */
@@ -296,9 +296,7 @@
       o.x = o.bx + Math.sin(o.ph)        * o.ax;
       o.y = o.by + Math.cos(o.ph * 0.71) * o.ay;
       const rot = Math.sin(o.ph * 1.3) * 7;
-      o.el.style.left      = o.x + 'px';
-      o.el.style.top       = o.y + 'px';
-      o.el.style.transform = `translate(-50%,-50%) rotate(${rot}deg)`;
+      o.el.style.transform = `translate(${o.x}px,${o.y}px) translate(-50%,-50%) rotate(${rot}deg)`;
     });
   }
 
@@ -317,11 +315,10 @@
         if (Math.abs(o.vfy) < 1.4) {
           o.vfy = 0; o.vfx = 0; o.rest = true;
           o.el.style.transform =
-            `translate(-50%,-50%) rotate(${(Math.random()-.5)*10}deg)`;
+            `translate(${o.x}px,${o.y}px) translate(-50%,-50%) rotate(${(Math.random()-.5)*10}deg)`;
         }
       }
-      o.el.style.left = o.x + 'px';
-      o.el.style.top  = o.y + 'px';
+      o.el.style.transform = `translate(${o.x}px,${o.y}px) translate(-50%,-50%)`;
       if (!o.rest) anyMoving = true;
     });
     if (!anyMoving) { state = 'resting'; onResting(); }
@@ -364,8 +361,9 @@
       o.vfy  = 1.2 + Math.random() * 2.8;
       o.vfx  = (Math.random() - 0.5) * 7;
       fallContainer.appendChild(o.el);
-      o.el.style.left   = o.x + 'px';
-      o.el.style.top    = o.y + 'px';
+      o.el.style.left   = '0';
+      o.el.style.top    = '0';
+      o.el.style.transform = `translate(${o.x}px,${o.y}px) translate(-50%,-50%)`;
       o.el.style.zIndex = '498';
     });
 
@@ -392,8 +390,7 @@
       });
       o.el.addEventListener('mousemove', e => {
         if (cursorEl) {
-          cursorEl.style.left = e.clientX + 'px';
-          cursorEl.style.top  = e.clientY + 'px';
+          cursorEl.style.transform = `translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%)`;
         }
       });
     });
