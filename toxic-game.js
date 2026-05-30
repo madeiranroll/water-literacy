@@ -74,6 +74,7 @@
     cursorEl.id = 'toxic-cursor';
     S(cursorEl, {
       position     : 'fixed',
+      left         : '0', top: '0',
       zIndex       : '1000',
       pointerEvents: 'none',
       transform    : 'translate(-50%,-50%)',
