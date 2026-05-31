@@ -621,7 +621,10 @@ function Nav({
     className: "nav__logo-title"
   }, "Living Water")), React.createElement("ul", {
     className: "nav__links"
-  }, React.createElement("li", {
+  }, React.createElement("li", null, React.createElement("button", {
+    className: `nav__link ${page === 'home' ? 'on' : ''}`,
+    onClick: () => navigate('home')
+  }, "Home")), React.createElement("li", {
     ref: ref,
     className: "dropdown"
   }, React.createElement("button", {
@@ -710,402 +713,640 @@ function Ticker() {
     className: "ticker-sep"
   }, "\xD7")))));
 }
+/* ===== DLAR redesigned HomePage + Footer + helpers (compiled from parts.jsx) ===== */
+/* ============================================================
+   DLAR HOMEPAGE REDESIGN — components (JSX source, compiled to app.js)
+   "Initiated": mystical, candlelit, sacred. Intelligent. Rebellious. Refined.
+   ============================================================ */
+
+/* Flower-of-life seal — the recurring brand mark. Inherits currentColor so
+   it can be tinted per topic. */
+function FlowerSeal({
+  size = 44,
+  className = "",
+  stroke = 1.4
+}) {
+  const circles = [[50, 50], [65, 50], [57.5, 63], [42.5, 63], [35, 50], [42.5, 37], [57.5, 37], [80, 50], [65, 76], [35, 76], [20, 50], [35, 24], [65, 24], [72.5, 63], [50, 76], [27.5, 63], [27.5, 37], [50, 24], [72.5, 37]];
+  return /*#__PURE__*/React.createElement("svg", {
+    className: className,
+    width: size,
+    height: size,
+    viewBox: "0 0 100 100",
+    fill: "none",
+    style: {
+      display: "block"
+    },
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "50",
+    cy: "50",
+    r: "46",
+    stroke: "currentColor",
+    strokeWidth: stroke,
+    opacity: "0.55"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "50",
+    cy: "50",
+    r: "40",
+    stroke: "currentColor",
+    strokeWidth: stroke,
+    opacity: "0.35"
+  }), circles.map((c, i) => /*#__PURE__*/React.createElement("circle", {
+    key: i,
+    cx: c[0],
+    cy: c[1],
+    r: "15",
+    stroke: "currentColor",
+    strokeWidth: stroke,
+    opacity: "0.85"
+  })));
+}
+
+/* MailerLite custom Join-the-list field (no default embed). */
+function JoinForm() {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState("idle"); // idle | sending | done | error
+  const ENDPOINT = "https://assets.mailerlite.com/jsonp/2392057/forms/188967863350986178/subscribe";
+  function submit(e) {
+    e.preventDefault();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setState("error");
+      return;
+    }
+    setState("sending");
+    try {
+      const body = "fields[email]=" + encodeURIComponent(email) + "&ml-submit=1&anticsrf=true";
+      fetch(ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: body
+      }).catch(function () {});
+    } catch (err) {}
+    // no-cors → opaque response; confirm optimistically (double opt-in finishes via email)
+    setTimeout(function () {
+      setState("done");
+    }, 600);
+  }
+  if (state === "done") {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "dlar-join"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "dlar-join__ok"
+    }, "You're on the list. Check your inbox to confirm."));
+  }
+  return /*#__PURE__*/React.createElement("form", {
+    className: "dlar-join",
+    onSubmit: submit,
+    noValidate: true
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "dlar-join__label",
+    htmlFor: "dlar-join-email"
+  }, "Join the list"), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-join__row"
+  }, /*#__PURE__*/React.createElement("input", {
+    id: "dlar-join-email",
+    className: "dlar-join__input",
+    type: "email",
+    name: "fields[email]",
+    required: true,
+    placeholder: "Your email",
+    value: email,
+    onChange: function (e) {
+      setEmail(e.target.value);
+      if (state === "error") setState("idle");
+    },
+    "aria-label": "Email address"
+  }), /*#__PURE__*/React.createElement("button", {
+    className: "dlar-join__btn",
+    type: "submit"
+  }, state === "sending" ? "Joining…" : "Join the list")), state === "error" ? /*#__PURE__*/React.createElement("p", {
+    className: "dlar-join__err"
+  }, "Please enter a valid email address.") : null);
+}
+
+/* The eight principles — content preserved from the live site. */
+const DLAR_UNRULY = [{
+  v: "Food is medicine.",
+  d: "I eat fermented everything. Grass-fed protein. Weeds from the meadow. I know the farmers by name. My wallet votes like a wrecking ball."
+}, {
+  v: "Nature is the first pharmacy.",
+  d: "Sunlight. Grounding. Living water. Circadian and seasonal rhythms — not as a trend, but as a rebellion against the fake-lit, fake-fed world."
+}, {
+  v: "One ingredient is enough.",
+  d: "Seed oils? Trans fats? Refined sugar, Frankenfoods, plastics, petrochemicals? Zero tolerance. One swap at a time. No rush. No mercy."
+}, {
+  v: "Soil health is human health.",
+  d: "No healthy food without healthy soil. Regenerative agriculture isn't a buzzword. It's my line in the sand."
+}, {
+  v: "I listen to my body without shame.",
+  d: "Yes, I'm that annoyingly picky friend. I bring my own salt to restaurants and raw milk to cafés. I used to apologize. I don't anymore."
+}, {
+  v: "I detox gently. Then I go deeper.",
+  d: "Bone broths, bitter herbs, then concentrated extracts. Soft first. Then fierce."
+}, {
+  v: "Conscious resilience.",
+  d: "Stress and fear are toxins too. If I fail today, I still pat myself on the back. I'm not afraid of what I know. I'm armed with it."
+}, {
+  v: "The body is infinite possibility.",
+  d: "Trampolines. Resin chewing. Aluminum foil at night. Chakras. Even the really woo stuff. Nothing is too much when you love your body like a rebel loves her cause."
+}];
+const DLAR_TOPICS = [{
+  id: "water",
+  name: "Living Water",
+  badge: "Live now",
+  live: true,
+  hue: "#B83858",
+  glow: "rgba(150,45,73,.22)",
+  tags: ["Filtration", "Structuring", "Sources"],
+  sub: "Cellular hydration, structuring, the best sources and salts — backed by science and lived experience."
+}, {
+  id: "supps",
+  name: "Supplements",
+  badge: "Coming soon",
+  hue: "#7C8EBF",
+  glow: "rgba(124,142,191,.16)",
+  tags: ["Bioavailability", "Protocols", "What to bin"],
+  sub: "What actually works — and what to throw out."
+}, {
+  id: "home",
+  name: "Home & Air",
+  badge: "Coming soon",
+  hue: "#D9B8D7",
+  glow: "rgba(217,184,215,.14)",
+  tags: ["Air", "EMF", "Cleaning"],
+  sub: "Air, EMF, cleaning products, and the space you live in."
+}, {
+  id: "cloth",
+  name: "Clothing",
+  badge: "Coming soon",
+  hue: "#F2D3DB",
+  glow: "rgba(242,211,219,.14)",
+  tags: ["Fabrics", "Dyes", "Next-to-skin"],
+  sub: "Fabrics, dyes, and what you wear against your skin."
+}];
+const DLAR_HOWITWORKS = [{
+  n: "I.",
+  t: "I read the room",
+  d: "Your home, your water, your air, the environment you reside in. I read them like a map to see what hides in plain sight."
+}, {
+  n: "II.",
+  t: "We find what's eroding you",
+  d: "A forensic, tender engagement. We surface what's quietly wearing down the people and places you love — no products you don't need."
+}, {
+  n: "III.",
+  t: "I hand you the way out",
+  d: "What it asks of you is change, and a great deal of it. The choices and the actions are yours. The road, we share."
+}];
 function HomePage({
   navigate
 }) {
   useReveal();
+
+  // Enable JS-driven reveals + scroll-lit principles after mount (SSR-safe).
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const section = document.querySelector('.method-section');
-      if (!section) return;
-      const obs = new IntersectionObserver(entries => {
+    const root = document.querySelector(".dlar");
+    if (!root) return;
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce) root.classList.add("js");
+
+    // fail-safe reveal observer (independent of legacy .reveal)
+    const rise = Array.prototype.slice.call(root.querySelectorAll(".dlar-rise"));
+    let ro;
+    if (!reduce && "IntersectionObserver" in window) {
+      ro = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) {
-            document.querySelectorAll('.unruly-hole').forEach(h => h.classList.add('fired'));
-            obs.disconnect();
+            e.target.classList.add("vis");
+            ro.unobserve(e.target);
           }
         });
       }, {
-        threshold: 0.15
+        threshold: 0.12
       });
-      obs.observe(section);
-      return () => obs.disconnect();
-    }, 150);
-    return () => clearTimeout(timer);
+      rise.forEach(el => ro.observe(el));
+    } else {
+      rise.forEach(el => el.classList.add("vis"));
+    }
+
+    // scroll-lit principles (the Smiling Wolf / Emely-Wensky move)
+    const list = root.querySelector(".dlar-unruly__list");
+    let lo;
+    if (list) {
+      list.classList.add("js-ready");
+      const items = Array.prototype.slice.call(list.querySelectorAll(".dlar-line-item"));
+      if (!reduce && "IntersectionObserver" in window) {
+        lo = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            e.target.classList.toggle("lit", e.isIntersecting);
+          });
+        }, {
+          threshold: 0.6,
+          rootMargin: "-18% 0px -18% 0px"
+        });
+        items.forEach(el => lo.observe(el));
+      } else {
+        items.forEach(el => el.classList.add("lit"));
+      }
+    }
+    return () => {
+      if (ro) ro.disconnect();
+      if (lo) lo.disconnect();
+    };
   }, []);
-  return React.createElement("div", {
-    className: "page-in"
-  }, React.createElement("section", {
-    className: "brand-hero"
-  }, React.createElement("div", {
-    className: "brand-hero__bg"
-  }), React.createElement("div", {
-    className: "container",
+  const marqItems = ["Water", "Supplements", "Home & Environment", "Clothing", "Food & Nutrition", "Personal Care", "Sleep", "Movement"];
+  const marqAll = marqItems.concat(marqItems);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "dlar page-in"
+  }, /*#__PURE__*/React.createElement("section", {
+    className: "brand-hero dlar-hero"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-hero__bg"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-hero__rose",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "assets/rosewindow-cut.png",
+    alt: "",
+    loading: "eager"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-hero__diana",
+    id: "diana-hero-anim",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "assets/diana-cut.png",
+    alt: "Diana, the huntress \u2014 an engraving"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-hero__inner"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-hero__copy"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-eyebrow dlar-eyebrow--redbud"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " Discern Like A Rebel"), /*#__PURE__*/React.createElement("h1", {
+    className: "dlar-hero__title"
+  }, /*#__PURE__*/React.createElement("span", null, "DISCERN"), /*#__PURE__*/React.createElement("span", {
+    className: "l-like"
+  }, "like a"), /*#__PURE__*/React.createElement("span", {
+    className: "l-rebel"
+  }, "REBEL")), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-hero__tag"
+  }, "Discernment is when you don't have to reach the end of a lesson to learn it. Ruthlessly curated education and swaps \u2014 across water, supplements, home, and beyond."), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-hero__cta"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "dlar-pill dlar-pill--solid",
+    onClick: () => navigate("work")
+  }, "Apply for a place ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-arrow"
+  }, "\u2192")), /*#__PURE__*/React.createElement("button", {
+    className: "dlar-pill dlar-pill--ghost",
+    onClick: () => navigate("swaps")
+  }, "Explore the Swaps ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-arrow"
+  }, "\u2192"))), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-hero__cred"
+  }, /*#__PURE__*/React.createElement("span", null, "Environmental scientist"), /*#__PURE__*/React.createElement("span", null, "Tested on herself first"), /*#__PURE__*/React.createElement("span", null, "Vienna"))), /*#__PURE__*/React.createElement("ul", {
+    className: "dlar-hero__bullets",
     style: {
-      position: 'relative',
-      zIndex: 1
+      alignSelf: "center",
+      justifySelf: "end",
+      textAlign: "right"
     }
-  }, React.createElement("span", {
-    className: "label label--rebel a1",
+  }, /*#__PURE__*/React.createElement("li", {
+    className: "dlar-hero__bullet"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " Question everything"), /*#__PURE__*/React.createElement("li", {
+    className: "dlar-hero__bullet"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " Choose better"), /*#__PURE__*/React.createElement("li", {
+    className: "dlar-hero__bullet"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " Live cleaner"))), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-scrollcue"
+  }, /*#__PURE__*/React.createElement("span", null, "Scroll to discover"), /*#__PURE__*/React.createElement("i", null))), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-marq",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-marq__row"
+  }, marqAll.map((m, i) => /*#__PURE__*/React.createElement("span", {
+    className: "dlar-marq__item",
+    key: i
+  }, m, " ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"))))), /*#__PURE__*/React.createElement("section", {
+    className: "dlar-sec dlar-unruly"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-glow dlar-glow--redbud"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-unruly__head dlar-rise"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-eyebrow"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " The Unruly Way"), /*#__PURE__*/React.createElement("h2", {
+    className: "dlar-h2",
     style: {
-      display: 'block',
-      marginBottom: '1.5rem'
+      marginTop: "1rem"
     }
-  }, "Discern Like A Rebel"), React.createElement("span", {
-    className: "brand-hero__title a1"
-  }, "DISCERN"), React.createElement("span", {
-    className: "brand-hero__title brand-hero__title--italic a2"
-  }, "like a"), React.createElement("span", {
-    className: "brand-hero__title brand-hero__title--red a3"
-  }, "REBEL"), React.createElement("span", {
-    className: "brand-hero__tag a4"
-  }, "Smashing The ", React.createElement("span", {
-    className: "smash-word"
-  }, "Toxins", React.createElement("span", {
-    className: "smash-strike"
-  })), " Out Of The Way.", React.createElement("br", null), "Ruthlessly curated education and swaps \u2014 across water, supplements, home, and beyond."), React.createElement("div", {
-    className: "a4",
+  }, "This isn't a method."), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-lead",
     style: {
-      display: 'flex',
-      gap: '1rem',
-      flexWrap: 'wrap',
-      marginTop: '2.5rem'
+      marginTop: ".6rem"
     }
-  }, React.createElement("button", {
-    className: "btn btn-rebel",
-    onClick: () => navigate('swaps')
-  }, "Explore Swaps \u2192"), React.createElement("button", {
-    className: "btn btn-ghost",
-    onClick: () => navigate('principles')
-  }, "Read the Guide"))), React.createElement("div", {
-    className: "hero-scroll"
-  }, React.createElement("div", {
-    className: "scroll-line"
-  }))), React.createElement(Ticker, null), React.createElement("div", {
-    className: "method-section"
-  }, React.createElement("div", {
-    className: "unruly-hole-wrap",
+  }, "It's a middle finger to toxins, served with a cup of bone broth and zero apology.")), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-unruly__list"
+  }, DLAR_UNRULY.map((p, i) => /*#__PURE__*/React.createElement("div", {
+    className: "dlar-line-item",
+    key: i
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-line-item__idx"
+  }, ("0" + (i + 1)).slice(-2)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-line-item__verb"
+  }, p.v), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-line-item__desc"
+  }, p.d))))))), /*#__PURE__*/React.createElement("section", {
+    className: "dlar-sec dlar-how"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-glow dlar-glow--gold"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-rise",
     style: {
-      width: '180px',
-      top: '-55px',
-      right: '-45px',
-      transform: 'rotate(13deg)'
+      maxWidth: "60ch"
     }
-  }, React.createElement("img", {
-    className: "unruly-hole",
-    src: "assets/unruly-hole.png",
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-eyebrow"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " How the work goes"), /*#__PURE__*/React.createElement("h2", {
+    className: "dlar-h2",
     style: {
-      '--hole-opacity': 0.3,
-      width: '100%',
-      animationDelay: '0.00s'
+      marginTop: "1rem"
+    }
+  }, "What's in your home is talking. ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-script"
+  }, "It's been waiting to be read."))), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-how__grid"
+  }, DLAR_HOWITWORKS.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    className: "dlar-step dlar-rise dlar-d" + (i + 1),
+    key: i
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-step__idx"
+  }, s.n), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-step__t"
+  }, s.t), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-step__d"
+  }, s.d)))))), /*#__PURE__*/React.createElement("section", {
+    className: "dlar-sec dlar-dir"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-glow dlar-glow--peri"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-rise",
+    style: {
+      maxWidth: "62ch"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-eyebrow"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " The Directory"), /*#__PURE__*/React.createElement("h2", {
+    className: "dlar-h2",
+    style: {
+      marginTop: "1rem"
+    }
+  }, "Choose your area."), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-lead",
+    style: {
+      marginTop: ".6rem"
+    }
+  }, "Each topic is independently researched, tested, and swapped. Water is live now.")), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-dir__grid"
+  }, DLAR_TOPICS.map((t, i) => /*#__PURE__*/React.createElement("div", {
+    className: "dlar-card dlar-rise dlar-d" + (i + 1) + (t.live ? "" : " dlar-card--soon"),
+    key: t.id,
+    style: {
+      "--card-hue": t.hue,
+      "--card-glow": t.glow
     },
-    alt: ""
-  })), React.createElement("div", {
-    className: "unruly-hole-wrap",
-    style: {
-      width: '215px',
-      top: '70px',
-      left: '9%',
-      transform: 'rotate(-9deg)'
-    }
-  }, React.createElement("img", {
-    className: "unruly-hole",
-    src: "assets/unruly-hole.png",
-    style: {
-      '--hole-opacity': 0.28,
-      width: '100%',
-      animationDelay: '0.12s'
-    },
-    alt: ""
-  })), React.createElement("div", {
-    className: "unruly-hole-wrap",
-    style: {
-      width: '165px',
-      top: '38%',
-      left: '-50px',
-      transform: 'rotate(5deg)'
-    }
-  }, React.createElement("img", {
-    className: "unruly-hole",
-    src: "assets/unruly-hole.png",
-    style: {
-      '--hole-opacity': 0.27,
-      width: '100%',
-      animationDelay: '0.22s'
-    },
-    alt: ""
-  })), React.createElement("div", {
-    className: "unruly-hole-wrap",
-    style: {
-      width: '195px',
-      top: '30%',
-      right: '7%',
-      transform: 'rotate(-15deg)'
-    }
-  }, React.createElement("img", {
-    className: "unruly-hole",
-    src: "assets/unruly-hole.png",
-    style: {
-      '--hole-opacity': 0.26,
-      width: '100%',
-      animationDelay: '0.08s'
-    },
-    alt: ""
-  })), React.createElement("div", {
-    className: "unruly-hole-wrap",
-    style: {
-      width: '295px',
-      bottom: '25px',
-      left: '27%',
-      transform: 'rotate(21deg)'
-    }
-  }, React.createElement("img", {
-    className: "unruly-hole",
-    src: "assets/unruly-hole.png",
-    style: {
-      '--hole-opacity': 0.29,
-      width: '100%',
-      animationDelay: '0.30s'
-    },
-    alt: ""
-  })), React.createElement("div", {
-    className: "unruly-hole-wrap",
-    style: {
-      width: '205px',
-      bottom: '-35px',
-      right: '13%',
-      transform: 'rotate(-6deg)'
-    }
-  }, React.createElement("img", {
-    className: "unruly-hole",
-    src: "assets/unruly-hole.png",
-    style: {
-      '--hole-opacity': 0.25,
-      width: '100%',
-      animationDelay: '0.17s'
-    },
-    alt: ""
-  })), React.createElement("div", {
-    className: "container",
-    style: {
-      position: 'relative',
-      zIndex: 1
-    }
-  }, React.createElement("div", {
-    className: "reveal",
-    style: {
-      marginBottom: '3.5rem'
-    }
-  }, React.createElement("div", {
-    className: "label",
-    style: {
-      marginBottom: '.75rem'
-    }
-  }, "THE UNRULY WAY"), React.createElement("h2", {
-    style: {
-      fontSize: 'clamp(1.71rem,3.325vw,2.66rem)',
-      color: 'var(--cream)',
-      marginBottom: '.75rem'
-    }
-  }, "This isn't a method."), React.createElement("p", {
-    style: {
-      fontFamily: 'var(--ff-body)',
-      fontSize: 'clamp(0.95rem,1.9vw,1.14rem)',
-      fontStyle: 'italic',
-      color: 'var(--text-dim)',
-      lineHeight: 1.65
-    }
-  }, "It's a middle finger to toxins, served with a cup of bone broth and zero apology.")), React.createElement("div", {
-    className: "reveal d1"
-  }, React.createElement("div", {
-    className: "unruly-row"
-  }, React.createElement("div", {
-    className: "unruly-item"
-  }, React.createElement("div", {
-    className: "unruly-num"
-  }, "01"), React.createElement("div", {
-    className: "unruly-verb"
-  }, "Food is medicine."), React.createElement("p", {
-    className: "unruly-desc"
-  }, "I eat fermented everything. Grass-fed protein. Weeds from the meadow. I know the farmers by name. My wallet votes like a wrecking ball.")), React.createElement("div", {
-    className: "unruly-item"
-  }, React.createElement("div", {
-    className: "unruly-num"
-  }, "02"), React.createElement("div", {
-    className: "unruly-verb unruly-verb--rebel"
-  }, "Nature is the first pharmacy."), React.createElement("p", {
-    className: "unruly-desc"
-  }, "Sunlight. Grounding. Living water. Circadian and seasonal rhythms \u2014 not as a trend, but as a rebellion against the fake-lit, fake-fed world.")), React.createElement("div", {
-    className: "unruly-item"
-  }, React.createElement("div", {
-    className: "unruly-num"
-  }, "03"), React.createElement("div", {
-    className: "unruly-verb"
-  }, "One ingredient is enough."), React.createElement("p", {
-    className: "unruly-desc"
-  }, "Seed oils? Trans fats? Refined sugar, Frankenfoods, plastics, petrochemicals? Zero tolerance. One swap at a time. No rush. No mercy.")), React.createElement("div", {
-    className: "unruly-item"
-  }, React.createElement("div", {
-    className: "unruly-num"
-  }, "04"), React.createElement("div", {
-    className: "unruly-verb unruly-verb--rebel"
-  }, "Soil health = human health."), React.createElement("p", {
-    className: "unruly-desc"
-  }, "No healthy food without healthy soil. Regenerative agriculture isn't a buzzword. It's my line in the sand."))), React.createElement("div", {
-    className: "unruly-row"
-  }, React.createElement("div", {
-    className: "unruly-item"
-  }, React.createElement("div", {
-    className: "unruly-num"
-  }, "05"), React.createElement("div", {
-    className: "unruly-verb"
-  }, "I listen to my body without shame."), React.createElement("p", {
-    className: "unruly-desc"
-  }, "Yes, I'm that annoyingly picky friend. I bring my own salt to restaurants and raw milk to caf\xE9s. I used to apologize. I don't anymore.")), React.createElement("div", {
-    className: "unruly-item"
-  }, React.createElement("div", {
-    className: "unruly-num"
-  }, "06"), React.createElement("div", {
-    className: "unruly-verb unruly-verb--rebel"
-  }, "I detox gently. Then I go deeper."), React.createElement("p", {
-    className: "unruly-desc"
-  }, "Bone broths, bitter herbs, then concentrated extracts. Soft first. Then fierce.")), React.createElement("div", {
-    className: "unruly-item"
-  }, React.createElement("div", {
-    className: "unruly-num"
-  }, "07"), React.createElement("div", {
-    className: "unruly-verb"
-  }, "Conscious resilience."), React.createElement("p", {
-    className: "unruly-desc"
-  }, "Stress and fear are toxins too. If I fail today? I still pat myself on the back. I'm not afraid of what I know. I'm armed with it.")), React.createElement("div", {
-    className: "unruly-item"
-  }, React.createElement("div", {
-    className: "unruly-num"
-  }, "08"), React.createElement("div", {
-    className: "unruly-verb unruly-verb--rebel"
-  }, "The body is infinite possibility."), React.createElement("p", {
-    className: "unruly-desc"
-  }, "Trampolines. Crushed bones for toothpaste. Resin chewing. Aluminum foil at night. Chakras. Yes, even the really woo stuff. Nothing is too much when you love your body like a rebel loves her cause.")))))), React.createElement("section", {
-    className: "topics-section"
-  }, React.createElement("div", {
-    className: "container"
-  }, React.createElement("div", {
-    className: "reveal"
-  }, React.createElement("div", {
-    className: "label",
-    style: {
-      marginBottom: '.75rem'
-    }
-  }, "Topics"), React.createElement("h2", {
-    style: {
-      fontSize: 'clamp(1.9rem,3.8vw,3.04rem)',
-      color: 'var(--cream)',
-      marginBottom: '.5rem'
-    }
-  }, "Choose your area"), React.createElement("p", {
-    style: {
-      color: 'var(--text-dim)',
-      fontStyle: 'italic',
-      fontSize: '1.1115rem'
-    }
-  }, "Each topic is independently researched, tested, and swapped. Water is live now.")), React.createElement("div", {
-    className: "topic-grid"
-  }, React.createElement("div", {
-    className: "topic-card topic-card--water reveal d1",
-    onClick: () => navigate('swaps')
-  }, React.createElement("div", null, React.createElement("span", {
-    className: "topic-badge badge-live"
-  }, "\u25CF Live Now"), React.createElement("div", {
-    className: "topic-title"
-  }, "Living Water"), React.createElement("p", {
-    className: "topic-desc"
-  }, "From cellular hydration and water structuring to the best sources, filtration systems, and salt brands \u2014 backed by science and lived experience.")), React.createElement("div", {
-    className: "topic-actions"
-  }, React.createElement("button", {
-    className: "btn btn-ghost btn-sm",
+    onClick: t.live ? () => navigate("swaps") : undefined,
+    role: t.live ? "button" : undefined
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-card__reg"
+  }, "[", ("0" + (i + 1)).slice(-2), "]"), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-card__top"
+  }, /*#__PURE__*/React.createElement(FlowerSeal, {
+    size: 46,
+    className: "dlar-card__seal"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "dlar-card__badge" + (t.live ? " dlar-card__badge--live" : "")
+  }, t.badge)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-card__title"
+  }, t.name), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-card__tags"
+  }, t.tags.map((tag, j) => /*#__PURE__*/React.createElement("span", {
+    className: "dlar-card__tag",
+    key: j
+  }, tag))), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-card__sub"
+  }, t.sub)), t.live ? /*#__PURE__*/React.createElement("div", {
+    className: "dlar-card__actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "dlar-pill dlar-pill--ghost dlar-pill--sm",
     onClick: e => {
       e.stopPropagation();
-      navigate('principles');
+      navigate("principles");
     }
-  }, "Principles"), React.createElement("button", {
-    className: "btn btn-rebel btn-sm",
+  }, "Principles"), /*#__PURE__*/React.createElement("button", {
+    className: "dlar-pill dlar-pill--solid dlar-pill--sm",
     onClick: e => {
       e.stopPropagation();
-      navigate('swaps');
+      navigate("swaps");
     }
-  }, "Swaps \u2192"))), [{
-    title: 'Supplements',
-    sub: 'What actually works — and what to throw out.'
-  }, {
-    title: 'Home & Environment',
-    sub: 'Air, EMF, cleaning products, and your living space.'
-  }, {
-    title: 'Clothing',
-    sub: 'Fabrics, dyes, and what you wear next to your skin.'
-  }].map((t, i) => React.createElement("div", {
-    key: t.title,
-    className: `topic-card topic-card--soon reveal d${i + 2}`
-  }, React.createElement("span", {
-    className: "topic-badge badge-soon"
-  }, "Coming Soon"), React.createElement("div", {
-    className: "topic-soon-title"
-  }, t.title), React.createElement("div", {
-    className: "topic-soon-sub"
-  }, t.sub)))))), React.createElement("section", {
-    className: "about-teaser"
-  }, React.createElement("div", {
-    className: "container"
-  }, React.createElement("div", {
-    className: "about-teaser-grid"
-  }, React.createElement("div", {
-    className: "reveal"
-  }, React.createElement("div", {
-    className: "about-photo-sm"
-  }, React.createElement("img", {
+  }, "Swaps ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-arrow"
+  }, "\u2192"))) : /*#__PURE__*/React.createElement("div", {
+    className: "dlar-card__sub",
+    style: {
+      opacity: .6
+    }
+  }, "In preparation")))))), /*#__PURE__*/React.createElement("section", {
+    className: "dlar-sec dlar-about"
+  }, /*#__PURE__*/React.createElement("img", {
+    className: "dlar-about__deco",
+    src: "assets/womandog-cut.png",
+    alt: "",
+    "aria-hidden": "true",
+    loading: "lazy"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-glow dlar-glow--redbud"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-about__grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-rise"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-portrait"
+  }, /*#__PURE__*/React.createElement("img", {
     src: "natalie.jpg",
-    alt: "Natalie \u2014 Discern Like A Rebel"
-  }))), React.createElement("div", {
-    className: "reveal d2"
-  }, React.createElement("div", {
-    className: "label",
-    style: {
-      marginBottom: '1rem'
+    alt: "Natalie \u2014 Discern Like A Rebel",
+    onError: e => {
+      e.currentTarget.style.display = "none";
+      e.currentTarget.parentNode.querySelector(".dlar-portrait__ph").style.display = "flex";
     }
-  }, "The Person Behind It"), React.createElement("h2", {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-portrait__ph",
     style: {
-      fontSize: 'clamp(1.9rem,3.8vw,2.85rem)',
-      color: 'var(--cream)',
-      marginBottom: '1.25rem'
+      display: "none"
     }
-  }, "Natalie"), React.createElement("p", {
+  }, /*#__PURE__*/React.createElement(FlowerSeal, {
+    size: 64
+  }), /*#__PURE__*/React.createElement("span", null, "A portrait, soon")))), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-rise dlar-d2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-eyebrow"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " The person behind it"), /*#__PURE__*/React.createElement("h2", {
+    className: "dlar-h2",
     style: {
-      color: 'var(--text-dim)',
-      fontSize: '1.1115rem',
-      fontStyle: 'italic',
-      lineHeight: 1.8,
-      marginBottom: '1rem'
+      marginTop: "1rem",
+      marginBottom: "1rem"
     }
-  }, "Environmental scientist. Holistic practitioner. Someone who tested everything on herself before recommending it to anyone else."), React.createElement("p", {
+  }, "Natalie"), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-lead",
     style: {
-      color: 'var(--text-dim)',
-      lineHeight: 1.85,
-      marginBottom: '2rem',
-      fontSize: '1.1115rem'
+      marginBottom: "1.1rem"
     }
-  }, "I studied environmental sciences at the University of Vienna, spent years in the lab, then had health challenges that sent me on a different kind of research journey. Today I combine laboratory precision with lived experience \u2014 and a healthy disrespect for anything that doesn't hold up to scrutiny."), React.createElement("div", {
+  }, "Environmental scientist. Holistic practitioner. Someone who tested everything on herself before recommending it to anyone else."), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-body",
     style: {
-      display: 'flex',
-      gap: '1rem',
-      flexWrap: 'wrap'
+      marginBottom: "1.6rem"
     }
-  }, React.createElement("button", {
-    className: "btn btn-gold",
-    onClick: () => navigate('about')
-  }, "My Story"), React.createElement("button", {
-    className: "btn btn-ghost",
-    onClick: () => navigate('work')
-  }, "Work With Me")))))));
+  }, "I studied environmental sciences at the University of Vienna, spent years in the lab, then health challenges sent me on a different kind of research journey. Today I combine laboratory precision with lived experience \u2014 and a healthy disrespect for anything that doesn't hold up to scrutiny."), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-hero__cta"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "dlar-pill dlar-pill--gold",
+    onClick: () => navigate("about")
+  }, "My story ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-arrow"
+  }, "\u2192")), /*#__PURE__*/React.createElement("button", {
+    className: "dlar-pill dlar-pill--ghost",
+    onClick: () => navigate("work")
+  }, "Work with me ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-arrow"
+  }, "\u2192"))))))), /*#__PURE__*/React.createElement("section", {
+    className: "dlar-close"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-close__bg"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-wrap dlar-close__inner"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-rise"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-eyebrow dlar-eyebrow--redbud"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dlar-star"
+  }, "\u2734"), " Private Consulting"), /*#__PURE__*/React.createElement("h2", {
+    className: "dlar-close__head"
+  }, "What's in your home is talking. ", /*#__PURE__*/React.createElement("em", null, "It's been waiting to be read."))), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-close__body dlar-rise dlar-d2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-close__copy"
+  }, /*#__PURE__*/React.createElement("p", null, "Your home, your water, your air, the environment you reside in. I read them like a map to see what hides in plain sight. I want you to prepare for a forensic, tender engagement. We find what's quietly eroding the people and places you love, and I hand you the way out. No products you don't need. What it asks of you instead is change, and a great deal of it. The choices and the actions are yours. The road, we share."), /*#__PURE__*/React.createElement("p", null, "Each season, I choose a small number of individuals, families, and companies to work with. Discretion is total. The work is deep. When the places are gone, the list remains."), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-close__actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "dlar-pill dlar-pill--solid",
+    onClick: () => navigate("work")
+  }, "Apply for a place ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-arrow"
+  }, "\u2192"))), /*#__PURE__*/React.createElement(JoinForm, null), /*#__PURE__*/React.createElement("p", {
+    className: "dlar-close__subline"
+  }, "A handful of places open each season. When they're gone, there's a list."))))));
 }
+function Footer({
+  navigate
+}) {
+  const panels = [{
+    id: "principles",
+    cls: "dlar-fp--edu",
+    name: "Education",
+    desc: "Evidence. Clarity. The principles behind every swap.",
+    link: "Explore"
+  }, {
+    id: "swaps",
+    cls: "dlar-fp--swaps",
+    name: "Swaps",
+    desc: "Non-toxic swaps that actually matter — ruthlessly curated.",
+    link: "Explore"
+  }, {
+    id: "work",
+    cls: "dlar-fp--rituals",
+    name: "Rituals",
+    desc: "Elevated daily rituals for body and home. Coming soon.",
+    link: "Soon"
+  }, {
+    id: "about",
+    cls: "dlar-fp--journal",
+    name: "Journal",
+    desc: "Thoughts, research, and reflections. Coming soon.",
+    link: "Soon"
+  }];
+  return /*#__PURE__*/React.createElement("footer", {
+    className: "dlar-footer"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-footer__panels"
+  }, panels.map(p => /*#__PURE__*/React.createElement("div", {
+    className: "dlar-fp " + p.cls,
+    key: p.id,
+    onClick: () => navigate(p.id),
+    role: "button"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-fp__hue"
+  }), /*#__PURE__*/React.createElement(FlowerSeal, {
+    size: 34,
+    className: "dlar-fp__seal"
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-fp__name"
+  }, p.name), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-fp__desc"
+  }, p.desc)), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-fp__link"
+  }, p.link, " ", /*#__PURE__*/React.createElement("span", null, "\u2192"))))), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-footer__base"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-footer__brand"
+  }, "Discern ", /*#__PURE__*/React.createElement("span", {
+    className: "dlar-script"
+  }, "like a"), " Rebel"), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-footer__links"
+  }, [["home", "Home"], ["principles", "Principles"], ["swaps", "Swaps"], ["about", "About"], ["work", "Work With Me"], ["contact", "Contact"]].map(([id, l]) => /*#__PURE__*/React.createElement("button", {
+    className: "dlar-footer__link",
+    key: id,
+    onClick: () => navigate(id)
+  }, l))), /*#__PURE__*/React.createElement(SocialLinks, {
+    style: "footer"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "dlar-footer__base",
+    style: {
+      paddingTop: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "dlar-footer__legal"
+  }, "\xA9 2025 Discern Like A Rebel. All rights reserved.", /*#__PURE__*/React.createElement("br", null), "Educational purposes only \u2014 not a substitute for medical advice.")));
+}
+
 function AboutPage({
   navigate
 }) {
@@ -2323,39 +2564,6 @@ function ContactPage({
       textAlign: 'left'
     }
   }, "An invitation to choose knowledge over convenience, presence over habit, and the intelligence of nature over the noise of marketing. One glass of living water at a time.")))));
-}
-function Footer({
-  navigate
-}) {
-  return React.createElement("footer", {
-    className: "footer"
-  }, React.createElement("div", {
-    className: "footer-inner"
-  }, React.createElement("div", null, React.createElement("div", {
-    className: "footer-brand"
-  }, "Discern Like A Rebel"), React.createElement("div", {
-    className: "footer-copy",
-    style: {
-      marginTop: '.35rem'
-    }
-  }, "Living Water \u2014 first topic")), React.createElement("div", {
-    className: "footer-links"
-  }, [['home', 'Home'], ['principles', 'Principles'], ['swaps', 'Swaps'], ['about', 'About'], ['work', 'Work With Me'], ['contact', 'Contact']].map(([id, l]) => React.createElement("button", {
-    key: id,
-    className: "footer-link",
-    onClick: () => navigate(id)
-  }, l))), React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-end',
-      gap: '.75rem'
-    }
-  }, React.createElement(SocialLinks, {
-    style: "footer"
-  }), React.createElement("div", {
-    className: "footer-copy"
-  }, "\xA9 2025 Discern Like A Rebel. All rights reserved.", React.createElement("br", null), "Educational purposes only \u2014 not a substitute for medical advice."))));
 }
 function App() {
   const getPage = () => {
