@@ -251,7 +251,9 @@
       const hero = document.querySelector('.brand-hero');
       if (hero) {
         heroEl = hero;
-        /* game-intro shrink disabled — redesigned hero owns its own layout */
+        /* the hero recedes — wordmark + Diana dim, shrink, slide to the corners
+           so the hunt becomes the main visual (CSS: .dlar-hero.gaming) */
+        hero.classList.add('gaming');
         heroObs = new IntersectionObserver(entries => {
           if (!entries[0].isIntersecting && !triggered) triggerFall();
         }, { threshold: 0.05 });
@@ -336,8 +338,9 @@
       taglineEl.style.textShadow = '0 0 18px rgba(150,45,73,0)';
       taglineEl.style.transform  = 'translateX(-50%) translateY(calc(-50% + 22px))';
     }
-    /* restore hero layout simultaneously with labels falling */
-    if (heroEl) heroEl.classList.remove('game-intro');
+    /* the hunt ends — Diana + wordmark regain colour and return to center stage,
+       in time with the labels falling away */
+    if (heroEl) heroEl.classList.remove('gaming');
     setTimeout(() => { if (dimEl.parentNode) dimEl.remove(); }, 1300);
 
     /* cursor stays active for the full 15 s — cleaned up in onResting() */
@@ -569,6 +572,9 @@
   window.addEventListener('resize', () => {
     if (cvs) { cvs.width = innerWidth; cvs.height = innerHeight; }
   });
+
+  /* let the React hero's "Skip the hunt" button end the game on demand */
+  window.dlarSkipGame = function () { if (!triggered) triggerFall(); };
 
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', boot);
