@@ -251,7 +251,7 @@
       const hero = document.querySelector('.brand-hero');
       if (hero) {
         heroEl = hero;
-        hero.classList.add('game-intro');   /* shift left + shrink text */
+        /* game-intro shrink disabled — redesigned hero owns its own layout */
         heroObs = new IntersectionObserver(entries => {
           if (!entries[0].isIntersecting && !triggered) triggerFall();
         }, { threshold: 0.05 });
